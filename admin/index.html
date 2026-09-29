@@ -2773,7 +2773,7 @@ function msBody(){
   if(msPane==='general')return hero('Workspace details for the O Auto Brokers back office.')+`
     <div class="ms-sec"><div class="ms-box">${msRow('Workspace name','',`<input class="ms-in" id="wsName" value="${esc(BRAND.name)}">`)}${msRow('Hub address','',`<input class="ms-in mono" value="hub.oautobrokers.org">`)}${msRow('Time zone','',mpop('data-x',['Eastern Time (Detroit)','Central Time','Pacific Time'],'Eastern Time (Detroit)'))}</div></div>
     <div class="ms-sec"><h5>Business hours</h5><div class="ms-box">${msRow('Monday – Thursday','Booking page slots every 30 minutes','11:00 AM – 6:00 PM')}${msRow('Friday','','11:00 AM – 5:00 PM')}${msRow('Saturday & Sunday','','Closed')}</div></div>
-    <div class="ms-sec"><h5>Contact</h5><div class="ms-box">${msRow('Main line','','(248) 864-8387')}${msRow('Email','','info@oautobrokers.org')}</div></div>`;
+    <div class="ms-sec"><h5>Contact</h5><div class="ms-box">${msRow('Main line','','(248) 864-8387')}${msRow('Email','','info@oautobrokers.org')}${msRow('Office','','24681 Northwestern Hwy #309, Southfield, MI 48075')}</div></div>`;
   if(msPane==='notif')return hero('Choose what reaches Orlando’s phone. Everything else waits in the hub.')+`
     <div class="ms-sec"><h5>Alerts</h5><div class="ms-box">${MSN.map((n,i)=>msRow(n[0],n[1],mtog(n[2],`data-mn="${i}"`))).join('')}</div></div>
     <div class="ms-sec"><div class="ms-box">${msRow('Quiet hours','No pushes except tracker alerts',mpop('data-x',['Off','9 PM – 7 AM','10 PM – 8 AM'],'9 PM – 7 AM'))}</div><p class="ms-note">Tracker alerts always come through, even during quiet hours.</p></div>`;
