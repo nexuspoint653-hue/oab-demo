@@ -2621,7 +2621,7 @@ function bind(r){
 function bindFav(){$$('[data-fav]').forEach(b=>b.onclick=e=>{e.preventDefault();e.stopPropagation();const id=b.dataset.fav;FAV.has(id)?FAV.delete(id):FAV.add(id);b.classList.toggle('on');toast(FAV.has(id)?'Saved to your list':'Removed from your list')})}
 
 /* ================= v2 overrides ================= */
-const BIZ={addr:'28588 Northwestern Hwy Ste. 330',city:'Southfield, MI 48034',phone:'(313) 546-1388',rating:'4.9',reviews:59};
+const BIZ={addr:'24681 Northwestern Hwy #309',city:'Southfield, MI 48075',phone:'(248) 864-8387',rating:'4.9',reviews:59};
 const REVIEWS=[
  ['Diamond S.','Credit to Car program','Did the Credit to Car program, they took me from a 540 to 793 in 4 months, put me in a 2026 vehicle and the car exceeded my expectations!','540 → 793 in 4 months'],
  ['CeMiyah C.','5 months ago','O helped me get another car very fast. I am 23 in a ‘26 and am so so happy about it. O is efficient and makes sure that your decision is the best for YOU.','2026 vehicle'],
@@ -2763,7 +2763,7 @@ function vHome(){
 
   <section class="bk" id="book">${img('road-night','Open road at night','center 60%').replace('class="ph"','class="ph bk-bg"')}
     <div class="wrap bk-in">
-      <div class="bk-hd rv"><span class="eb" style="color:#ffffffb3">Book a visit</span><h2>Choose a time that actually works.</h2><p>30-minute visits at <span class="mapx"><button type="button" class="mapx-b" aria-haspopup="menu" aria-expanded="false">our office location<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14s5-4.2 5-8A5 5 0 0 0 3 6c0 3.8 5 8 5 8Z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6" r="1.6" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button><span class="mapx-m" role="menu"><small>${BIZ.addr}, ${BIZ.city}</small><a role="menuitem" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('O Auto Brokers & Leasing, '+BIZ.addr+', '+BIZ.city)}">Open in Google Maps</a><a role="menuitem" target="_blank" rel="noopener" href="https://maps.apple.com/?q=${encodeURIComponent('O Auto Brokers & Leasing')}&address=${encodeURIComponent(BIZ.addr+', '+BIZ.city)}">Open in Apple Maps</a><a role="menuitem" target="_blank" rel="noopener" href="https://waze.com/ul?q=${encodeURIComponent(BIZ.addr+', '+BIZ.city)}&navigate=yes">Open in Waze</a></span></span>. Your concierge confirms by email.</p></div>
+      <div class="bk-hd rv"><span class="eb" style="color:#ffffffb3">Book a visit</span><h2>Choose a time that actually works.</h2><p>30-minute visits at <span class="mapx"><button type="button" class="mapx-b" aria-haspopup="menu" aria-expanded="false">our office location<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14s5-4.2 5-8A5 5 0 0 0 3 6c0 3.8 5 8 5 8Z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6" r="1.6" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button><span class="mapx-m" role="menu"><small>${BIZ.addr}, ${BIZ.city}</small><a role="menuitem" target="_blank" rel="noopener" href="https://goo.gl/maps/YCVvxHafwDYbp1gE7">Open in Google Maps</a><a role="menuitem" target="_blank" rel="noopener" href="https://maps.apple.com/?q=${encodeURIComponent('O Auto Brokers & Leasing')}&address=${encodeURIComponent(BIZ.addr+', '+BIZ.city)}">Open in Apple Maps</a><a role="menuitem" target="_blank" rel="noopener" href="https://waze.com/ul?q=${encodeURIComponent(BIZ.addr+', '+BIZ.city)}&navigate=yes">Open in Waze</a></span></span>. Your concierge confirms by email.</p></div>
       <form class="bk-form rv" id="bkForm" novalidate>
         <div class="bk-who">
           <label><span>Name</span><input id="bkName" value="Jaylen Brooks" autocomplete="name" placeholder="Your name" required></label>
@@ -2991,10 +2991,10 @@ const CC_KB=[
  [/credit to car|rebuild|repair|improve/i,"Credit to Car helps you rebuild while you drive. One client went from 540 to 793 in 4 months."],
  [/bankrupt|chapter|repo|reposs/i,"We work with discharged and active Chapter 13, and past repos. We know which lenders will say yes."],
  [/hour|open|close|time/i,"We're open Mon–Thu 11 AM–6 PM and Fri 11 AM–5 PM. Closed Saturday and Sunday."],
- [/where|address|location|located/i,"28588 Northwestern Hwy Ste. 330, Southfield, MI 48034. We also come to you."],
- [/phone|call|number|talk|human|person/i,"Call or text (313) 546-1388 and you'll reach a real concierge."]
+ [/where|address|location|located/i,"24681 Northwestern Hwy #309, Southfield, MI 48075. We also come to you."],
+ [/phone|call|number|talk|human|person/i,"Call or text (248) 864-8387 and you'll reach a real concierge."]
 ];
-function ccAnswer(q){for(const [re,a] of CC_KB)if(re.test(q))return a;return "Good question. A concierge can answer that directly: call or text (313) 546-1388, or start your application and we'll reach out within the day."}
+function ccAnswer(q){for(const [re,a] of CC_KB)if(re.test(q))return a;return "Good question. A concierge can answer that directly: call or text (248) 864-8387, or start your application and we'll reach out within the day."}
 function ccInit(){
   const f=document.getElementById('ccF');if(!f||f._on)return;f._on=1;
   const card=document.getElementById('cc'),body=document.getElementById('ccBody'),inp=document.getElementById('ccI'),P=document.getElementById('cxP'),stat=document.getElementById('cxStat');
@@ -3215,7 +3215,7 @@ async function deskAct(e){
     const sref=bkDb.doc('slots/'+slotKey(a.date,a.time));if(approve)await sref.set({state:'booked',appt:a.id,at:new Date().toISOString()});else if(!clashOf(a).length)await sref.set({state:'open',at:new Date().toISOString()});
     toast(approve?'Confirmed. Sending the confirmation email':'Declined. The time is open again');
     const subj=approve?`Your O Auto Brokers visit is confirmed: ${dLong(a.date)} at ${t12(a.time)}`:'About your O Auto Brokers appointment request';
-    const body=approve?`Hi ${a.name},\n\nYou're confirmed for a ${a.reason||'visit'} on ${dLong(a.date)} at ${t12(a.time)}.\n\n28588 Northwestern Hwy Ste. 330, Southfield, MI 48034\n(313) 546-1388\n\nSee you then,\nO Auto Brokers & Leasing`:`Hi ${a.name},\n\nThat time on ${dLong(a.date)} at ${t12(a.time)} no longer works on our end. Reply with another time that suits you, or book at our website.\n\nO Auto Brokers & Leasing\n(313) 546-1388`;
+    const body=approve?`Hi ${a.name},\n\nYou're confirmed for a ${a.reason||'visit'} on ${dLong(a.date)} at ${t12(a.time)}.\n\n24681 Northwestern Hwy #309, Southfield, MI 48075\n(248) 864-8387\n\nSee you then,\nO Auto Brokers & Leasing`:`Hi ${a.name},\n\nThat time on ${dLong(a.date)} at ${t12(a.time)} no longer works on our end. Reply with another time that suits you, or book at our website.\n\nO Auto Brokers & Leasing\n(248) 864-8387`;
     typeof oabNotify==='function'&&oabNotify(approve?'confirmed':'declined',a);
   }catch(err){b.disabled=false;toast('Could not save: '+(err&&err.code||'error'))}
 }
@@ -3258,7 +3258,7 @@ function footer(){
       ${col('Vehicles',[['Inventory','#inventory'],['Lease specials','#lease'],['SUVs','#inventory'],['Trucks','#inventory'],['Sedans & coupes','#inventory'],['Business vehicles','#business']])}
       ${col('Programs',[['Credit to Car','#credit'],['First Time Buyer','#credit'],['Business credit','#business'],['Trade-ins','#services'],['Get approved','#apply']])}
       ${col('O Auto Brokers',[['The O experience','#about'],['Concierge','#services'],['Real reviews','#reviews'],['Book a visit','#book'],['Staff desk','#desk']])}
-      ${col('Customer service',[['Call '+BIZ.phone,'tel:+13135461388'],['info@oautobrokers.org','mailto:info@oautobrokers.org'],['Upload documents','#apply'],['Directions','https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(BIZ.addr+', '+BIZ.city)]])}
+      ${col('Customer service',[['Call '+BIZ.phone,'tel:+12488648387'],['info@oautobrokers.org','mailto:info@oautobrokers.org'],['Upload documents','#apply'],['Directions','https://goo.gl/maps/YCVvxHafwDYbp1gE7']])}
     </div>
     <div class="fx-mid">
       <div><b class="fx-c">© ${new Date().getFullYear()} O AUTO BROKERS &amp; LEASING, LLC</b>
@@ -3329,7 +3329,7 @@ function vLegal(k){const d=legalDocs()[k];return `<section class="lg-hero"><div 
     <div class="lg-tool"><label class="lg-plain"><input type="checkbox" id="lgPlain"><i></i>Plain-English mode</label><div class="lg-search">${ic('search')}<input id="lgQ" placeholder="Search this page" aria-label="Search this page"></div></div></div><div class="lg-bar"><u id="lgBar"></u></div></section>
   <section class="lg-body"><div class="wrap lg-grid">
     <aside class="lg-toc"><span>On this page</span>${d.s.map((s,i)=>`<a href="#${k}" data-to="lg${i}"><b>${String(i+1).padStart(2,'0')}</b>${s[0]}</a>`).join('')}
-      <div class="lg-help"><b>Questions?</b><span>A real person answers.</span><a href="tel:+13135461388">${BIZ.phone}</a><a href="mailto:info@oautobrokers.org">info@oautobrokers.org</a></div></aside>
+      <div class="lg-help"><b>Questions?</b><span>A real person answers.</span><a href="tel:+12488648387">${BIZ.phone}</a><a href="mailto:info@oautobrokers.org">info@oautobrokers.org</a></div></aside>
     <div class="lg-doc">${d.s.map((s,i)=>`<article class="lg-s rv" id="lg${i}"><span class="lg-n">${String(i+1).padStart(2,'0')}</span><h2>${s[0]}</h2><p class="lg-short"><em>In short</em>${s[1]}</p><p class="lg-full">${s[2]}</p></article>`).join('')}
       <p class="lg-note">This page is provided for general information and should be reviewed by O Auto Brokers’ legal counsel before publication.</p></div>
   </div></section>`}
@@ -3439,7 +3439,7 @@ ${rows.filter(r=>r[1]!==''&&r[1]!=null).map(r=>`<tr><td style="padding:13px 0;bo
 </table></td></tr>
 <tr><td style="padding:26px 36px 8px"><a href="${e(ctaUrl)}" style="display:inline-block;background:#D7262B;color:#fff;text-decoration:none;font:800 12px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;padding:15px 26px">${e(cta)} &rarr;</a></td></tr>
 ${note?`<tr><td style="padding:14px 36px 0;font-size:12.5px;line-height:1.6;color:#8C8C90">${e(note)}</td></tr>`:''}
-<tr><td style="padding:36px 36px 30px"><div style="border-top:1px solid #E6E6E3;padding-top:18px;font-size:12px;line-height:1.7;color:#8C8C90">O Auto Brokers &amp; Leasing · 28588 Northwestern Hwy Ste. 330, Southfield, MI 48034<br>(248) 864-8387 · info@oautobrokers.org<br><span style="color:#B5B5B8">Sent by the O Auto Brokers website · Southfield, Michigan</span></div></td></tr>
+<tr><td style="padding:36px 36px 30px"><div style="border-top:1px solid #E6E6E3;padding-top:18px;font-size:12px;line-height:1.7;color:#8C8C90">O Auto Brokers &amp; Leasing · 24681 Northwestern Hwy #309, Southfield, MI 48075<br>(248) 864-8387 · info@oautobrokers.org<br><span style="color:#B5B5B8">Sent by the O Auto Brokers website · Southfield, Michigan</span></div></td></tr>
 </table></td></tr></table></body></html>`;
 }
 function oabMail(kind,d){
@@ -3449,7 +3449,7 @@ function oabMail(kind,d){
   if(kind==='booking')return {subject:`Appointment request · ${d.name} · ${dl(d.date)} at ${tt(d.time)}`,html:emailHTML({eyebrow:'Appointment request',title:`${d.name} would like to come in`,intro:`A ${String(d.reason||'visit').toLowerCase()} was requested on the website. One tap on the Concierge Desk confirms it and sends ${String(d.name||'').split(' ')[0]} a confirmation.`,
     rows:[['Client',d.name],['When',`${dl(d.date)} at ${tt(d.time)}`],['Visit type',d.reason],['Email',d.email],['Phone',d.phone],['Status','Pending your approval']],cta:'Review on the Desk',ctaUrl:'https://oautobrokers.netlify.app/#desk'})};
   if(kind==='confirmed')return {subject:`Confirmed · ${d.name} · ${dl(d.date)} at ${tt(d.time)}`,html:emailHTML({eyebrow:'Appointment confirmed',title:`You're confirmed, ${String(d.name||'').split(' ')[0]}`,intro:`Your ${String(d.reason||'visit').toLowerCase()} is locked in and your concierge is looking forward to meeting you. Bring your driver’s license and your two most recent pay stubs, and we will take care of the rest.`,
-    rows:[['When',`${dl(d.date)} at ${tt(d.time)}`],['Visit type',d.reason],['Where','28588 Northwestern Hwy Ste. 330, Southfield'],['Your concierge','Orlando · (248) 864-8387']],cta:'Get directions',ctaUrl:'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent('28588 Northwestern Hwy Ste. 330, Southfield, MI 48034'),note:`Client copy. In the live build this goes to ${d.email||'the client'}.`})};
+    rows:[['When',`${dl(d.date)} at ${tt(d.time)}`],['Visit type',d.reason],['Where','24681 Northwestern Hwy #309, Southfield'],['Your concierge','Orlando · (248) 864-8387']],cta:'Get directions',ctaUrl:'https://goo.gl/maps/YCVvxHafwDYbp1gE7',note:`Client copy. In the live build this goes to ${d.email||'the client'}.`})};
   if(kind==='declined')return {subject:`Declined · ${d.name} · ${dl(d.date)}`,html:emailHTML({eyebrow:'Appointment update',title:'Let’s find a better time',intro:`We are sorry, ${dl(d.date)} at ${tt(d.time)} just filled up on our end. Choose any open time that suits you and it is yours.`,rows:[['Client',d.name],['Requested',`${dl(d.date)} at ${tt(d.time)}`]],cta:'Book another time',ctaUrl:'https://oautobrokers.netlify.app/#book'})};
   if(kind==='newsletter')return {subject:`New lease-specials subscriber · ${d.email}`,html:emailHTML({eyebrow:'New subscriber',title:'A new reader for the Monday specials',intro:'Someone just joined the lease specials list from the website. They will get the first look at next week’s deals.',rows:[['Email',d.email],['Source','Website footer']],cta:'Open in OAB Hub',ctaUrl:HUB_URL+'#inbox'})};
 }
