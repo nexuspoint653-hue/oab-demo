@@ -2250,7 +2250,7 @@ html.light-pg .ofoot{background:#0E0E10!important}
 @media (max-width:1000px){.wrap.inv{grid-template-columns:1fr!important}}
 @media (max-width:760px){
   :root{--mp:20px}
-  html,body{overflow-x:hidden}
+  html,body{overflow-x:clip}
   .wrap,.wrap.wide{padding-inline:var(--mp)!important}
   /* nav: full-width solid bar */
   #nav{top:0!important;left:0!important;right:0!important;padding:0!important}
@@ -2267,10 +2267,10 @@ html.light-pg .ofoot{background:#0E0E10!important}
   .mnav .sq{margin-top:22px!important;height:54px;justify-content:center;font-family:var(--f-tech)!important;font-size:12px!important;letter-spacing:.14em!important;display:flex!important;align-items:center;white-space:nowrap}
   .bxh .h2cta{width:100%;max-width:none!important}.hero2 .h2in>div{width:100%}
   /* bottom dock */
-  .mbar{left:0!important;right:0!important;bottom:0!important;border-radius:0!important;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px))!important;background:#060606f0!important;border:0!important;border-top:1px solid #ffffff17!important;gap:10px!important}
+  .mbar{display:none!important;left:0!important;right:0!important;bottom:0!important;border-radius:0!important;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px))!important;background:#060606f0!important;border:0!important;border-top:1px solid #ffffff17!important;gap:10px!important}
   .mbar .btn{height:48px!important;border-radius:2px!important;font-size:11.5px!important;letter-spacing:.14em}
   .mbar .btn.glass{background:transparent!important;border:1.5px solid #ffffff4d!important}
-  body{padding-bottom:calc(70px + env(safe-area-inset-bottom,0px))}
+  body{padding-bottom:0!important}
   /* type scale */
   :root{--t1:clamp(30px,9vw,40px);--t2:clamp(26px,8vw,34px)}
   main h2{font-size:var(--t2)!important;line-height:1.02!important}
@@ -2305,7 +2305,7 @@ html.light-pg .ofoot{background:#0E0E10!important}
   .ld .ld-t{white-space:normal!important;font-size:var(--t2)!important;width:auto!important}
   .ld .ld-h{flex-direction:column!important;align-items:stretch!important;gap:18px!important;margin:12px 0 26px!important}
   .ld .ld-all{width:100%;justify-content:center}
-  .ld-g{display:flex!important;gap:12px!important;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(-1*var(--mp));padding:0 var(--mp) 6px;scrollbar-width:none}
+  .ld-g{display:flex!important;gap:12px!important;overflow-x:auto;scroll-snap-type:x proximity;margin:0 calc(-1*var(--mp));padding:0 var(--mp) 6px;scrollbar-width:none}
   .ld-g::-webkit-scrollbar{display:none}
   .ld-g>.ldc{flex:0 0 82%!important;scroll-snap-align:start;min-width:0}
   .ldc h3{font-size:18px!important}
@@ -2373,6 +2373,21 @@ html.light-pg .ofoot{background:#0E0E10!important}
   .hero2 h1{white-space:normal!important;font-size:clamp(34px,10.4vw,44px)!important}
   *{min-width:0}
   .dk2-cta .sq{height:50px!important;flex:none!important}
+
+  /* smooth scrolling: cut expensive effects while scrolling on phones */
+  #nav .nav-in{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#060606!important}
+  main *,footer *{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .pbx-wall,.br2-vp,.speed .bgimg,.fx-lit,.rv2 .rrow{-webkit-mask-image:none!important;mask-image:none!important}
+  .ld-g,.rrow.swipe,.pbx-spec{-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x pan-y}
+  .rrow.swipe{animation:none!important;width:auto!important;overflow-x:auto;scroll-snap-type:x proximity;padding:0 var(--mp) 6px;scrollbar-width:none;transform:none!important}
+  .rrow.swipe::-webkit-scrollbar{display:none}
+  .rrow.swipe>*{scroll-snap-align:start;flex:0 0 84vw!important}
+  .revs .edge{display:none!important}
+  .br2-tr{animation-duration:30s!important}
+  .br2-i>*{transform:none!important;opacity:1!important;filter:none!important}
+  .rv{transition-duration:.5s!important}
+  .fx-col a{white-space:nowrap!important;width:auto!important}
+  .bxh .h2in{grid-template-columns:minmax(0,1fr)!important;display:block!important}
 }
 @media (max-width:380px){.dk2-g{grid-template-columns:1fr!important}.dk2-i{border-right:0!important}.dk2-i:nth-child(2){border-top:1px solid #ffffff1f}}
 </style>
@@ -3675,7 +3690,7 @@ function st3Draw(){const w=document.getElementById('st3');if(!w)return;const sv=
   sv.setAttribute('viewBox',`0 0 ${R.width} ${R.height}`);
   let d=`M${ns[0].cx} ${ns[0].b+18}`;for(let i=1;i<ns.length;i++){const a=ns[i-1],c=ns[i],x=a.cx,ty=c.cy,ex=c.l-22,r=Math.min(90,(ex-x)/2);d+=` L ${x} ${ty-r} Q ${x} ${ty}, ${x+r} ${ty} L ${ex} ${ty}`;if(i<ns.length-1)d+=` M ${c.cx} ${c.b+18}`}
   const bg=sv.querySelector('.bg'),fg=sv.querySelector('.fg');bg.setAttribute('d',d);fg.setAttribute('d',d);w._len=fg.getTotalLength();fg.style.strokeDasharray=w._len;st3Prog()}
-function st3Prog(){const w=document.getElementById('st3');if(!w||!w._len)return;const sv=w.querySelector('.st3-ln'),fg=sv.querySelector('.fg'),dot=sv.querySelector('.dot');const R=w.getBoundingClientRect();
+function st3Prog(){if(innerWidth<=760)return;const w=document.getElementById('st3');if(!w||!w._len)return;const sv=w.querySelector('.st3-ln'),fg=sv.querySelector('.fg'),dot=sv.querySelector('.dot');const R=w.getBoundingClientRect();
   let p=(innerHeight*.72-R.top)/(R.height*.9);p=Math.max(0,Math.min(1,p));fg.style.strokeDashoffset=w._len*(1-p);const pt=fg.getPointAtLength(w._len*p);dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);
   w.classList.toggle('on',p>0&&p<1);w.querySelectorAll('.st3-s').forEach((s,i)=>s.classList.toggle('lit',p>=i/2.2))}
 function st3Bind(){const w=document.getElementById('st3');if(!w||w._b)return;w._b=1;setTimeout(st3Draw,80);setTimeout(st3Draw,900)}
@@ -3706,7 +3721,7 @@ function crFit(){const hs=[...document.querySelectorAll('#credit .cr h3')];if(!h
   f=Math.max(15,Math.floor(f*10)/10);hs.forEach(h=>h.style.setProperty('font-size',f+'px','important'))}
 addEventListener('resize',()=>setTimeout(crFit,50));new MutationObserver(()=>setTimeout(crFit,60)).observe(document.getElementById('root'),{childList:true});setTimeout(crFit,200);
 /* brand slider spotlight: center logo full, edges shrink and dim */
-(function(){let vp=null;function tick(){vp=document.querySelector('.br2-vp');if(vp){const r=vp.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight){const c=r.left+r.width/2,half=r.width/2;
+(function(){if(matchMedia('(max-width:760px),(pointer:coarse)').matches)return;let vp=null;function tick(){vp=document.querySelector('.br2-vp');if(vp){const r=vp.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight){const c=r.left+r.width/2,half=r.width/2;
   vp.querySelectorAll('.br2-i').forEach(el=>{const b=el.getBoundingClientRect();const d=Math.min(1,Math.abs(b.left+b.width/2-c)/half);el.style.setProperty('--s',(1.04-d*.14).toFixed(3));el.style.setProperty('--o',(1-d*.55).toFixed(3));el.style.setProperty('--g',(d*.9).toFixed(2))})}}requestAnimationFrame(tick)}requestAnimationFrame(tick)})();
 /* insert a divider between stacked dark sections */
 function sDiv(){const m=document.querySelector('main');if(!m)return;const kids=[...m.children].filter(e=>e.matches('section,.brands'));
@@ -3744,10 +3759,17 @@ new MutationObserver(()=>setTimeout(fkBind,50)).observe(document.getElementById(
 function sdLit(){const ds=[...document.querySelectorAll('.sdiv3')];if(!ds.length)return;const mid=innerHeight*.45;let cur=null;
   ds.forEach(d=>{const s=d.nextElementSibling;if(!s)return;const r=d.getBoundingClientRect(),b=s.getBoundingClientRect();if(r.top<mid&&b.bottom>mid)cur=d});
   ds.forEach(d=>d.classList.toggle('lit',d===cur))}
-addEventListener('scroll',sdLit,{passive:true});addEventListener('resize',sdLit);new MutationObserver(()=>setTimeout(sdLit,150)).observe(document.getElementById('root'),{childList:true});
+let _sdR=0;addEventListener('scroll',()=>{if(!_sdR)_sdR=requestAnimationFrame(()=>{_sdR=0;sdLit()})},{passive:true});addEventListener('resize',sdLit);new MutationObserver(()=>setTimeout(sdLit,150)).observe(document.getElementById('root'),{childList:true});
 
 /* email logo, attached inline so it shows in every inbox */
 let _logoAtt;async function oabLogoAtt(){if(_logoAtt!==undefined)return _logoAtt;try{const b=await (await fetch('brand/oab-logo-160.png')).blob();const d=await new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result);f.readAsDataURL(b)});_logoAtt={content:String(d).split(',')[1],filename:'oab-logo.png',mimeType:'image/png',inline:true}}catch(_){_logoAtt=null}return _logoAtt}
+
+/* mobile: zoom the whole layout out ~10% (real viewport, so it stays crisp) */
+(function(){try{if(Math.min(screen.width,innerWidth)>760)return;let m=document.querySelector('meta[name=viewport]');if(!m){m=document.createElement('meta');m.name='viewport';document.head.appendChild(m)}
+  const w=Math.round(Math.min(screen.width,innerWidth)/0.9);m.content='width='+w+', viewport-fit=cover';}catch(_){}})();
+/* mobile: marquee rows become native swipe rows (drop the loop duplicates) */
+function rowSwipe(){if(innerWidth>760)return;document.querySelectorAll('.rrow').forEach(r=>{if(r._sw)return;r._sw=1;const k=[...r.children];k.slice(Math.ceil(k.length/2)).forEach(c=>c.remove());r.classList.add('swipe')})}
+new MutationObserver(()=>setTimeout(rowSwipe,40)).observe(document.getElementById('root'),{childList:true});setTimeout(rowSwipe,200);
 </script>
 
 </html>
