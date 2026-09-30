@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en"><head><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>O Auto Brokers</title>
 <meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2245,6 +2245,136 @@ img{-webkit-user-drag:none;user-drag:none}
 #credit .cr.feat-red .bk4-c.y{transform:translateX(76px) rotate(8deg)}
 .bk4-c{width:74px;margin-left:-37px}.bk4-c em{font-size:7.5px;letter-spacing:.08em}
 .vs-ph img[src*="oab-car-"]{object-fit:cover!important;width:100%!important;height:100%!important;max-height:none!important;position:absolute!important;inset:0}
+/* ================= v70 MOBILE REDESIGN (≤760px) ================= */
+html.light-pg .ofoot{background:#0E0E10!important}
+@media (max-width:1000px){.wrap.inv{grid-template-columns:1fr!important}}
+@media (max-width:760px){
+  :root{--mp:20px}
+  html,body{overflow-x:hidden}
+  .wrap,.wrap.wide{padding-inline:var(--mp)!important}
+  /* nav: full-width solid bar */
+  #nav{top:0!important;left:0!important;right:0!important;padding:0!important}
+  #nav .nav-in{max-width:none!important;width:100%!important;height:60px!important;min-height:60px!important;margin:0!important;border-radius:0!important;padding:0 12px 0 16px!important;background:#060606eb!important;backdrop-filter:blur(16px) saturate(1.4)!important;-webkit-backdrop-filter:blur(16px) saturate(1.4)!important;border:0!important;border-bottom:1px solid #ffffff14!important;box-shadow:none!important;display:flex;align-items:center;justify-content:space-between}
+  #nav .logo .lg,#nav .logo img{width:40px!important;height:40px!important}
+  #nav .nav-r{margin-left:auto!important;gap:8px}
+  #nav .nav-cta{display:inline-flex!important;height:36px!important;padding:0 14px!important;font-size:10.5px!important;letter-spacing:.12em}
+  #nav .burger{width:40px;height:40px;border-radius:2px!important;background:#ffffff12!important;border:1px solid #ffffff1f}
+  /* full-screen menu */
+  .mnav{padding:84px 24px calc(28px + env(safe-area-inset-bottom,0px))!important;gap:0!important;background:#060606!important;overflow:auto}
+  .mnav a:not(.sq):not(.ddm-staff){font-family:var(--f-title)!important;font-size:30px!important;letter-spacing:.01em;padding:12px 0;border-bottom:1px solid #ffffff14;display:flex;justify-content:space-between;align-items:center}
+  .mnav a:not(.sq):not(.ddm-staff)::after{content:"→";font-family:var(--f);font-size:18px;color:var(--red)}
+  .mnav .x{top:10px!important;right:12px!important;border-radius:2px!important}
+  .mnav .sq{margin-top:22px!important;height:54px;justify-content:center;font-family:var(--f-tech)!important;font-size:12px!important;letter-spacing:.14em!important;display:flex!important;align-items:center;white-space:nowrap}
+  .bxh .h2cta{width:100%;max-width:none!important}.hero2 .h2in>div{width:100%}
+  /* bottom dock */
+  .mbar{left:0!important;right:0!important;bottom:0!important;border-radius:0!important;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px))!important;background:#060606f0!important;border:0!important;border-top:1px solid #ffffff17!important;gap:10px!important}
+  .mbar .btn{height:48px!important;border-radius:2px!important;font-size:11.5px!important;letter-spacing:.14em}
+  .mbar .btn.glass{background:transparent!important;border:1.5px solid #ffffff4d!important}
+  body{padding-bottom:calc(70px + env(safe-area-inset-bottom,0px))}
+  /* type scale */
+  :root{--t1:clamp(30px,9vw,40px);--t2:clamp(26px,8vw,34px)}
+  main h2{font-size:var(--t2)!important;line-height:1.02!important}
+  .eb{font-size:10.5px!important}
+  /* section rhythm */
+  .sec{padding-block:64px!important}
+  .sd3-in{height:40px;padding:0 var(--mp)!important;font-size:9.5px}.sd3-r{display:none}
+  /* hero */
+  .hero2 .h2in{padding-top:96px!important}
+  .hero2 h1{font-size:clamp(36px,11vw,46px)!important;line-height:.98!important}
+  .h2tags{flex-direction:column;align-items:flex-start;gap:8px!important}
+  .h2tags .bar-eb{white-space:normal!important;font-size:10px!important;line-height:1.5;max-width:100%}
+  .bxh .h2cta{flex-direction:column!important;gap:10px!important}
+  .bxh .h2cta .sq{width:100%;height:52px!important;flex:none!important}
+  .badge-o{display:none!important}
+  .bxh .bxs{margin-top:36px!important}
+  .bxh .bx{min-height:0!important;padding:18px 0!important}
+  .bxh .bx i{font-size:88px!important;opacity:.5!important}
+  /* finder */
+  .finder2{grid-template-columns:1fr 1fr!important}
+  /* programs */
+  .pbx-l{padding-block:56px 20px!important}
+  .pbx-l h2{white-space:normal!important;font-size:var(--t2)!important}
+  .pbx-spec{max-width:100%!important;overflow-x:auto;flex-wrap:nowrap!important;scrollbar-width:none}
+  .pbx-spec::-webkit-scrollbar{display:none}
+  .pbx-spec button{flex:0 0 auto!important;padding:12px 14px!important}
+  .pbx .pb-tabs{display:flex!important;width:100%}.pbx .pb-tabs button{flex:1;padding:13px 10px!important}
+  .pbx-wall{height:340px!important;margin:0 calc(-1*var(--mp))!important}
+  .pbx-cta{flex-direction:column}.pbx-cta .sq{width:100%}
+  /* lease deals → swipe carousel */
+  .ld{padding-block:60px!important}
+  .ld .ld-t{white-space:normal!important;font-size:var(--t2)!important;width:auto!important}
+  .ld .ld-h{flex-direction:column!important;align-items:stretch!important;gap:18px!important;margin:12px 0 26px!important}
+  .ld .ld-all{width:100%;justify-content:center}
+  .ld-g{display:flex!important;gap:12px!important;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(-1*var(--mp));padding:0 var(--mp) 6px;scrollbar-width:none}
+  .ld-g::-webkit-scrollbar{display:none}
+  .ld-g>.ldc{flex:0 0 82%!important;scroll-snap-align:start;min-width:0}
+  .ldc h3{font-size:18px!important}
+  /* brand slider */
+  .br2{padding:34px 0!important}
+  .br2-vp{--slot:34vw!important;width:100%!important}
+  .br2-i{height:64px!important}
+  .br2-i img{max-width:80%!important;height:auto!important;max-height:52px!important}
+  .br2-i .lg-cadillac,.br2-i .lg-ram,.br2-i .lg-buick,.br2-i .lg-lincoln{max-height:56px!important}
+  .br2-i .lg-dodge,.br2-i .lg-hummer,.br2-i .lg-gmc{max-height:30px!important}
+  /* white-glove */
+  .speed .sx{padding:16px!important}
+  /* credit */
+  #credit .ysx-row{column-gap:6px!important}
+  #credit .ysx-s{padding:14px 0 0!important}
+  #credit .cr .cb{padding:22px!important}
+  #credit .cr h3{font-size:22px!important}
+  /* three steps */
+  .st3{row-gap:0!important}
+  .st3-cta{margin:8px 0 28px!important}
+  .st3-cta .sq{width:100%;justify-content:center}
+  .st3-s{margin-left:0!important;padding:22px 0!important;gap:16px!important}
+  .st3-n{font-size:44px!important}
+  .st3-b h3{font-size:20px!important}
+  .st3-go{width:38px!important;height:38px!important;top:22px!important}
+  /* what to bring: compact 2x2 */
+  .dk2-h{margin-bottom:28px!important}
+  .dk2-meter{max-width:none!important}
+  .dk2-cta{flex-direction:column}
+  .dk2-g{grid-template-columns:1fr 1fr!important}
+  .dk2-i{min-height:0!important;padding:18px 14px!important;border-left:0!important;border-top:1px solid #ffffff1f}
+  .dk2-i:nth-child(odd){border-right:1px solid #ffffff1f}
+  .dk2-i:nth-child(-n+2){border-top:0}
+  .dk2-ic{margin:14px 0 12px!important}
+  .dk2-i b{font-size:13.5px!important}.dk2-s{font-size:12.5px!important}
+  .dk2-ck{padding-top:14px!important;font-size:9.5px!important}
+  .dk2-tip{flex-direction:column;align-items:flex-start!important;gap:10px!important}
+  /* o experience */
+  .ox2{padding:64px 0!important}
+  .ox2-g{gap:36px!important}
+  .ox2-r{min-height:420px!important}
+  .ox2-q{width:auto!important;left:16px;right:-4px!important;bottom:20px!important}
+  .ox2-cta{flex-direction:column}.ox2-cta .sq{width:100%}
+  /* concierge + booking */
+  .split{gap:32px!important}
+  .bk{padding-block:64px!important}
+  /* reviews */
+  .rv2{padding-block:64px 70px!important}
+  .rv2-h{padding-bottom:28px!important;margin-bottom:30px!important;gap:24px!important}
+  .rv2 .lau{transform:scale(.86);transform-origin:left center;margin:-10px 0!important}
+  .rc.rv2c{width:84vw!important}
+  /* footer */
+  .ofoot{padding-top:48px!important;padding-bottom:20px}
+  .fx-word{margin-top:24px!important}
+  /* inventory */
+  .inv .vgrid{grid-template-columns:1fr!important}
+  .page-top{padding-top:84px!important}
+  .ptitle h1{font-size:clamp(32px,10vw,42px)!important}
+  /* car detail */
+  .dgal,.det{grid-template-columns:1fr!important}
+
+  .st3{grid-template-columns:minmax(0,1fr)!important}
+  .st3-h,.st3-cta,.st3-s.s1,.st3-s.s2,.st3-s.s3{grid-column:1/-1!important;grid-row:auto!important;justify-self:stretch!important;text-align:left!important;max-width:none!important}
+  .st3-ln{display:none!important}
+  .hero2 h1{white-space:normal!important;font-size:clamp(34px,10.4vw,44px)!important}
+  *{min-width:0}
+  .dk2-cta .sq{height:50px!important;flex:none!important}
+}
+@media (max-width:380px){.dk2-g{grid-template-columns:1fr!important}.dk2-i{border-right:0!important}.dk2-i:nth-child(2){border-top:1px solid #ffffff1f}}
 </style>
 <div id="root"></div>
 <script>
