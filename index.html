@@ -2658,6 +2658,62 @@ html.iv-open,html.iv-open body{overflow:hidden}
   #services .split>div:last-child{order:-1}
   .dk2-tip{display:none!important}
 }
+
+/* ===== Programs + What to bring merged ===== */
+.pg12-bring{margin-top:56px;padding-top:44px;border-top:1px solid #ffffff14}
+.pg12-bring .dk2-h{margin-bottom:26px;gap:40px;align-items:end}
+.pg12-bt{font-family:var(--f-title);font-size:clamp(26px,2.6vw,38px);line-height:1.05;text-transform:uppercase;color:#fff;margin-top:12px}
+.pg12-bring .dk2-h p{font-size:15.5px;margin-top:10px}
+.pg12-bring .dk2-meter{max-width:420px}
+.pg12-bring .dk2-meter>i{margin:12px 0 16px}
+.pg12-bring .dk2-cta .sq{height:48px;font-size:11.5px}
+.pg12-bring .dk2-g{border:1px solid #ffffff14;border-radius:0}
+.pg12-bring .dk2-i{min-height:0;padding:20px 22px;display:grid;grid-template-columns:auto 1fr auto;grid-template-rows:auto auto;column-gap:14px;align-items:center}
+.pg12-bring .dk2-n{display:none}
+.pg12-bring .dk2-ic{grid-row:1/3;margin:0;width:24px;height:24px}.pg12-bring .dk2-ic svg{width:24px;height:24px}
+.pg12-bring .dk2-i b{font-size:13.5px;grid-column:2}
+.pg12-bring .dk2-s{font-size:12.5px;margin-top:3px;grid-column:2}
+.pg12-bring .dk2-ck{grid-column:3;grid-row:1/3;margin:0;padding:0;font-size:0;gap:0}
+.pg12-bring .dk2-ck em{width:20px;height:20px}.pg12-bring .dk2-ck em::after{left:6.5px;top:3px}
+@media (max-width:1100px){.pg12-bring .dk2-g{grid-template-columns:repeat(2,minmax(0,1fr))}.pg12-bring .dk2-i:nth-child(3){border-left:0}.pg12-bring .dk2-i:nth-child(n+3){border-top:1px solid #ffffff1f}}
+@media (max-width:760px){.pg12-bring{margin-top:36px;padding-top:30px}.pg12-bring .dk2-h{grid-template-columns:1fr;gap:18px}.pg12-bring .dk2-meter{max-width:none;justify-self:stretch}
+  .pg12-bring .dk2-g{grid-template-columns:1fr!important}.pg12-bring .dk2-i{border-left:0!important;padding:16px}.pg12-bring .dk2-i+.dk2-i{border-top:1px solid #ffffff1f}}
+/* outline buttons: white fill on hover gets red text so it never disappears */
+.sq.ol:hover,.sq.ol:focus-visible,.sq.ol:active{color:var(--red)!important}
+.sq.ol:hover svg,.sq.ol:active svg{color:var(--red)!important}
+.sq.ol:hover,.sq.ol:focus-visible{box-shadow:0 10px 34px -8px #ffffff73,0 0 22px -6px #ffffff59!important;transition:box-shadow .35s ease,color .3s ease,background-size .45s ease!important}
+.pg12-bring .dk2-ck{font-size:0!important;letter-spacing:0!important}
+
+/* O experience quote: visible at rest */
+.ox2-q{background:linear-gradient(135deg,#D7262B40,#141416e6 55%)!important;border:1px solid #ffffff38!important;box-shadow:0 18px 50px -18px #000,0 0 0 1px #D7262B33,0 0 40px -12px #D7262B66!important}
+.ox2-q blockquote{font-weight:400!important}
+.ox2-q figcaption span{color:#ffffffb3!important}
+
+/* tablets + small laptops: Personal + Business stacks, wall stays the same style */
+@media (min-width:761px) and (max-width:1200px){
+  .pbx-in{grid-template-columns:1fr!important;min-height:0!important;gap:0!important}
+  .pbx-l{padding-block:64px 10px!important}
+  .pbx-wall{height:380px!important;margin:10px calc(-1*var(--p,24px)) 0!important;-webkit-mask-image:linear-gradient(180deg,transparent,#000 16%,#000 84%,transparent)!important;mask-image:linear-gradient(180deg,transparent,#000 16%,#000 84%,transparent)!important}
+  .pbx-tilt{inset:-30% 0 -30% 4%!important}
+  #services .split{grid-template-columns:1fr!important;gap:36px!important}
+  #services .split>div:last-child{order:-1}
+  #services .cc{height:520px!important;max-height:520px}
+}
+
+/* reviews on phones: one clean swipe row, snap per card */
+@media (max-width:760px){
+  .rv2-h{gap:18px!important}
+  .rv2-l h2{font-size:34px!important}
+  #reviews .lau{transform:scale(.8);margin:-20px auto -16px!important}
+  #reviews .rrow.rev{display:none!important}
+  #reviews .rrow{padding:6px var(--mp) 4px!important;gap:12px!important;scroll-snap-type:x mandatory;scroll-padding-inline:var(--mp)}
+  #reviews .rrow>*{flex:0 0 86%!important;width:86%!important;scroll-snap-align:start}
+  #reviews .rx{min-height:0!important}
+  #reviews .edge{display:none!important}
+  .rv12-hint{display:flex;justify-content:space-between;align-items:center;padding:10px var(--mp) 0;font-family:var(--f-tech);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--on-dark-3)}
+  .rv12-hint b{color:#fff}
+}
+@media (min-width:761px){.rv12-hint{display:none}}
 </style>
 <div id="root"></div>
 <script>
@@ -4065,7 +4121,7 @@ const PROGRAMS=[
 ];
 
 function progHTML(){return `<section class="sec dark pg12" id="programs"><div class="wrap wide">
-  <div class="pg12-h"><div class="rv"><span class="eb">Programs</span><h2>Pick your way in</h2></div>
+  <div class="pg12-h"><div class="rv"><span class="eb">Step 1 · Programs</span><h2>Pick your way in</h2></div>
     <p class="rv">Text a keyword to <a href="${sms()}">${BIZ.text}</a> and a real person answers.</p></div>
   <div class="pg12-g">${PROGRAMS.map(x=>`<article class="pg12-c rv" data-k="${x.k}">
     <div class="pg12-top"><span class="pg12-n">${x.n}</span><span class="pg12-tag">${x.tag}</span></div>
@@ -4076,6 +4132,7 @@ function progHTML(){return `<section class="sec dark pg12" id="programs"><div cl
       <div class="pg12-sub">${x.href?`<a href="${sms(x.kw)}" data-sms="${x.kw}" data-prog="${x.t}">Text “${x.kw}”</a>`:`<a href="tel:${BIZ.textTel}">${PH_IC}Call to ask</a>`}<a href="#apply">Apply online</a></div></div>
   </article>`).join('')}</div>
   <div class="pg12-soon rv"><span class="pg12-sb">Coming soon</span><div><b>Heroes Program</b><span>Veterans, first responders and healthcare workers. Get on the early list.</span></div><a class="sq ol sm" href="${sms('HERO')}" data-sms="HERO" data-prog="Heroes Program">Text “HERO” ${ic('arrow')}</a></div>
+  <!--BRING-->
 </div></section>`}
 
 function sellHTML(){return `<section class="sec white sl12" id="sell"><div class="wrap wide sl12-in">
@@ -4186,7 +4243,10 @@ vHome=function(){let h=_vHome0();
   R(`${ic('search')}Find my car</button></form>`,`${ic('search')}Find my car</button><a class="sq fall" href="#inventory">All inventory ${ic('arrow')}</a></form>`);
   /* Personal + business right under the finder, then Instagram; programs move down after "We say yes" */
   h=h.replace('<section class="ld" id="lease-deals"',igHTML()+'<section class="ld" id="lease-deals"');
-  h=h.replace('<section class="sec dk2" id="bring">',progHTML()+'<section class="sec dk2" id="bring">');
+  /* Programs + What to bring are one section: pick a program, then have these ready */
+  {const m=h.match(/<section class="sec dk2" id="bring"><div class="wrap wide">([\s\S]*?)<\/div><\/section>/);let inner=m?m[1]:'';
+   inner=inner.replace(/<div class="dtip dk2-tip[\s\S]*$/,'').replace('<span class="eb">Be ready</span><h2>What to bring</h2>','<span class="eb">Step 2 · Be ready</span><h3 class="pg12-bt">Then bring these</h3>').replace('Have these ready and most approvals come back in 24 hours.','Have these 4 things and most approvals come back in 24 hours.');
+   h=h.replace(/<section class="sec dk2" id="bring">[\s\S]*?<\/div><\/section>/,progHTML().replace('<!--BRING-->',`<div class="dk2 pg12-bring" id="bring">${inner}</div>`));}
   /* branded hero photo */
   h=h.replace(/(id="heroPh"><img src=")[^"]*(" alt=")[^"]*("[^>]*?object-position:)[^"]*/,'$1'+P('ig-hero-gem')+'$2Black SUV with a red bow in a dark showroom$362% 58%');
   /* trim copy */
@@ -4250,8 +4310,10 @@ function sDiv(){const m=document.querySelector('main');if(!m)return;const kids=[
 function a12(){const r=(location.hash||'').slice(1);const id={programs:'programs',sell:'sell',instagram:'instagram'}[r];if(!id)return;
   const go=()=>{const t=document.getElementById(id);t&&scrollTo({top:t.getBoundingClientRect().top+scrollY-84})};setTimeout(go,40);setTimeout(go,500)}
 addEventListener('hashchange',()=>setTimeout(a12,0));
-new MutationObserver(()=>{igBind();sellBind()}).observe(document.getElementById('root'),{childList:true});
+function rvHint(){const r=document.querySelector('#reviews .rrow');if(!r||r._h)return;r._h=1;r.insertAdjacentHTML('afterend','<div class="rv12-hint"><span>Swipe for more</span><span><b id="rvN">1</b> / <i id="rvT" style="font-style:normal"></i></span></div>');setTimeout(()=>{const t=document.getElementById('rvT');if(t)t.textContent=r.children.length},800);
+  r.addEventListener('scroll',()=>{const c=r.children[0];if(!c)return;const n=Math.round(r.scrollLeft/(c.offsetWidth+12))+1;const e=document.getElementById('rvN');if(e)e.textContent=Math.min(n,r.children.length)},{passive:true})}
+new MutationObserver(()=>{igBind();sellBind();rvHint()}).observe(document.getElementById('root'),{childList:true});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){const m=document.getElementById('mnav');m&&m.classList.remove('open')}});
 new MutationObserver(()=>{const m=document.getElementById('mnav');document.documentElement.classList.toggle('mn-open',!!(m&&m.classList.contains('open')))}).observe(document.getElementById('root'),{subtree:true,attributes:true,attributeFilter:['class']});
-render();a12();igBind();sellBind();
+render();a12();igBind();sellBind();setTimeout(rvHint,300);
 </script>
