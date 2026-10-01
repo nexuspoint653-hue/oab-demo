@@ -2760,6 +2760,17 @@ html.iv-open #root *{animation-play-state:paused!important}
 @media (max-width:760px){.cta12{flex-direction:column;align-items:stretch;gap:12px;margin-top:28px}.cta12 .sq{width:100%;justify-content:center}.cta12-t{text-align:center;font-size:12.5px}}
 .cta12{position:relative;z-index:4}
 .speed .cta12{justify-content:center}
+/* agency tagline: "POWERED BY  [FrameWorks Studio]" inline, no card */
+.fx-soc a.fx-agency{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;gap:14px!important;align-items:center!important;transform:none!important}
+.fx-soc a.fx-agency>div{display:flex!important;align-items:center;gap:16px}
+.fx-soc a.fx-agency small{margin:0!important;font-family:var(--f)!important;font-size:11.5px!important;letter-spacing:.32em!important;color:#ffffff8c!important;font-weight:400}
+.fx-soc a.fx-agency img{height:22px!important;width:auto;opacity:.85;transition:opacity .3s}
+.fx-soc a.fx-agency:hover img{opacity:1}.fx-soc a.fx-agency:hover small{color:#ffffffcc!important}
+@media (max-width:560px){.fx-soc a.fx-agency>div{gap:10px}.fx-soc a.fx-agency small{font-size:9px!important;letter-spacing:.22em!important}.fx-soc a.fx-agency img{height:17px!important}}
+/* self-hosted reels */
+.iv12-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;z-index:2;opacity:0;transition:opacity .35s ease}
+.iv12-v.ready .iv12-vid{opacity:1}
+.iv12-v.ready .iv12-ld{display:none}
 </style>
 <div id="root"></div>
 <script>
@@ -3785,7 +3796,7 @@ function footer(){
   </div>
   <div class="fx-word" id="fxWord" aria-hidden="true"><div class="fx-track"><span>O AUTO BROKERS</span><span>O AUTO BROKERS</span></div><div class="fx-lit"><div class="fx-track"><span>O AUTO BROKERS</span><span>O AUTO BROKERS</span></div></div></div>
   <a class="fx-agency" href="#" onclick="event.preventDefault()" aria-label="Designed and built by FrameWorks Studio">
-    <div><small>Designed &amp; built by</small><img class="fx-al" src="brand/fws-long.png" alt="FrameWorks Studio" height="22"></div></a>
+    <div><small>Powered by</small><img class="fx-al" src="brand/fws-long.png" alt="FrameWorks Studio" height="22"></div></a>
 </footer>
 <div class="mbar"><a class="btn glass" href="#inventory">Inventory</a><a class="btn red" href="#apply">Get approved</a></div>`}
 
@@ -4150,12 +4161,13 @@ const PH_IC='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-w
 
 /* Paste Instagram reel / post links here, in order. Empty url = branded placeholder card. */
 const IG_REELS=[
- {url:'https://www.instagram.com/reel/DXowugbjZp8/',ph:'ig-wheel',cta:['Get approved','#apply'],tag:'Success story',cap:'She came in a wheelchair. She drove off in her own car.'},
- {url:'https://www.instagram.com/reel/DdU6pTtNUUU/',ph:'ig-mom',kw:'MOM',tag:'Single moms',cap:'You’re doing the job of two. Let’s get you moving.'},
- {url:'https://www.instagram.com/reel/DcwrkbKOV9g/',ph:'ig-desk',kw:'C2C',tag:'Credit to Car',cap:'How C2C works, straight from O'},
- {url:'https://www.instagram.com/reel/DdXSp6qN-8t/',ph:'ig-rent',kw:'RENT',tag:'Long-term rental',cap:'Still renting? Build an exit plan.'},
- {url:'https://www.instagram.com/reel/Da8CawiOfJI/',ph:'ig-buick',cta:['Get approved','#apply'],tag:'New keys',cap:'Welcome to the OAB family'},
- {url:'https://www.instagram.com/reel/Dcbxkttv358/',ph:'ig-health',kw:'HERO',tag:'Healthcare heroes',cap:'You help others. Let us help you.'},
+ {url:'https://www.instagram.com/reel/DXowugbjZp8/',v:'DXowugbjZp8',ph:'ig-wheel',tag:'Success story',cap:'She came in a wheelchair. She drove off in her own car.',cta:['Get approved','#apply']},
+ {url:'https://www.instagram.com/reel/DdU6pTtNUUU/',v:'DdU6pTtNUUU',ph:'ig-mom',tag:'Single moms',cap:'You’re doing the job of two. Let’s get you moving.',kw:'MOM'},
+ {url:'https://www.instagram.com/reel/DcwrkbKOV9g/',v:'DcwrkbKOV9g',ph:'ig-desk',tag:'Credit to Car',cap:'How C2C works, straight from O',kw:'C2C'},
+ {url:'https://www.instagram.com/reel/Dan56jfvSJU/',v:'Dan56jfvSJU',poster:'video/oab-Dan56jfvSJU.jpg',tag:'Success story',cap:'She’s not just renting. She’s building a future.',kw:'RENT'},
+ {url:'https://www.instagram.com/reel/DdXSp6qN-8t/',v:'DdXSp6qN-8t',ph:'ig-rent',tag:'Long-term rental',cap:'Still renting? Build an exit plan.',kw:'RENT'},
+ {url:'https://www.instagram.com/reel/Dcbxkttv358/',v:'Dcbxkttv358',ph:'ig-health',tag:'Healthcare heroes',cap:'You help others. Let us help you.',kw:'HERO'},
+ {url:'https://www.instagram.com/reel/Dap180JR4Nt/',v:'Dap180JR4Nt',poster:'video/oab-Dap180JR4Nt.jpg',tag:'Credit wins',cap:'Better credit: $400 a month back in her pocket.',cta:['See what I qualify for','#apply']},
  {url:'',ph:'ig-biz-trucks',tag:'Coming soon',cap:'Veterans & first responders program',soon:1}
 ];
 const igId=u=>{const m=String(u||'').match(/instagram\.com\/(?:[^/]+\/)?(reel|reels|p|tv)\/([A-Za-z0-9_-]+)/);return m?{t:m[1]==='reels'?'reel':m[1],id:m[2]}:null};
@@ -4201,7 +4213,7 @@ function igHTML(){return `<section class="sec dark ig12" id="instagram"><div cla
     <a class="ig12-f rv" href="https://instagram.com/oautobrokers" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor"/></svg><span>Follow the OAB family</span></a></div>
   <div class="ig12-nav"><button type="button" class="ig12-ar" data-d="-1" aria-label="Previous videos"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="ig12-ar" data-d="1" aria-label="Next videos"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
   <div class="ig12-r" id="igRow">${IG_REELS.map((r,i)=>{const e=igId(r.url);return `<div class="ig12-c rv${r.soon?' soon':''}" data-i="${i}"${e?` data-t="${e.t}" data-id="${e.id}"`:''}>
-    <img src="${P(r.ph)}" alt="" loading="lazy" onerror="this.remove()"><span class="ig12-sh"></span>
+    <img src="${r.poster||P(r.ph)}" alt="" loading="lazy" onerror="this.remove()"><span class="ig12-sh"></span>
     <span class="ig12-tag">${r.tag}</span>
     ${r.soon?`<span class="ig12-soon"><img src="brand/oab-logo-160.png" alt=""></span>`:`<button type="button" class="ig12-pl" aria-label="Play video"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></button>`}
     <div class="ig12-cp"><b>${r.cap}</b><span>${r.soon?'Text “HERO” to get early access':'@oautobrokers'}</span></div></div>`}).join('')}</div>
@@ -4213,9 +4225,6 @@ function igBind(){const row=document.getElementById('igRow');if(!row||row._b)ret
   row.querySelectorAll('.ig12-c').forEach(c=>c.onclick=()=>{
     if(c.classList.contains('soon')){smsOpen('HERO','Heroes Program');return}
     if(!c.dataset.id){window.open('https://instagram.com/oautobrokers','_blank','noopener');return}
-    const url=`https://www.instagram.com/${c.dataset.t}/${c.dataset.id}/`;
-    /* inline playback only where Instagram allows framing (the live site); preview sandboxes block it, so open the reel instead */
-    if(!/(^|\.)(netlify\.app|oautobrokers\.org|oautobrokers\.com|localhost)$/.test(location.hostname)){window.open(url,'_blank','noopener');return}
     igOpen(+c.dataset.i)})}
 
 /* premium video player: dark lightbox, Instagram's frame cropped to just the video, branded side panel */
@@ -4228,17 +4237,17 @@ function igOpen(i){const L=IG_LIST();let k=Math.max(0,L.findIndex(r=>r.i===i));
     <button type="button" class="iv12-ar l" data-d="-1" aria-label="Previous video"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
     <button type="button" class="iv12-ar r" data-d="1" aria-label="Next video"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></div>`);
   const m=document.getElementById('igM'),V=document.getElementById('ivV'),Pn=document.getElementById('ivP');
-  const fit=()=>{const f=V.querySelector('iframe');if(!f)return;const H=V.clientHeight,W=V.clientWidth,over=16,mh=H+over*2,cw=mh/1.297,wi=cw+15,vw=mh*9/16;
-    f.style.width=wi+'px';f.style.height=(55+mh+420)+'px';f.style.left=(-(cw-vw)/2-(vw-W)/2)+'px';f.style.top=(-55-over)+'px'};
+  const fit=()=>{};
   const show=()=>{const r=L[k],url=`https://www.instagram.com/${r.t}/${r.id}/`;
-    V.innerHTML=`<img class="iv12-po" src="${P(r.ph)}" alt=""><span class="iv12-ld"><i></i></span><iframe src="${url}embed/" allow="autoplay; encrypted-media; clipboard-write; fullscreen" title="${esc(r.cap)}" scrolling="no"></iframe>`;
-    const f=V.querySelector('iframe');f.onload=()=>setTimeout(()=>V.classList.add('ready'),350);V.classList.remove('ready');fit();
+    V.innerHTML=`<img class="iv12-po" src="${r.poster||P(r.ph)}" alt=""><video class="iv12-vid" src="video/oab-${r.v}.mp4" poster="${r.poster||P(r.ph)}" playsinline controls autoplay preload="auto" title="${esc(r.cap)}"></video>`;
+    const vid=V.querySelector('video');V.classList.remove('ready');vid.addEventListener('playing',()=>V.classList.add('ready'),{once:true});vid.addEventListener('loadeddata',()=>V.classList.add('ready'),{once:true});
+    const pl=vid.play();pl&&pl.catch(()=>{vid.muted=true;vid.play().catch(()=>{})});
     const cta=r.kw?`<a class="sq red" href="${sms(r.kw)}" data-sms="${r.kw}" data-prog="${esc(r.tag)}">Text “${r.kw}” ${ic('arrow')}</a>`:`<a class="sq red" href="${r.cta[1]}" data-x>${r.cta[0]} ${ic('arrow')}</a>`;
     Pn.innerHTML=`<span class="iv12-n">${String(k+1).padStart(2,'0')} <em>/ ${String(L.length).padStart(2,'0')}</em></span><span class="eb">${esc(r.tag)}</span><h3>${esc(r.cap)}</h3>
       <p>Real clients, real keys. ${MOTTO}.</p><div class="iv12-c">${cta}<a class="sq ol" href="tel:${BIZ.textTel}">${PH_IC}Call ${BIZ.text}</a></div>
-      <a class="iv12-ig" href="${url}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor"/></svg>Watch on Instagram</a>`;
+      <a class="iv12-ig" href="${url}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor"/></svg>See it on Instagram</a>`;
     Pn.querySelectorAll('[data-x]').forEach(x=>x.onclick=close)};
-  const close=()=>{m.classList.remove('on');document.documentElement.classList.remove('iv-open');setTimeout(()=>m.remove(),320);removeEventListener('keydown',key);removeEventListener('resize',fit)};
+  const close=()=>{const vv=V.querySelector('video');if(vv){vv.pause();vv.removeAttribute('src');vv.load()}m.classList.remove('on');document.documentElement.classList.remove('iv-open');setTimeout(()=>m.remove(),320);removeEventListener('keydown',key);removeEventListener('resize',fit)};
   const key=e=>{if(e.key==='Escape')close();if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)};
   const go=d=>{k=(k+d+L.length)%L.length;show()};
   m.querySelectorAll('.iv12-bg,.iv12-x').forEach(x=>x.onclick=close);m.querySelectorAll('.iv12-ar').forEach(b=>b.onclick=()=>go(+b.dataset.d));
