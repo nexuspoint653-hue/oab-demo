@@ -2734,6 +2734,10 @@ html.iv-open,html.iv-open body{overflow:hidden}
 
 .fx-lit .fx-track span{background:linear-gradient(180deg,#ffffff8c,#ffffff26)!important;-webkit-background-clip:text!important;background-clip:text!important}
 @media (hover:none){.fx-word>.fx-track span{color:#ffffff24!important;filter:blur(1.5px)}}
+/* photo wall: cap card size so the moving strips stay small enough for the GPU at any screen size (huge strips froze) */
+.pbx-tilt{grid-template-columns:repeat(3,minmax(0,250px))!important;justify-content:center}
+.pbx-track{will-change:transform;backface-visibility:hidden}
+@media (max-width:760px){.pbx-tilt{grid-template-columns:repeat(3,minmax(0,150px))!important}}
 </style>
 <div id="root"></div>
 <script>
@@ -4233,7 +4237,7 @@ PB_PH[0].splice(0,12,'ig-sign','ig-buick','ig-gmc','ig-summer','ig-wheel','ig-he
 PB_PH[1].splice(0,12,'ig-biz-trucks','ig-biz-vans','ig-desk','ig-maybach','silverado','truck-black','ig-biz-vans','ig-desk','ig-biz-trucks','truck-black','ig-maybach','silverado');
 
 /* wall photos load up front (lazy images inside the tilted, clipped wall can stall) */
-const _pbWall0=pbWall;pbWall=function(i){return _pbWall0(i).split('loading="lazy"').join('decoding="async"')};
+const _pbWall0=pbWall;pbWall=function(i){const ph=PB_PH[i];return [0,1,2].map(c=>{const set=ph.filter((_,k)=>k%3===c);const cards=[...set,...set,...set,...set].map(p=>`<div class="pbx-card"><img src="${P(p)}" alt="" decoding="async" onerror="this.parentNode.remove()"></div>`).join('');return `<div class="pbx-col ${c===1?'up':'dn'}"><div class="pbx-track">${cards}</div></div>`}).join('')};
 
 /* text-to-inquire: phones open Messages; desktops get a scan-to-text card + call */
 const isPhone=()=>matchMedia('(pointer:coarse)').matches&&innerWidth<1024;
