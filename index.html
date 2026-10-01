@@ -4123,7 +4123,7 @@ function igOpen(i){const L=IG_LIST();let k=Math.max(0,L.findIndex(r=>r.i===i));
     <button type="button" class="iv12-ar l" data-d="-1" aria-label="Previous video"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
     <button type="button" class="iv12-ar r" data-d="1" aria-label="Next video"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></div>`);
   const m=document.getElementById('igM'),V=document.getElementById('ivV'),Pn=document.getElementById('ivP');
-  const fit=()=>{const f=V.querySelector('iframe');if(!f)return;const H=V.clientHeight,W=V.clientWidth,over=8,mh=H+over*2,cw=mh/1.297,wi=cw+15,vw=mh*9/16;
+  const fit=()=>{const f=V.querySelector('iframe');if(!f)return;const H=V.clientHeight,W=V.clientWidth,over=16,mh=H+over*2,cw=mh/1.297,wi=cw+15,vw=mh*9/16;
     f.style.width=wi+'px';f.style.height=(55+mh+420)+'px';f.style.left=(-(cw-vw)/2-(vw-W)/2)+'px';f.style.top=(-55-over)+'px'};
   const show=()=>{const r=L[k],url=`https://www.instagram.com/${r.t}/${r.id}/`;
     V.innerHTML=`<img class="iv12-po" src="${P(r.ph)}" alt=""><span class="iv12-ld"><i></i></span><iframe src="${url}embed/" allow="autoplay; encrypted-media; clipboard-write; fullscreen" title="${esc(r.cap)}" scrolling="no"></iframe>`;
@@ -4138,7 +4138,7 @@ function igOpen(i){const L=IG_LIST();let k=Math.max(0,L.findIndex(r=>r.i===i));
   const go=d=>{k=(k+d+L.length)%L.length;show()};
   m.querySelectorAll('.iv12-bg,.iv12-x').forEach(x=>x.onclick=close);m.querySelectorAll('.iv12-ar').forEach(b=>b.onclick=()=>go(+b.dataset.d));
   addEventListener('keydown',key);addEventListener('resize',fit);
-  show();document.documentElement.classList.add('iv-open');requestAnimationFrame(()=>m.classList.add('on'))}
+  show();document.documentElement.classList.add('iv-open');setTimeout(()=>m.classList.add('on'),20)}
 
 function sellBind(){const f=document.getElementById('sellF');if(!f||f._b)return;f._b=1;
   f.onsubmit=e=>{e.preventDefault();const d={car:$('#slCar').value.trim(),mi:$('#slMi').value.trim(),fin:$('#slFin').value,phone:$('#slPh').value.trim()};
@@ -4164,7 +4164,7 @@ function smsOpen(kw,prog){if(isPhone()){location.href=sms(kw);return}
     <div class="sm12-qr">${QR12[kw]||QR12.TXT}</div><p>Scan with your phone camera. Your message opens ready to send.</p>
     <div class="sm12-a"><button type="button" class="sq red" id="smCopy">Copy number</button><a class="sq ol" href="tel:${BIZ.textTel}">${PH_IC}Call ${BIZ.text}</a></div>
     <small>A real person answers · ${MOTTO}.</small></div></div>`);
-  const m=document.getElementById('smsM');requestAnimationFrame(()=>m.classList.add('on'));
+  const m=document.getElementById('smsM');setTimeout(()=>m.classList.add('on'),20);
   const close=()=>{m.classList.remove('on');setTimeout(()=>m.remove(),300);removeEventListener('keydown',esc12)};const esc12=e=>{if(e.key==='Escape')close()};addEventListener('keydown',esc12);
   m.querySelectorAll('[data-x]').forEach(x=>x.onclick=close);
   document.getElementById('smCopy').onclick=e=>{try{navigator.clipboard.writeText(BIZ.text)}catch(_){}e.target.textContent='Copied';setTimeout(()=>e.target.textContent='Copy number',1600)}}
