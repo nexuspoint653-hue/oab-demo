@@ -2728,6 +2728,12 @@ html.iv-open,html.iv-open body{overflow:hidden}
 .rv2 .edge{will-change:auto}
 #reviews,#instagram,#business-anchor{contain:paint}
 .rv2 .rrow .rc *{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+
+/* footer wordmark: soft, blurred base that's visible at rest; crisp where the cursor is */
+.fx-word>.fx-track span{color:#ffffff1c!important;filter:blur(3px);transition:filter .5s}
+
+.fx-lit .fx-track span{background:linear-gradient(180deg,#ffffff8c,#ffffff26)!important;-webkit-background-clip:text!important;background-clip:text!important}
+@media (hover:none){.fx-word>.fx-track span{color:#ffffff24!important;filter:blur(1.5px)}}
 </style>
 <div id="root"></div>
 <script>
