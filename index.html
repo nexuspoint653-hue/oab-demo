@@ -2738,6 +2738,14 @@ html.iv-open,html.iv-open body{overflow:hidden}
 .pbx-tilt{grid-template-columns:repeat(3,minmax(0,250px))!important;justify-content:center}
 .pbx-track{will-change:transform;backface-visibility:hidden}
 @media (max-width:760px){.pbx-tilt{grid-template-columns:repeat(3,minmax(0,150px))!important}}
+
+/* video player performance: nothing else renders or animates while a video is open */
+.iv12-bg{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:radial-gradient(60% 60% at 50% 45%,#1c0809,#050505 70%)!important}
+html.iv-open #root{visibility:hidden}
+html.iv-open #root *{animation-play-state:paused!important}
+.iv12-in{will-change:auto}
+.iv12.on .iv12-in{transform:none!important;transition:none}
+.iv12-v iframe{transform:translateZ(0)}
 </style>
 <div id="root"></div>
 <script>
@@ -4084,12 +4092,12 @@ function fxFit(){const w=document.getElementById('fxWord');if(!w)return;const s=
   s.forEach(x=>x.style.fontSize='100px');const cw=w.clientWidth,sw=s[0].scrollWidth||1;const fs=Math.floor(100*cw/sw*.985);s.forEach(x=>x.style.fontSize=fs+'px');w.style.height=Math.round(fs*.84)+'px'}
 function fxBind(){const w=document.getElementById('fxWord');if(!w||w._on)return;w._on=1;fxFit();setTimeout(fxFit,400);
   let mx=.5,my=.5,sx=.5,sy=.5,a=0,ta=0,raf=0;
-  const loop=()=>{sx+=(mx-sx)*.16;sy+=(my-sy)*.16;a+=(ta-a)*.08;w.style.setProperty('--sx',(sx*100).toFixed(2)+'%');w.style.setProperty('--sy',(sy*100).toFixed(2)+'%');w.style.setProperty('--sa',a.toFixed(3));raf=w.isConnected?requestAnimationFrame(loop):0};
+  const loop=()=>{sx+=(mx-sx)*.16;sy+=(my-sy)*.16;a+=(ta-a)*.08;w.style.setProperty('--sx',(sx*100).toFixed(2)+'%');w.style.setProperty('--sy',(sy*100).toFixed(2)+'%');w.style.setProperty('--sa',a.toFixed(3));const still=Math.abs(mx-sx)<.002&&Math.abs(my-sy)<.002&&Math.abs(ta-a)<.003;raf=(w.isConnected&&!still)?requestAnimationFrame(loop):0};
   addEventListener('pointermove',e=>{const r=w.getBoundingClientRect();mx=(e.clientX-r.left)/r.width;my=(e.clientY-r.top)/r.height;
-    const dx=Math.max(r.left-e.clientX,0,e.clientX-r.right),dy=Math.max(r.top-e.clientY,0,e.clientY-r.bottom),d=Math.hypot(dx,dy);ta=Math.max(0,1-d/220)},{passive:true});
+    const dx=Math.max(r.left-e.clientX,0,e.clientX-r.right),dy=Math.max(r.top-e.clientY,0,e.clientY-r.bottom),d=Math.hypot(dx,dy);ta=Math.max(0,1-d/220);if(!raf&&(ta>0||a>.003))raf=requestAnimationFrame(loop)},{passive:true});
   document.addEventListener('pointerleave',()=>{ta=0});
   new IntersectionObserver(es=>{if(es[0].isIntersecting&&!raf)raf=requestAnimationFrame(loop)}).observe(w);
-  if(matchMedia('(pointer:coarse)').matches){let t0=performance.now();const idle=t=>{mx=.5+.4*Math.sin((t-t0)/3200);my=.55;ta=.7;if(w.isConnected)requestAnimationFrame(idle)};requestAnimationFrame(idle)}}
+  if(matchMedia('(pointer:coarse)').matches){let t0=performance.now();let vis=false;new IntersectionObserver(es=>{vis=es[0].isIntersecting}).observe(w);const idle=t=>{if(vis){mx=.5+.4*Math.sin((t-t0)/3200);my=.55;ta=.7;if(!raf)raf=requestAnimationFrame(loop)}if(w.isConnected)setTimeout(()=>requestAnimationFrame(idle),vis?16:400)};requestAnimationFrame(idle)}}
 addEventListener('resize',()=>setTimeout(fxFit,60));
 /* dividers v3: editorial running head (index + section name) on a plain hairline */
 function sDiv(){const m=document.querySelector('main');if(!m)return;const kids=[...m.children].filter(e=>e.matches('section,.brands'));let n=0;
@@ -4220,7 +4228,7 @@ function igOpen(i){const L=IG_LIST();let k=Math.max(0,L.findIndex(r=>r.i===i));
   const go=d=>{k=(k+d+L.length)%L.length;show()};
   m.querySelectorAll('.iv12-bg,.iv12-x').forEach(x=>x.onclick=close);m.querySelectorAll('.iv12-ar').forEach(b=>b.onclick=()=>go(+b.dataset.d));
   addEventListener('keydown',key);addEventListener('resize',fit);
-  show();document.documentElement.classList.add('iv-open');setTimeout(()=>m.classList.add('on'),20)}
+  show();setTimeout(()=>document.documentElement.classList.add('iv-open'),360);setTimeout(()=>m.classList.add('on'),20)}
 
 function sellBind(){const f=document.getElementById('sellF');if(!f||f._b)return;f._b=1;
   f.onsubmit=e=>{e.preventDefault();const d={car:$('#slCar').value.trim(),mi:$('#slMi').value.trim(),fin:$('#slFin').value,phone:$('#slPh').value.trim()};
