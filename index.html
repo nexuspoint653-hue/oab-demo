@@ -2584,6 +2584,80 @@ html.mn-open,html.mn-open body{overflow:hidden}
 
 .ig12-open{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:3;white-space:nowrap;font-family:var(--f-tech);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:#0B0B0Ccc;border:1px solid #ffffff33;padding:8px 12px;backdrop-filter:blur(6px)}
 .ig12-open:hover{background:var(--red);border-color:var(--red)}
+
+/* ===== premium video lightbox ===== */
+html.iv-open,html.iv-open body{overflow:hidden}
+.iv12{position:fixed;inset:0;z-index:220;display:grid;place-items:center;opacity:0;transition:opacity .35s ease}
+.iv12.on{opacity:1}
+.iv12-bg{position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 45%,#2a0b0ccc,#050505f2 70%);backdrop-filter:blur(10px)}
+.iv12-in{position:relative;display:flex;align-items:stretch;gap:0;transform:translateY(18px) scale(.985);transition:transform .5s cubic-bezier(.2,.7,.2,1);box-shadow:0 40px 120px -30px #000,0 0 0 1px #ffffff14}
+.iv12.on .iv12-in{transform:none}
+.iv12-v{position:relative;height:min(84vh,780px);aspect-ratio:9/16;overflow:hidden;background:#000;isolation:isolate}
+.iv12-v iframe{position:absolute;border:0;background:#000;opacity:0;transition:opacity .45s ease;z-index:2}
+.iv12-v.ready iframe{opacity:1}
+.iv12-po{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55) saturate(.9);z-index:1}
+.iv12-ld{position:absolute;inset:0;display:grid;place-items:center;z-index:1}
+.iv12-ld i{width:38px;height:38px;border-radius:50%;border:2px solid #ffffff33;border-top-color:#fff;animation:ivspin .8s linear infinite}
+@keyframes ivspin{to{transform:rotate(360deg)}}
+.iv12-p{width:340px;background:#0B0B0C;border-left:1px solid #ffffff12;padding:34px 30px;display:flex;flex-direction:column;color:#fff}
+.iv12-n{font-family:var(--f-tech);font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--red)}.iv12-n em{font-style:normal;color:var(--on-dark-3)}
+.iv12-p .eb{margin-top:auto}
+.iv12-p h3{font-family:var(--f-title);font-size:28px;line-height:1.08;text-transform:uppercase;margin-top:14px}
+.iv12-p p{color:var(--on-dark-2);font-size:14.5px;margin-top:12px;line-height:1.5}
+.iv12-c{display:flex;flex-direction:column;gap:10px;margin-top:26px}
+.iv12-c .sq{width:100%;height:50px;font-size:11.5px}.iv12-c .sq.ol{color:#fff;border-color:#ffffff38}.iv12-c svg{width:15px;height:15px}
+.iv12-ig{display:inline-flex;align-items:center;gap:9px;margin-top:22px;font-size:13px;color:var(--on-dark-2);transition:color .25s}
+.iv12-ig:hover{color:#fff}.iv12-ig svg{width:16px;height:16px}
+.iv12-x{position:absolute;top:22px;right:22px;width:46px;height:46px;border:1px solid #ffffff2e;background:#0b0b0c80;z-index:3;transition:background-color .25s}
+.iv12-x:hover{background:var(--red);border-color:var(--red)}
+.iv12-x i{position:absolute;left:13px;right:13px;top:22px;height:1.5px;background:#fff;transform:rotate(45deg)}.iv12-x i+i{transform:rotate(-45deg)}
+.iv12-ar{position:absolute;top:50%;width:52px;height:52px;margin-top:-26px;border:1px solid #ffffff2e;background:#0b0b0c80;color:#fff;display:grid;place-items:center;z-index:3;transition:background-color .25s,border-color .25s}
+.iv12-ar:hover{background:var(--red);border-color:var(--red)}.iv12-ar svg{width:16px;height:16px}
+.iv12-ar.l{left:28px}.iv12-ar.r{right:28px}
+@media (max-width:900px){
+  .iv12-in{flex-direction:column;width:100%;height:100%;box-shadow:none}
+  .iv12-v{height:auto;width:100%;flex:1;aspect-ratio:auto}
+  .iv12-p{width:100%;border-left:0;border-top:1px solid #ffffff12;padding:16px 18px calc(16px + env(safe-area-inset-bottom,0px))}
+  .iv12-p .eb,.iv12-p p,.iv12-ig,.iv12-n{display:none}
+  .iv12-p h3{font-size:18px;margin-top:0}
+  .iv12-c{flex-direction:row;margin-top:12px}.iv12-c .sq{height:46px;font-size:10.5px;padding:0 10px}
+  .iv12-x{top:12px;right:12px}
+  .iv12-ar{top:auto;bottom:150px;width:44px;height:44px}.iv12-ar.l{left:12px}.iv12-ar.r{right:12px}
+}
+
+/* ===== mobile v3: tighter, conversion-first ===== */
+@media (max-width:760px){
+  .sec,.pg12,.ig12,.sl12,.dk2,.speed{padding-block:52px!important}
+  /* hero: stats become one compact row so the CTAs + finder sit higher */
+  .bxh .bxs{display:grid!important;grid-template-columns:repeat(3,1fr)!important;margin-top:26px!important;gap:0!important;border-top:1px solid #ffffff14}
+  .bxh .bx{min-height:0!important;padding:14px 8px 0 0!important;border:0!important}
+  .bxh .bx+.bx{border-left:1px solid #ffffff14!important;padding-left:10px!important;border-top:0!important}
+  .bxh .bx i,.bxh .bx .bxn{display:none!important}
+  .bxh .bx b{font-size:10px!important;letter-spacing:.1em!important;line-height:1.3;display:block}
+  .bxh .bx span{font-size:11.5px!important;margin-top:4px;display:block;line-height:1.35}
+  /* personal + business: same moving wall, smaller */
+  .pbx-l{padding-block:44px 8px!important}
+  .pbx-wall{height:270px!important;margin:6px calc(-1*var(--mp)) 0!important;-webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent)!important;mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent)!important}
+  .pbx-tilt{inset:-38% -6% -38% 4%!important;gap:12px!important}
+  .pbx-track{gap:10px!important}
+  .pbx-card{border-radius:10px!important}
+  .pbx-list>div:nth-child(n+3){display:none}
+  /* programs: swipe cards instead of a long stack */
+  .pg12-g{display:grid!important;grid-auto-flow:column;grid-template-columns:none!important;grid-auto-columns:84%;gap:12px!important;overflow-x:auto;scroll-snap-type:x mandatory;background:none!important;border:0!important;margin-inline:calc(-1*var(--mp));padding-inline:var(--mp);scroll-padding-inline:var(--mp);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .pg12-g::-webkit-scrollbar{display:none}
+  .pg12-c{scroll-snap-align:start;border:1px solid var(--ink-line)!important;padding:24px 20px!important}
+  .pg12-c h3{min-height:0!important;margin-top:18px!important}
+  .pg12-h p{font-size:14px}
+  /* white-glove: smaller gauge, tighter rows */
+  .speed .gauge{transform:scale(.78);margin:-30px auto -40px!important}
+  .speed .sx{padding:12px 14px!important}
+  .speed .sx b{font-size:13.5px!important}.speed .sx span{font-size:12.5px!important}
+  /* O experience + concierge: lose the extras, keep the actions */
+  .ox2-r{min-height:280px!important;max-height:320px}
+  .clist{display:none!important}
+  #services .split>div:last-child{order:-1}
+  .dk2-tip{display:none!important}
+}
 </style>
 <div id="root"></div>
 <script>
@@ -3973,12 +4047,12 @@ const PH_IC='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-w
 
 /* Paste Instagram reel / post links here, in order. Empty url = branded placeholder card. */
 const IG_REELS=[
- {url:'https://www.instagram.com/reel/DXowugbjZp8/',ph:'ig-wheel',tag:'Success story',cap:'She came in a wheelchair. She drove off in her own car.'},
- {url:'https://www.instagram.com/reel/DdU6pTtNUUU/',ph:'ig-mom',tag:'Single moms',cap:'You’re doing the job of two. Let’s get you moving.'},
- {url:'https://www.instagram.com/reel/DcwrkbKOV9g/',ph:'ig-desk',tag:'Credit to Car',cap:'How C2C works, straight from O'},
- {url:'https://www.instagram.com/reel/DdXSp6qN-8t/',ph:'ig-rent',tag:'Long-term rental',cap:'Still renting? Build an exit plan.'},
- {url:'https://www.instagram.com/reel/Da8CawiOfJI/',ph:'ig-buick',tag:'New keys',cap:'Welcome to the OAB family'},
- {url:'https://www.instagram.com/reel/Dcbxkttv358/',ph:'ig-health',tag:'Healthcare heroes',cap:'You help others. Let us help you.'},
+ {url:'https://www.instagram.com/reel/DXowugbjZp8/',ph:'ig-wheel',cta:['Get approved','#apply'],tag:'Success story',cap:'She came in a wheelchair. She drove off in her own car.'},
+ {url:'https://www.instagram.com/reel/DdU6pTtNUUU/',ph:'ig-mom',kw:'MOM',tag:'Single moms',cap:'You’re doing the job of two. Let’s get you moving.'},
+ {url:'https://www.instagram.com/reel/DcwrkbKOV9g/',ph:'ig-desk',kw:'C2C',tag:'Credit to Car',cap:'How C2C works, straight from O'},
+ {url:'https://www.instagram.com/reel/DdXSp6qN-8t/',ph:'ig-rent',kw:'RENT',tag:'Long-term rental',cap:'Still renting? Build an exit plan.'},
+ {url:'https://www.instagram.com/reel/Da8CawiOfJI/',ph:'ig-buick',cta:['Get approved','#apply'],tag:'New keys',cap:'Welcome to the OAB family'},
+ {url:'https://www.instagram.com/reel/Dcbxkttv358/',ph:'ig-health',kw:'HERO',tag:'Healthcare heroes',cap:'You help others. Let us help you.'},
  {url:'',ph:'ig-biz-trucks',tag:'Coming soon',cap:'Veterans & first responders program',soon:1}
 ];
 const igId=u=>{const m=String(u||'').match(/instagram\.com\/(?:[^/]+\/)?(reel|reels|p|tv)\/([A-Za-z0-9_-]+)/);return m?{t:m[1]==='reels'?'reel':m[1],id:m[2]}:null};
@@ -4037,8 +4111,34 @@ function igBind(){const row=document.getElementById('igRow');if(!row||row._b)ret
     const url=`https://www.instagram.com/${c.dataset.t}/${c.dataset.id}/`;
     /* inline playback only where Instagram allows framing (the live site); preview sandboxes block it, so open the reel instead */
     if(!/(^|\.)(netlify\.app|oautobrokers\.org|oautobrokers\.com|localhost)$/.test(location.hostname)){window.open(url,'_blank','noopener');return}
-    if(c.classList.contains('on'))return;c.classList.add('on');
-    c.insertAdjacentHTML('beforeend',`<iframe src="${url}embed/" allow="autoplay; encrypted-media; clipboard-write" title="O Auto Brokers on Instagram" allowfullscreen></iframe><a class="ig12-open" href="${url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Open on Instagram ↗</a>`)})}
+    igOpen(+c.dataset.i)})}
+
+/* premium video player: dark lightbox, Instagram's frame cropped to just the video, branded side panel */
+const IG_LIST=()=>IG_REELS.map((r,i)=>Object.assign({i},r,igId(r.url)||{})).filter(r=>r.id);
+function igOpen(i){const L=IG_LIST();let k=Math.max(0,L.findIndex(r=>r.i===i));
+  document.getElementById('igM')?.remove();
+  document.body.insertAdjacentHTML('beforeend',`<div class="iv12" id="igM" role="dialog" aria-modal="true" aria-label="Video"><div class="iv12-bg" data-x></div>
+    <div class="iv12-in"><div class="iv12-v" id="ivV"></div><aside class="iv12-p" id="ivP"></aside></div>
+    <button type="button" class="iv12-x" data-x aria-label="Close"><i></i><i></i></button>
+    <button type="button" class="iv12-ar l" data-d="-1" aria-label="Previous video"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+    <button type="button" class="iv12-ar r" data-d="1" aria-label="Next video"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></div>`);
+  const m=document.getElementById('igM'),V=document.getElementById('ivV'),Pn=document.getElementById('ivP');
+  const fit=()=>{const f=V.querySelector('iframe');if(!f)return;const H=V.clientHeight,W=V.clientWidth,over=8,mh=H+over*2,cw=mh/1.297,wi=cw+15,vw=mh*9/16;
+    f.style.width=wi+'px';f.style.height=(55+mh+420)+'px';f.style.left=(-(cw-vw)/2-(vw-W)/2)+'px';f.style.top=(-55-over)+'px'};
+  const show=()=>{const r=L[k],url=`https://www.instagram.com/${r.t}/${r.id}/`;
+    V.innerHTML=`<img class="iv12-po" src="${P(r.ph)}" alt=""><span class="iv12-ld"><i></i></span><iframe src="${url}embed/" allow="autoplay; encrypted-media; clipboard-write; fullscreen" title="${esc(r.cap)}" scrolling="no"></iframe>`;
+    const f=V.querySelector('iframe');f.onload=()=>setTimeout(()=>V.classList.add('ready'),350);V.classList.remove('ready');fit();
+    const cta=r.kw?`<a class="sq red" href="${sms(r.kw)}" data-sms="${r.kw}" data-prog="${esc(r.tag)}">Text “${r.kw}” ${ic('arrow')}</a>`:`<a class="sq red" href="${r.cta[1]}" data-x>${r.cta[0]} ${ic('arrow')}</a>`;
+    Pn.innerHTML=`<span class="iv12-n">${String(k+1).padStart(2,'0')} <em>/ ${String(L.length).padStart(2,'0')}</em></span><span class="eb">${esc(r.tag)}</span><h3>${esc(r.cap)}</h3>
+      <p>Real clients, real keys. ${MOTTO}.</p><div class="iv12-c">${cta}<a class="sq ol" href="tel:${BIZ.textTel}">${PH_IC}Call ${BIZ.text}</a></div>
+      <a class="iv12-ig" href="${url}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor"/></svg>Watch on Instagram</a>`;
+    Pn.querySelectorAll('[data-x]').forEach(x=>x.onclick=close)};
+  const close=()=>{m.classList.remove('on');document.documentElement.classList.remove('iv-open');setTimeout(()=>m.remove(),320);removeEventListener('keydown',key);removeEventListener('resize',fit)};
+  const key=e=>{if(e.key==='Escape')close();if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)};
+  const go=d=>{k=(k+d+L.length)%L.length;show()};
+  m.querySelectorAll('.iv12-bg,.iv12-x').forEach(x=>x.onclick=close);m.querySelectorAll('.iv12-ar').forEach(b=>b.onclick=()=>go(+b.dataset.d));
+  addEventListener('keydown',key);addEventListener('resize',fit);
+  show();document.documentElement.classList.add('iv-open');requestAnimationFrame(()=>m.classList.add('on'))}
 
 function sellBind(){const f=document.getElementById('sellF');if(!f||f._b)return;f._b=1;
   f.onsubmit=e=>{e.preventDefault();const d={car:$('#slCar').value.trim(),mi:$('#slMi').value.trim(),fin:$('#slFin').value,phone:$('#slPh').value.trim()};
