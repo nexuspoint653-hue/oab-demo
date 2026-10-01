@@ -2721,7 +2721,7 @@ html.iv-open,html.iv-open body{overflow:hidden}
 @media (max-width:700px){.finder2>.sq.fall{border-left:0!important;border-top:1px solid #E6E6E2!important}}
 
 /* ===== scroll performance ===== */
-.offv{animation-play-state:paused!important}
+.offv .rrow,.offv .br2-tr,.offv .pbx-track{animation-play-state:paused!important}
 .rv2 .rrow{will-change:transform;backface-visibility:hidden;transform:translateZ(0)}
 .rv2 .rrow .rc{box-shadow:none!important;contain:layout paint}
 #root main>section.rv2::before{-webkit-mask-image:none!important;mask-image:none!important}
@@ -4232,6 +4232,9 @@ HERO_SLIDES.splice(0,HERO_SLIDES.length,'ig-hero-gem');
 PB_PH[0].splice(0,12,'ig-sign','ig-buick','ig-gmc','ig-summer','ig-wheel','ig-health','ig-health','ig-sign','ig-buick','ig-gmc','ig-summer','ig-wheel');
 PB_PH[1].splice(0,12,'ig-biz-trucks','ig-biz-vans','ig-desk','ig-maybach','silverado','truck-black','ig-biz-vans','ig-desk','ig-biz-trucks','truck-black','ig-maybach','silverado');
 
+/* wall photos load up front (lazy images inside the tilted, clipped wall can stall) */
+const _pbWall0=pbWall;pbWall=function(i){return _pbWall0(i).split('loading="lazy"').join('decoding="async"')};
+
 /* text-to-inquire: phones open Messages; desktops get a scan-to-text card + call */
 const isPhone=()=>matchMedia('(pointer:coarse)').matches&&innerWidth<1024;
 function smsOpen(kw,prog){if(isPhone()){location.href=sms(kw);return}
@@ -4334,7 +4337,7 @@ addEventListener('hashchange',()=>setTimeout(a12,0));
 function rvHint(){const r=document.querySelector('#reviews .rrow');if(!r||r._h)return;r._h=1;r.insertAdjacentHTML('afterend','<div class="rv12-hint"><span>Swipe for more</span><span><b id="rvN">1</b> / <i id="rvT" style="font-style:normal"></i></span></div>');setTimeout(()=>{const t=document.getElementById('rvT');if(t)t.textContent=r.children.length},800);
   r.addEventListener('scroll',()=>{const c=r.children[0];if(!c)return;const n=Math.round(r.scrollLeft/(c.offsetWidth+12))+1;const e=document.getElementById('rvN');if(e)e.textContent=Math.min(n,r.children.length)},{passive:true})}
 /* only animate marquees while they're on screen */
-function marqIO(){document.querySelectorAll('.rrow,.br2-tr,.pbx-track').forEach(el=>{if(el._io)return;el._io=1;new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('offv',!e.isIntersecting)),{rootMargin:'200px'}).observe(el)})}
+function marqIO(){document.querySelectorAll('#reviews,#business-anchor,.brands').forEach(el=>{if(el._io)return;el._io=1;new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('offv',!e.isIntersecting)),{rootMargin:'300px 0px'}).observe(el)})}
 new MutationObserver(()=>{igBind();sellBind();rvHint();marqIO()}).observe(document.getElementById('root'),{childList:true});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){const m=document.getElementById('mnav');m&&m.classList.remove('open')}});
 new MutationObserver(()=>{const m=document.getElementById('mnav');document.documentElement.classList.toggle('mn-open',!!(m&&m.classList.contains('open')))}).observe(document.getElementById('root'),{subtree:true,attributes:true,attributeFilter:['class']});
