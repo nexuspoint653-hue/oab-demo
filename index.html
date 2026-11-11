@@ -1966,7 +1966,7 @@ html,body{background:var(--bk)!important}
 .rc.rv2c:hover .rv2c-av{background:var(--red);border-color:var(--red)}
 .rv2c-a b{display:block;font-weight:600;font-size:15px;color:#fff}
 .rv2c-a div span{display:block;font-size:13px;color:#ffffff73;margin-top:2px}
-.rv2c-g{margin-left:auto;width:20px;height:20px;opacity:.35;transition:opacity .4s}.rv2c-g svg{width:100%;height:100%}
+.rv2c-g{margin-left:auto;width:22px;height:22px;opacity:1;background:#fff;border-radius:50%;padding:3px;box-sizing:border-box}.rv2c-g svg{width:100%;height:100%}
 .rc.rv2c:hover .rv2c-g{opacity:.9}
 .rv2 .edge{width:180px!important}
 @media (max-width:900px){.rv2-h{grid-template-columns:1fr;gap:34px}.rv2 .lau{justify-self:start}}
@@ -2802,12 +2802,16 @@ html.iv-open #root *{animation-play-state:paused!important}
 
 /* hero photo right, fades to black left */
 .bxh{background:#000!important}
-.bxh .ph{inset:0 0 0 auto!important;width:min(66%,1200px)!important;background:none!important}
-.bxh .ph img{width:100%!important;height:100%!important;object-fit:cover!important;opacity:.78;filter:saturate(1.02) contrast(1.04) brightness(.92)!important}
-.bxh .ph img{-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.25) 16%,rgba(0,0,0,.7) 40%,#000 66%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.25) 16%,rgba(0,0,0,.7) 40%,#000 66%)}
-.bxh .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,rgba(0,0,0,.25) 100%),linear-gradient(180deg,rgba(0,0,0,.55) 0%,transparent 22%,transparent 60%,#000 100%);pointer-events:none}
+.bxh .ph{inset:auto!important;top:96px!important;right:0!important;left:auto!important;bottom:auto!important;width:min(68%,1150px)!important;height:auto!important;aspect-ratio:16/9;background:none!important;overflow:hidden}
+.bxh .ph img{animation:bmwIn 2.2s cubic-bezier(.16,.8,.2,1) .15s both!important}
+@keyframes bmwIn{0%{opacity:0;transform:scaleX(-1) translateX(14%)}100%{opacity:.9;transform:scaleX(-1)}}
+.bxh .ph img{transform:scaleX(-1)}
+@media (prefers-reduced-motion:reduce){.bxh .ph img{animation:none!important}}
+.bxh .ph img{width:100%!important;height:100%!important;object-fit:cover!important;opacity:.9;filter:contrast(1.08) brightness(1.3)!important}
+.bxh .ph img{-webkit-mask-image:linear-gradient(270deg,transparent 0%,rgba(0,0,0,.35) 14%,rgba(0,0,0,.85) 30%,#000 45%,#000 92%,transparent 100%),linear-gradient(180deg,transparent 0%,#000 14%,#000 70%,transparent 100%);mask-image:linear-gradient(270deg,transparent 0%,rgba(0,0,0,.35) 14%,rgba(0,0,0,.85) 30%,#000 45%,#000 92%,transparent 100%),linear-gradient(180deg,transparent 0%,#000 14%,#000 70%,transparent 100%);-webkit-mask-composite:source-in;mask-composite:intersect}
+.bxh .ph::after{display:none}
 .bxh::after{background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,transparent 16%,transparent 70%,#000 100%)!important}
-@media (max-width:800px){.bxh .ph{width:100%!important}.bxh .ph img{-webkit-mask-image:none;mask-image:none}.bxh .ph img{opacity:.55;object-position:62% 55%!important}.bxh .ph::after{background:linear-gradient(90deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.45) 60%,rgba(0,0,0,.2) 100%),linear-gradient(180deg,rgba(0,0,0,.5) 0%,transparent 25%,transparent 55%,#000 100%)}}
+@media (max-width:800px){.bxh .ph{width:100%!important;right:0!important;top:0!important;height:100%!important;aspect-ratio:auto}.bxh .ph img{-webkit-mask-image:none;mask-image:none}.bxh .ph img{opacity:.55;object-position:62% 55%!important}.bxh .ph::after{background:linear-gradient(90deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.45) 60%,rgba(0,0,0,.2) 100%),linear-gradient(180deg,rgba(0,0,0,.5) 0%,transparent 25%,transparent 55%,#000 100%)}}
 </style>
 <div id="root"></div>
 <script>
@@ -4188,7 +4192,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('.dk2-i');if(!b)r
 function reviewCard(r,i){const n=REVIEWS.indexOf(r),k=(n<0?i:n),ini=r[0].split(/[\s.]+/).filter(Boolean).map(x=>x[0]).join('').slice(0,2);
   return `<article class="rc rv2c"><div class="rv2c-t"><span class="rv2c-st" aria-label="5 stars">${'<i></i>'.repeat(5)}</span><span class="rv2c-tag">${rvTag(r)}</span></div>
   <p>“${esc(r[2])}”</p>
-  <div class="rv2c-a"><span class="rv2c-av">${ini}</span><div><b>${esc(r[0])}</b><span>${esc(r[3])}</span></div><span class="rv2c-g" title="Google review"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3Z"/><path fill="#fff" opacity=".8" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z"/><path fill="#fff" opacity=".6" d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 0 0 0 9.2L6.4 14Z"/><path fill="#fff" opacity=".7" d="M12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 0 0 3.1 7.4L6.4 10C7.2 7.7 9.4 6 12 6Z"/></svg></span></div></article>`}
+  <div class="rv2c-a"><span class="rv2c-av">${ini}</span><div><b>${esc(r[0])}</b><span>${esc(r[3])}</span></div><span class="rv2c-g" title="Google review"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3Z"/><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z"/><path fill="#FBBC05" d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 0 0 0 9.2L6.4 14Z"/><path fill="#EA4335" d="M12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 0 0 3.1 7.4L6.4 10C7.2 7.7 9.4 6 12 6Z"/></svg></span></div></article>`}
 /* subtext: one line when it fits, otherwise balanced lines (no orphan second lines) */
 function oneLine(){const els=document.querySelectorAll('main p, main .lead, main small, footer p');
   els.forEach(p=>{if(p.closest('.rc,.ldc,.toast,form')||p.children.length>2)return;
@@ -4411,7 +4415,7 @@ vHome=function(){let h=_vHome0();
    inner=inner.replace(/<div class="dtip dk2-tip[\s\S]*$/,'').replace('<span class="eb">Be ready</span><h2>What to bring</h2>','<span class="eb">Step 2 · Be ready</span><h3 class="pg12-bt">Then bring these</h3>').replace('Have these ready and most approvals come back in 24 hours.','Have these 4 things and most approvals come back in 24 hours.');
    h=h.replace(/<section class="sec dk2" id="bring">[\s\S]*?<\/div><\/section>/,progHTML().replace('<!--BRING-->',`<div class="dk2 pg12-bring" id="bring">${inner}</div>`));}
   /* branded hero photo */
-  h=h.replace(/(id="heroPh"><img src=")[^"]*(" alt=")[^"]*("[^>]*?object-position:)[^"]*/,'$1'+P('life/cadillac-xt4-3')+'$2Red Cadillac XT4 outside the showroom at dusk$334% 60%');
+  h=h.replace(/(id="heroPh"><img src=")[^"]*(" alt=")[^"]*("[^>]*?object-position:)[^"]*/,'$1'+'photos/hero/bmw-m4.jpg'+'$2BMW M4 Competition at dusk$324% 58%');
   /* trim copy */
   R('Lease or finance the car you actually want, even with bad credit, a repo, a bankruptcy or no credit at all.','Lease or finance the car you want, whatever your credit.');
   R('<p>Rebuild your score and drive while you do it. One client went from 540 to 793 in 4 months.</p>','<p>Drive now, build credit. One client went 540 to 793.</p>');
