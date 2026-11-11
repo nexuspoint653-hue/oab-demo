@@ -2795,6 +2795,8 @@ html.iv-open #root *{animation-play-state:paused!important}
 .vs-ph img[src*="photos/studio/"],.ldc-ph img[src*="photos/studio/"],.pt-img img[src*="photos/studio/"],.gal .ph img[src*="photos/studio/"]{object-fit:cover!important;object-position:center 58%!important;width:100%!important;height:100%!important;max-height:none!important;position:absolute!important;inset:0;transform:none;background:#F3F3F4;filter:none!important;opacity:1!important}
 .vc:hover .vs-ph img[src*="photos/studio/"]{transform:scale(1.035)!important}
 .gal:not(:has(.th)) .ph.main{grid-column:1/-1}
+.rx-g{margin-left:auto;display:grid;place-items:center;opacity:1!important;filter:none!important}.rx-g svg{width:22px!important;height:22px!important}
+.rc.rx:hover .rx-g svg path{filter:none}
 </style>
 <div id="root"></div>
 <script>
@@ -3215,7 +3217,7 @@ function reviewCard(r,i){const n=REVIEWS.indexOf(r),c=RV_COL[(n<0?i:n)%RV_COL.le
   return `<article class="rc rx" style="--c:${c}"><div class="rx-s"><b>${String((n<0?i:n)+1).padStart(2,'0')}</b><span>${rvTag(r)}</span></div>
   <div class="rx-b"><div class="rx-t"><svg class="rx-q" viewBox="0 0 32 24" aria-hidden="true"><path d="M0 24V13.6C0 5.9 4.3 1.3 12.2 0l1.3 3.4C9.4 4.6 7.3 7 7 10.6h6.3V24H0Zm18.5 0V13.6C18.5 5.9 22.8 1.3 30.7 0L32 3.4c-4.1 1.2-6.2 3.6-6.5 7.2h6.3V24H18.5Z" fill="currentColor"/></svg><span class="rx-st" aria-label="5 stars">★★★★★</span></div>
   <p>${esc(r[2])}</p>
-  <div class="rx-a"><span class="rx-av">${ini}</span><div><b>${esc(r[0])}</b><span>${esc(r[3])}</span></div><span class="rx-g" title="Google review"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3Z"/><path fill="currentColor" opacity=".75" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z"/><path fill="currentColor" opacity=".55" d="M6.4 14a6 6 0 0 1 0-3.9V7.5H3.1a10 10 0 0 0 0 9L6.4 14Z"/><path fill="currentColor" opacity=".85" d="M12 5.9c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.7 9.4 5.9 12 5.9Z"/></svg></span></div></div></article>`}
+  <div class="rx-a"><span class="rx-av">${ini}</span><div><b>${esc(r[0])}</b><span>${esc(r[3])}</span></div><span class="rx-g" title="Google review"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3Z"/><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z"/><path fill="#FBBC05" d="M6.4 14a6 6 0 0 1 0-3.9V7.5H3.1a10 10 0 0 0 0 9L6.4 14Z"/><path fill="#EA4335" d="M12 5.9c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.7 9.4 5.9 12 5.9Z"/></svg></span></div></div></article>`}
 
 function vHome(){
   const pop=['V2113','V2111','V2103','V2104','V2110','V2101','V2105','V2108'].map(byId);
