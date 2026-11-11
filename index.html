@@ -2797,11 +2797,13 @@ html.iv-open #root *{animation-play-state:paused!important}
 .gal:not(:has(.th)) .ph.main{grid-column:1/-1}
 .rx-g{margin-left:auto;display:grid;place-items:center;opacity:1!important;filter:none!important}.rx-g svg{width:22px!important;height:22px!important}
 .rc.rx:hover .rx-g svg path{filter:none}
+.gal .th img[src*='photos/life/'],.gal .ph.main img[src*='photos/life/']{object-fit:cover!important;width:100%!important;height:100%!important}
+.gal .th:has(img[src*='photos/studio/']){background:#F3F3F4}.gal .th img[src*='photos/studio/']{object-fit:cover;object-position:center 58%}
 </style>
 <div id="root"></div>
 <script>
 /* ================= O Auto Brokers — public site prototype ================= */
-const P=n=>/^(black|studio)\//.test(n)?'photos/'+n+'.jpg':'photos/oab-'+n+'.jpg';
+const P=n=>/^(black|studio|life)\//.test(n)?'photos/'+n+'.jpg':'photos/oab-'+n+'.jpg';
 const I={
  arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',back:'<path d="M19 12H5M11 6l-6 6 6 6"/>',
  menu:'<path d="M4 8h16M4 16h16"/>',x:'<path d="M6 6l12 12M18 6 6 18"/>',plus:'<path d="M12 5v14M5 12h14"/>',
@@ -2851,7 +2853,7 @@ const CARS=[
  ['V2116',2026,'Jeep','Grand Cherokee Laredo','SUV',399,'Lease','studio/grand-cherokee','4x4','5 seats','23 mpg'],
  ['V2117',2025,'Ford','Explorer ST-Line','SUV',424,'Lease','studio/explorer-stline','AWD','7 seats','23 mpg'],
  ['V2118',2025,'Cadillac','Escalade-V','SUV',899,'Finance','studio/escalade-v','AWD','7 seats','14 mpg']
-].map(c=>({id:c[0],year:c[1],make:c[2],model:c[3],body:c[4],pay:c[5],type:c[6],ph:c[7],drive:c[8],seats:c[9],mpg:c[10],pos:c[11]||''}));
+].map(c=>({id:c[0],year:c[1],make:c[2],model:c[3],body:c[4],pay:c[5],type:c[6],ph:c[7],drive:c[8],seats:c[9],mpg:c[10],pos:c[11]||''}));CARS.forEach(c=>{const sl=c.ph.split('/')[1];c.gal=[1,2,3].map(i=>'life/'+sl+'-'+i)});
 const byId=id=>CARS.find(c=>c.id===id);
 let FAV=new Set();
 
@@ -3041,7 +3043,7 @@ function vDetail(id){
   return `<section class="page-top" style="border:0;padding-bottom:0"><div class="wrap"><div class="crumbs"><a href="#home">Home</a><span>/</span><a href="#inventory">Inventory</a><span>/</span><span>${c.make} ${c.model}</span></div></div></section>
   <div class="wrap det" style="background:#fff0">
     <div>
-      <div class="gal" id="gal"><div class="ph main"><img id="gMain" src="${P(gal[0])}" alt="${esc(c.year+' '+c.make+' '+c.model)}" ${c.pos?`style="object-position:${c.pos}"`:''} onerror="this.remove()"></div>${gal.slice(1).map((g,i)=>`<button class="ph th" data-g="${g}">${`<img src="${P(g)}" alt="" loading="lazy" onerror="this.remove()">`}</button>`).join('')}</div>
+      <div class="gal" id="gal"><div class="ph main"><img id="gMain" src="${P(gal[0])}" alt="${esc(c.year+' '+c.make+' '+c.model)}" ${c.pos?`style="object-position:${c.pos}"`:''} onerror="this.remove()"></div>${gal.map((g,i)=>`<button class="ph th" data-g="${g}">${`<img src="${P(g)}" alt="" loading="lazy" onerror="this.remove()">`}</button>`).join('')}</div>
       <div class="dcard"><div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start"><div><span class="eb">${c.id} · ${c.body}</span><h1 style="font-size:clamp(28px,3.4vw,40px);margin-top:10px">${c.year} ${c.make} ${c.model}</h1></div><span class="chip ${c.type==='Lease'?'red':'dk'}" style="font-size:12px;padding:6px 12px">${c.type} · 10,000 mi/yr</span></div>
         <div class="sgrid" style="margin-top:22px">${[['Drivetrain',c.drive],['Seating',c.seats],['Economy',c.mpg],['Term','36 months']].map(s=>`<div class="sg"><span>${s[0]}</span><b>${s[1]}</b></div>`).join('')}</div></div>
       <div class="dcard"><h3>About this ${c.body.toLowerCase()}</h3><p>The ${c.year} ${c.make} ${c.model} is one of our most requested ${c.body.toLowerCase()}s. We source it from our dealer network at the best price we can find today, then match you with a lender that fits your credit. Custom photos and a video walk-around are available on request.</p></div>
