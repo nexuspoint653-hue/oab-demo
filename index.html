@@ -2771,6 +2771,15 @@ html.iv-open #root *{animation-play-state:paused!important}
 .iv12-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;z-index:2;opacity:0;transition:opacity .35s ease}
 .iv12-v.ready .iv12-vid{opacity:1}
 .iv12-v.ready .iv12-ld{display:none}
+.cc-x{display:flex;flex-wrap:wrap;gap:8px;align-self:flex-start;max-width:92%;animation:ccIn .35s cubic-bezier(.2,.7,.2,1)}
+.cc-x .cc-act,.cc-x .cc-chip{font:inherit;font-size:13px;font-weight:500;border-radius:999px;padding:8px 14px;cursor:pointer;text-decoration:none;transition:background-color .2s,border-color .2s,color .2s;line-height:1.2}
+.cc-x .cc-act{background:#ffffff12;color:#fff;border:1px solid #ffffff2e}
+.cc-x .cc-act.pri{background:var(--red);border-color:var(--red);color:#fff}
+.cc-x .cc-act:hover{background:#D7262B;border-color:#D7262B}
+.cc-x .cc-chip{background:none;color:#ffffffb3;border:1px dashed #ffffff2e}
+.cc-x .cc-chip:hover{color:#fff;border-color:#D7262B80;background:#D7262B14}
+.cc-m.bot.mod{border-left-color:#E0A33A!important}
+.is-locked input{opacity:.55;cursor:not-allowed}
 </style>
 <div id="root"></div>
 <script>
@@ -3507,26 +3516,83 @@ new MutationObserver(()=>{if(document.getElementById('ysx'))yesStepper()}).obser
 yesStepper();
 
 /* ================= concierge chat (answers from the business's own info) ================= */
-const CC_KB=[
- [/bad credit|credit score|low score|poor credit|approv(e|al) with|580|540/i,"Yes. We work with scores under 580 every day, plus repos, bankruptcies and no credit at all. Most files are approved within 24 hours."],
- [/fast|how long|quick|24|when.*approv/i,"Most approvals come back within 24 hours. Applying takes about 5 minutes and doesn't affect your credit."],
- [/deliver|home|office|airport|dtw|valet/i,"Yes. We deliver to your home or office, and offer complimentary DTW airport valet, 365 days a year."],
- [/business|company|llc|truck|fleet/i,"Yes. We place business vehicles too, from company trucks to executive SUVs, and can help build business credit."],
- [/bring|document|need|paperwork|proof/i,"Usually a driver's license, proof of income (recent pay stubs or bank statements) and proof of address. Your concierge confirms the exact list for your lender."],
- [/trade|sell|my car|acquisition/i,"Yes. Send us the year, make, model and mileage and we'll get you a trade-in or purchase offer."],
- [/lease|finance|monthly|payment|price|cost|\$/i,"Lease specials start around $180/mo and finance options are available on every vehicle. Tell us your budget and we'll match it."],
- [/credit to car|rebuild|repair|improve/i,"Credit to Car helps you rebuild while you drive. One client went from 540 to 793 in 4 months."],
- [/bankrupt|chapter|repo|reposs/i,"We work with discharged and active Chapter 13, and past repos. We know which lenders will say yes."],
- [/hour|open|close|time/i,"We're open Mon–Thu 11 AM–6 PM and Fri 11 AM–5 PM. Closed Saturday and Sunday."],
- [/where|address|location|located/i,"24681 Northwestern Hwy #309, Southfield, MI 48075. We also come to you."],
- [/phone|call|number|talk|human|person/i,"Call or text (248) 864-8387 and you'll reach a real concierge."]
+/* ===== concierge brain v2: intents, moderation, guided chips ===== */
+const CC_TEL='tel:+12488648387',CC_SMS='sms:+12488648387';
+const CC_ACT={apply:['Get approved','#apply'],inv:['See inventory','#inventory'],lease:['Lease specials','#lease'],call:['Call (248) 864-8387',CC_TEL],text:['Text us',CC_SMS],prog:['View programs','#programs'],sell:['Get an offer','#sell'],book:['Book a visit','#book']};
+const CC_START=['Can I get approved with bad credit?','How fast is approval?','What programs do you have?','Do you take trade-ins?'];
+const CC_INTENTS=[
+ {k:'credit',w:[/bad credit|credit score|low score|poor credit|no credit|first.?time|5[0-9]{2}\b|4[0-9]{2}\b|approv(e|ed|al)? with|denied|turned down/],
+  t:"Yes. We work with scores under 580 every day, plus repos, bankruptcies and no credit at all. Most files are approved within 24 hours, and applying doesn't affect your credit.",a:['apply','call'],c:['What do I need to bring?','How fast is approval?']},
+ {k:'speed',w:[/how (fast|long|quick)|same day|today|24 ?h|when.*(hear|approv|know)/],
+  t:"Most approvals come back within 24 hours. The application takes about 5 minutes and is a soft check, so it won't hurt your score.",a:['apply'],c:['What do I need to bring?','Do you deliver?']},
+ {k:'bk',w:[/bankrupt|chapter ?(7|13)|repo|reposs/],
+  t:"We work with discharged and active Chapter 13 and past repos. We know which lenders say yes, so you only apply once.",a:['apply','call'],c:['How fast is approval?','What is Credit to Car?']},
+ {k:'docs',w:[/bring|document|paperwork|proof of|pay ?stub|what do i need|requirements?/],
+  t:"Usually a driver's license, proof of income (two recent pay stubs or bank statements) and proof of address. Your concierge confirms the exact list for your lender.",a:['apply'],c:['How fast is approval?','Do I need a down payment?']},
+ {k:'down',w:[/down ?payment|money down|nothing down|zero down|\$0 down|deposit/],
+  t:"It depends on your file. Many clients start with little down, and Credit to Car starts at $1,500. Tell us your budget and we'll build the deal around it.",a:['apply','prog'],c:['What programs do you have?','Lease or finance?']},
+ {k:'prog',w:[/program|single mom|\bmoms?\b|c2c|credit to car|rebuild|repair|improve|\brental|\brent\b|weekly|hero|veteran|first responder|nurse|healthcare|payment help|behind on/],
+  t:"Our programs: Credit to Car (start with $1,500 and rebuild while you drive), Long-term rental from $299/week, the Single Moms program, and Car Payment Help with a same-day call back. A Heroes program for veterans, first responders and healthcare workers is coming soon.",a:['prog','apply'],c:['How does Credit to Car work?','Can I get approved with bad credit?']},
+ {k:'c2c',w:[/how does credit to car|credit to car work|540|793/],
+  t:"Credit to Car puts you in a car while your on-time payments rebuild your score. You start with $1,500. One client went from 540 to 793 in 4 months.",a:['apply','prog'],c:['What do I need to bring?','Do you deliver?']},
+ {k:'lease',w:[/lease|finance|monthly|payment|price|cost|how much|afford|budget|\$\d|per month|\/mo/],
+  t:"Lease specials start around $180/mo and every car can be financed. Share your monthly budget and we'll match you to the right car.",a:['lease','inv'],c:['Do I need a down payment?','Can I get approved with bad credit?']},
+ {k:'inv',w:[/inventory|cars? (do you|available|in stock)|suv|truck|sedan|coupe|cadillac|escalade|gmc|chevy|chevrolet|ford|dodge|jeep|ram|silverado|durango|explorer|tahoe|yukon|bronco|challenger|what cars|which cars|any cars/],
+  t:"We have SUVs, trucks, sedans and coupes from Cadillac, GMC, Chevrolet, Ford, Dodge, Jeep and Ram, and we can source almost anything else for you.",a:['inv','lease'],c:['Lease or finance?','Do you deliver?']},
+ {k:'deliver',w:[/deliver|drop off|bring (it|the car)|home|office|airport|dtw|valet|pick ?up/],
+  t:"Yes. We deliver to your home or office, and offer complimentary DTW airport valet, 365 days a year.",a:['apply','book'],c:['Where are you located?','What are your hours?']},
+ {k:'biz',w:[/business|company|llc|fleet|commercial|work truck|ein/],
+  t:"Yes. We place business vehicles too, from work trucks and vans to executive SUVs, and we can help build business credit.",a:['apply','call'],c:['What do I need to bring?','Do you deliver?']},
+ {k:'trade',w:[/trade|sell (my|a)|my car|buy my|offer for|acquisition|get rid of/],
+  t:"Yes. Send us the year, make, model and mileage and we'll get you an offer for your trade-in or your car.",a:['sell','text'],c:['Lease or finance?','How fast is approval?']},
+ {k:'cosign',w:[/co.?sign|cosigner|guarantor/],
+  t:"A co-signer can help but isn't required. Many of our clients are approved on their own.",a:['apply'],c:['Can I get approved with bad credit?']},
+ {k:'ins',w:[/insurance|insure|coverage|warranty|maintenance|oil change|service/],
+  t:"Your concierge can set up insurance quotes at delivery, and we'll walk you through warranty and maintenance options for your car.",a:['call','apply'],c:['Do you deliver?','What do I need to bring?']},
+ {k:'hours',w:[/hours?|open|close|closing|weekend|saturday|sunday|today open/],
+  t:"We're open Monday to Thursday 11 AM to 6 PM and Friday 11 AM to 5 PM. Closed Saturday and Sunday, but you can apply online anytime.",a:['book','apply'],c:['Where are you located?','Do you deliver?']},
+ {k:'where',w:[/where|address|location|located|directions|southfield|office/],
+  t:"24681 Northwestern Hwy #309, Southfield, MI 48075. We can also come to you.",a:['book','call'],c:['What are your hours?','Do you deliver?']},
+ {k:'human',w:[/phone|call|number|talk|human|person|agent|someone|real person|representative|manager|orlando/],
+  t:"Call or text (248) 864-8387 and you'll reach a real concierge, usually within minutes during business hours.",a:['call','text'],c:['What are your hours?']},
+ {k:'complaint',w:[/scam|complain|problem|issue|upset|angry|terrible|worst|refund|lawsuit|sue\b/],
+  t:"I'm sorry you're dealing with that. Please call or text (248) 864-8387 and a manager will personally help you today.",a:['call','text'],c:[]}
 ];
-function ccAnswer(q){for(const [re,a] of CC_KB)if(re.test(q))return a;return "Good question. A concierge can answer that directly: call or text (248) 864-8387, or start your application and we'll reach out within the day."}
+const CC_GREET=/^(hi|hey|hello|yo|sup|hiya|good (morning|afternoon|evening)|what'?s up|salam|assalamu)\b/;
+const CC_THANKS=/\b(thanks|thank you|thx|ty|appreciate|great|awesome|perfect|cool|ok(ay)?|got it)\b/;
+const CC_BYE=/\b(bye|goodbye|see you|later|that'?s all|nothing else)\b/;
+function ccNorm(q){return (' '+q.toLowerCase()+' ').replace(/[0]/g,'o').replace(/[1!|]/g,'i').replace(/3/g,'e').replace(/[4@]/g,'a').replace(/[5$]/g,'s').replace(/7/g,'t').replace(/(.)\1{2,}/g,'$1$1')}
+function ccIsAbuse(q){
+ const n=ccNorm(q), j=n.replace(/[^a-z*]/g,'');
+ const hard=/f+[*u]*[c*]+k|\bf[*\s]?u[*\s]?c[*\s]?k|\bfck|\bfuk|\bfk\b|\bfkn|\bfking|\bwtf\b|\bstfu\b|shi+t|\bsh\*t|bitch|b\*tch|\basshole|\bass(es)?\b|\bdick|\bcock\b|pussy|cunt|bastard|\bslut|whore|motherf|nigg|\bfag|retard|\bdumbass|jackass|\bpiss|\bporn|\bnude|\bsexy?\b|\bboobs?|\bkys\b|kill (you|yourself)|\bdie\b|hate you|stupid bot|dumb bot|idiot|moron/;
+ const joined=/fuck|shit|bitch|cunt|motherf|nigg|asshole|pussy/;
+ return hard.test(n)||joined.test(j);
+}
+function ccIsGibberish(q){const s=q.trim();if(s.length<2)return true;const l=s.toLowerCase().replace(/[^a-z]/g,'');if(!l.length)return !/\d{3}/.test(s);if(l.length>=5&&!/[aeiouy]/.test(l))return true;if(/(.)\1{4,}/.test(l))return true;if(/^(asdf|qwer|zxcv|hjkl|sdfg|jkl)/.test(l))return true;return false}
+let CC_STRIKES=0;
+function ccBrain(q){
+ const raw=q.trim(), n=ccNorm(raw);
+ if(ccIsAbuse(raw)){CC_STRIKES++;
+  if(CC_STRIKES>=2)return {t:"I'm going to pause the chat here. If you'd like help with a car, call or text (248) 864-8387, or start over with a question about approvals, leases or trade-ins.",a:['call','text'],c:[],lock:true,mod:true};
+  return {t:"Let's keep it respectful so I can help. I can answer questions about approvals, credit, leases, trade-ins and delivery. Try one of these:",a:[],c:CC_START,mod:true};}
+ if(ccIsGibberish(raw))return {t:"I didn't quite catch that. Here are a few things I can help with:",a:[],c:CC_START};
+ if(CC_GREET.test(n.trim())&&raw.split(/\s+/).length<=4)return {t:"Hi, welcome to O Auto Brokers. If you can dream it, you can drive it. What can I help you with today?",a:['apply'],c:CC_START};
+ let best=null,score=0;
+ for(const it of CC_INTENTS){let s=0;for(const re of it.w){const m=n.match(new RegExp(re.source,'g'));if(m)s+=m.length*2+m.join('').length/20}if(s>score){score=s;best=it}}
+ if(best)return best;
+ if(CC_BYE.test(n))return {t:"Thanks for stopping by. When you're ready, the application takes about 5 minutes.",a:['apply','call'],c:[]};
+ if(CC_THANKS.test(n)&&raw.split(/\s+/).length<=5)return {t:"You're welcome. Anything else I can help with?",a:[],c:CC_START};
+ if(/\b(weather|joke|politic|president|election|bitcoin|crypto|stock|sports|game|movie|recipe|homework|code|chatgpt|who are you|are you (a )?(bot|ai|real))\b/.test(n))
+  return {t:"I'm the O Auto Brokers concierge, so I stick to cars: approvals, credit, leases, trade-ins and delivery. What can I help you find?",a:['inv'],c:CC_START};
+ return {t:"Good question. A concierge can answer that one directly: call or text (248) 864-8387, or start your application and we'll reach out within the day.",a:['call','apply'],c:CC_START.slice(0,2)};
+}
+function ccAnswer(q){return ccBrain(q).t}
+
 function ccInit(){
   const f=document.getElementById('ccF');if(!f||f._on)return;f._on=1;
   const card=document.getElementById('cc'),body=document.getElementById('ccBody'),inp=document.getElementById('ccI'),P=document.getElementById('cxP'),stat=document.getElementById('cxStat');
   const DEMO=['Can I get approved with bad credit?','Do you deliver?','How fast is approval?','Do you take trade-ins?'];
-  let lockUntil=0,live=false,demoI=0,paused=false,timer=0,hoverT=0,alive=true,busy=false;
+  let lastR=null,locked=false;let lockUntil=0,live=false,demoI=0,paused=false,timer=0,hoverT=0,alive=true,busy=false;
   const wait=ms=>new Promise(r=>{timer=setTimeout(r,ms)});
   const until=async()=>{while(paused&&alive)await new Promise(r=>setTimeout(r,120))};
   const scroll=()=>{body.scrollTop=body.scrollHeight};
@@ -3537,7 +3603,7 @@ function ccInit(){
     if(isDemo&&live)return;empty();const me=bubble('me');me.textContent=q;
     stat.textContent='Typing…';const t=bubble('bot typing');t.innerHTML='<span></span><span></span><span></span>';
     await new Promise(r=>setTimeout(r,isDemo?900:600));await until();if(isDemo&&live){t.remove();return}
-    t.className='cc-m bot';await stream(t,ccAnswer(q),isDemo?14:9);stat.textContent='Concierge · online';
+    t.className='cc-m bot';const R=ccBrain(q);lastR=isDemo?null:R;if(R.mod)t.classList.add('mod');await stream(t,R.t,isDemo?14:9);stat.textContent='Concierge · online';if(!isDemo&&R.lock)lockChat();
   }
   async function demo(){
     while(alive&&!live){const q=DEMO[demoI%DEMO.length];demoI++;
@@ -3555,10 +3621,18 @@ function ccInit(){
   card.addEventListener('pointerenter',e=>{if(e.pointerType!=='touch'&&!busy)showP()});card.addEventListener('pointermove',e=>{if(e.pointerType!=='touch'&&!busy&&live&&Date.now()>=lockUntil&&lockUntil&&!card.classList.contains('show-p')){lockUntil=0;showP()}});
   P.addEventListener('click',async e=>{const b=e.target.closest('button');if(!b)return;hideP();goLive();busy=true;lockUntil=Date.now()+12000;body.innerHTML='';inp.value='';stat.textContent='Concierge · online';await reply(b.textContent,false);busy=false;addNav()});
   inp.addEventListener('focus',()=>{hideP();goLive()});
-  f.addEventListener('submit',async e=>{e.preventDefault();const q=inp.value.trim();if(!q||busy)return;goLive();inp.value='';busy=true;lockUntil=Date.now()+12000;body.querySelectorAll('.cc-nav').forEach(n=>n.remove());await reply(q,false);busy=false;addNav()});
-  function addNav(){body.querySelectorAll('.cc-nav').forEach(n=>n.remove());const n=document.createElement('div');n.className='cc-nav';n.innerHTML='<button type="button" data-back>← More questions</button>';body.appendChild(n);scroll()}
-  body.addEventListener('click',e=>{if(e.target.closest('[data-back]'))showP(true)});
-  document.getElementById('cxReset').onclick=()=>{hideP();body.innerHTML='<div class="cx-empty" id="cxEmpty"><span class="cx-orb lg"><img src="brand/oab-logo-160.png" alt=""></span><p>How can we help today?</p><small>Approvals, credit, leases, trade-ins and delivery.</small></div>';inp.value='';if(live){live=false;card.classList.remove('is-live');demoI=0;demo()}};
+  f.addEventListener('submit',async e=>{e.preventDefault();const q=inp.value.trim().slice(0,300);if(!q||busy||locked)return;goLive();inp.value='';busy=true;lockUntil=Date.now()+12000;body.querySelectorAll('.cc-nav,.cc-x').forEach(n=>n.remove());await reply(q,false);busy=false;addNav()});
+  function addNav(){body.querySelectorAll('.cc-nav,.cc-x').forEach(n=>n.remove());const R=lastR||{a:[],c:[]};
+    if((R.a&&R.a.length)||(R.c&&R.c.length)){const x=document.createElement('div');x.className='cc-x';
+      x.innerHTML=(R.a||[]).map(k=>{const v=CC_ACT[k];return v?`<a class="cc-act${/^#/.test(v[1])?' pri':''}" href="${v[1]}">${v[0]}</a>`:''}).join('')+(R.c||[]).map(c=>`<button type="button" class="cc-chip" data-q="${c.replace(/"/g,'&quot;')}">${c}</button>`).join('');body.appendChild(x)}
+    const n=document.createElement('div');n.className='cc-nav';n.innerHTML=locked?'<button type="button" data-restart>Start over</button>':'<button type="button" data-back>← More questions</button>';body.appendChild(n);scroll()}
+  function lockChat(){locked=true;inp.disabled=true;inp.value='';inp.placeholder='Chat paused. Tap Start over to continue.';card.classList.add('is-locked')}
+  function unlockChat(){locked=false;CC_STRIKES=0;inp.disabled=false;inp.placeholder='Ask anything...';card.classList.remove('is-locked')}
+  body.addEventListener('click',async e=>{if(e.target.closest('[data-back]'))return showP(true);
+    if(e.target.closest('[data-restart]')){unlockChat();document.getElementById('cxReset').click();return}
+    const ch=e.target.closest('[data-q]');if(ch&&!busy&&!locked){goLive();busy=true;body.querySelectorAll('.cc-nav,.cc-x').forEach(n=>n.remove());await reply(ch.dataset.q,false);busy=false;addNav()}
+    if(e.target.closest('.cc-act[href^="#"]'))setTimeout(()=>{},0)});
+  document.getElementById('cxReset').onclick=()=>{hideP();if(locked)unlockChat();lastR=null;body.innerHTML='<div class="cx-empty" id="cxEmpty"><span class="cx-orb lg"><img src="brand/oab-logo-160.png" alt=""></span><p>How can we help today?</p><small>Approvals, credit, leases, trade-ins and delivery.</small></div>';inp.value='';if(live){live=false;card.classList.remove('is-live');demoI=0;demo()}};
   // touch devices: tap card background shows prompts
   card.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'&&!e.target.closest('input,button'))showP()});
   if(matchMedia('(prefers-reduced-motion: reduce)').matches){live=true}else setTimeout(demo,900);
