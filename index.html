@@ -3154,7 +3154,7 @@ function bind(r){
     const hp=$('#heroPh img');const go=i=>{slide=i;$$('#thumbs button').forEach((b,j)=>b.classList.toggle('on',j===i));if(hp){hp.style.opacity=0;setTimeout(()=>{hp.src=P(HERO_SLIDES[i]);hp.style.opacity=1},250)}};
     if(hp)hp.style.transition='opacity .5s';
     $$('#thumbs button').forEach(b=>b.onclick=()=>{go(+b.dataset.slide);clearInterval(heroT)});
-    heroT=setInterval(()=>go((slide+1)%HERO_SLIDES.length),6000);
+    if(HERO_SLIDES.length>1&&!document.querySelector('.bxh'))heroT=setInterval(()=>go((slide+1)%HERO_SLIDES.length),6000);
     $('#finder').onsubmit=e=>{e.preventDefault();F.max=Math.min(600,+$('#fBudget').value);F.min=150;const b=$('#fBody').value;F.bodies=new Set(b==='Any type'?[]:[b]);location.hash='#inventory'};
     $$('[data-cat]').forEach(a=>a.onclick=()=>{F.bodies=new Set([a.dataset.cat])});
     // gauge
