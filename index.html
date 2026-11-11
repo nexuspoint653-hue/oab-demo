@@ -2790,6 +2790,11 @@ html.iv-open #root *{animation-play-state:paused!important}
 .vs-ph .tagl{height:auto!important;bottom:auto!important;align-items:flex-start!important}.vs-ph .tagl .chip{height:auto!important}
 .chip.dk{min-height:0!important}
 .ig12-r,.ld-g,.pbx-spec,.rrow.swipe{overflow-y:hidden!important}
+
+.vs-ph:has(img[src*="photos/studio/"]),.ldc-ph:has(img[src*="photos/studio/"]),.pt-img:has(img[src*="photos/studio/"]),.gal .ph:has(img[src*="photos/studio/"]){background:#F3F3F4!important}
+.vs-ph img[src*="photos/studio/"],.ldc-ph img[src*="photos/studio/"],.pt-img img[src*="photos/studio/"],.gal .ph img[src*="photos/studio/"]{object-fit:cover!important;object-position:center 58%!important;width:100%!important;height:100%!important;max-height:none!important;position:absolute!important;inset:0;transform:none;background:#F3F3F4;filter:none!important;opacity:1!important}
+.vc:hover .vs-ph img[src*="photos/studio/"]{transform:scale(1.035)!important}
+.gal:not(:has(.th)) .ph.main{grid-column:1/-1}
 </style>
 <div id="root"></div>
 <script>
@@ -2826,24 +2831,24 @@ function toast(m){const t=$('#toast');t.innerHTML=ic('check')+esc(m);t.classList
 
 /* ---------- inventory (from the live site, sample data) ---------- */
 const CARS=[
- ['V2101',2025,'GMC','Terrain SLE','SUV',291,'Lease','black/gmc-terrain','AWD','5 seats','28 mpg'],
- ['V2102',2025,'Chevrolet','Malibu LS','Sedan',180,'Lease','black/malibu-lt','FWD','5 seats','32 mpg'],
- ['V2103',2025,'Ford','Bronco Sport','SUV',453,'Lease','black/bronco-sport','4x4','5 seats','26 mpg'],
- ['V2104',2026,'Cadillac','XT5 Premium Luxury','SUV',489,'Lease','black/cadillac-xt5','AWD','5 seats','24 mpg'],
- ['V2105',2026,'Cadillac','XT6 Premium Luxury','SUV',569,'Lease','black/cadillac-xt6','AWD','7 seats','23 mpg'],
- ['V2106',2026,'Cadillac','XT4 Luxury','SUV',459,'Lease','black/cadillac-xt4','FWD','5 seats','28 mpg'],
- ['V2107',2025,'Chevrolet','Camaro LT','Coupe',399,'Finance','black/camaro-lt','RWD','4 seats','22 mpg'],
- ['V2108',2025,'Chevrolet','Silverado 1500 LT','Truck',388,'Lease','black/silverado-lt','4x4','6 seats','20 mpg'],
- ['V2109',2025,'Ram','3500 Heavy Duty','Truck',522,'Finance','black/ram-3500','4x4','5 seats','16 mpg'],
- ['V2110',2025,'Dodge','Challenger R/T','Coupe',449,'Lease','black/challenger-rt','RWD','5 seats','19 mpg'],
- ['V2111',2025,'Dodge','Durango GT AWD','SUV',419,'Lease','black/durango-gt','AWD','7 seats','21 mpg'],
- ['V2112',2025,'Dodge','Challenger Scat Pack','Coupe',499,'Finance','black/challenger-scatpack','RWD','5 seats','18 mpg'],
- ['V2113',2025,'Ford','Explorer XLT','SUV',330,'Lease','black/explorer-xlt','AWD','7 seats','24 mpg'],
- ['V2114',2025,'Ford','Escape Active','SUV',298,'Lease','black/escape-active','FWD','5 seats','30 mpg'],
- ['V2115',2025,'Ford','F-150 XLT','Truck',357,'Lease','black/f150-xlt','4x4','6 seats','21 mpg'],
- ['V2116',2026,'Jeep','Grand Cherokee Laredo','SUV',399,'Lease','black/grand-cherokee','4x4','5 seats','23 mpg'],
- ['V2117',2025,'Ford','Explorer ST-Line','SUV',424,'Lease','black/explorer-stline','AWD','7 seats','23 mpg'],
- ['V2118',2025,'Cadillac','Escalade-V','SUV',899,'Finance','black/escalade-v','AWD','7 seats','14 mpg']
+ ['V2101',2025,'GMC','Terrain SLE','SUV',291,'Lease','studio/gmc-terrain','AWD','5 seats','28 mpg'],
+ ['V2102',2025,'Chevrolet','Malibu LS','Sedan',180,'Lease','studio/malibu-lt','FWD','5 seats','32 mpg'],
+ ['V2103',2025,'Ford','Bronco Sport','SUV',453,'Lease','studio/bronco-sport','4x4','5 seats','26 mpg'],
+ ['V2104',2026,'Cadillac','XT5 Premium Luxury','SUV',489,'Lease','studio/cadillac-xt5','AWD','5 seats','24 mpg'],
+ ['V2105',2026,'Cadillac','XT6 Premium Luxury','SUV',569,'Lease','studio/cadillac-xt6','AWD','7 seats','23 mpg'],
+ ['V2106',2026,'Cadillac','XT4 Luxury','SUV',459,'Lease','studio/cadillac-xt4','FWD','5 seats','28 mpg'],
+ ['V2107',2025,'Chevrolet','Camaro LT','Coupe',399,'Finance','studio/camaro-lt','RWD','4 seats','22 mpg'],
+ ['V2108',2025,'Chevrolet','Silverado 1500 LT','Truck',388,'Lease','studio/silverado-lt','4x4','6 seats','20 mpg'],
+ ['V2109',2025,'Ram','3500 Heavy Duty','Truck',522,'Finance','studio/ram-3500','4x4','5 seats','16 mpg'],
+ ['V2110',2025,'Dodge','Challenger R/T','Coupe',449,'Lease','studio/challenger-rt','RWD','5 seats','19 mpg'],
+ ['V2111',2025,'Dodge','Durango GT AWD','SUV',419,'Lease','studio/durango-gt','AWD','7 seats','21 mpg'],
+ ['V2112',2025,'Dodge','Challenger Scat Pack','Coupe',499,'Finance','studio/challenger-scatpack','RWD','5 seats','18 mpg'],
+ ['V2113',2025,'Ford','Explorer XLT','SUV',330,'Lease','studio/explorer-xlt','AWD','7 seats','24 mpg'],
+ ['V2114',2025,'Ford','Escape Active','SUV',298,'Lease','studio/escape-active','FWD','5 seats','30 mpg'],
+ ['V2115',2025,'Ford','F-150 XLT','Truck',357,'Lease','studio/f150-xlt','4x4','6 seats','21 mpg'],
+ ['V2116',2026,'Jeep','Grand Cherokee Laredo','SUV',399,'Lease','studio/grand-cherokee','4x4','5 seats','23 mpg'],
+ ['V2117',2025,'Ford','Explorer ST-Line','SUV',424,'Lease','studio/explorer-stline','AWD','7 seats','23 mpg'],
+ ['V2118',2025,'Cadillac','Escalade-V','SUV',899,'Finance','studio/escalade-v','AWD','7 seats','14 mpg']
 ].map(c=>({id:c[0],year:c[1],make:c[2],model:c[3],body:c[4],pay:c[5],type:c[6],ph:c[7],drive:c[8],seats:c[9],mpg:c[10],pos:c[11]||''}));
 const byId=id=>CARS.find(c=>c.id===id);
 let FAV=new Set();
@@ -3029,7 +3034,7 @@ function drawGrid(){
 let gIdx=0,down=1500;
 function vDetail(id){
   const c=byId(id);if(!c)return vInventory();
-  const gal=[c.ph,'interior','wheel','keys','road-night'];
+  const gal=[c.ph].concat(c.gal||[]);
   const sim=CARS.filter(x=>x.body===c.body&&x.id!==c.id).slice(0,2);
   return `<section class="page-top" style="border:0;padding-bottom:0"><div class="wrap"><div class="crumbs"><a href="#home">Home</a><span>/</span><a href="#inventory">Inventory</a><span>/</span><span>${c.make} ${c.model}</span></div></div></section>
   <div class="wrap det" style="background:#fff0">
