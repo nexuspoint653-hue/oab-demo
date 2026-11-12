@@ -2815,6 +2815,10 @@ html.iv-open #root *{animation-play-state:paused!important}
 
 /* programs: 9 cards, 3 per row */
 @media (min-width:1001px){.pg12-g{grid-template-columns:repeat(3,minmax(0,1fr))!important}.pg12-c{min-height:330px}}
+
+.ig12-lnk{position:absolute;inset:0;z-index:4}
+.ig12-c.soon .ig12-tag{background:var(--red)}
+.ddm a.ddm-pq{color:#fff;font-weight:600}
 </style>
 <div id="root"></div>
 <script>
@@ -4275,9 +4279,9 @@ const IG_REELS=[
  {url:'https://www.instagram.com/reel/DcwrkbKOV9g/',v:'DcwrkbKOV9g',ph:'ig-desk',tag:'Credit to Car',cap:'How C2C works, straight from O',kw:'C2C'},
  {url:'https://www.instagram.com/reel/Dan56jfvSJU/',v:'Dan56jfvSJU',poster:'video/oab-Dan56jfvSJU.jpg',tag:'Success story',cap:'She’s not just renting. She’s building a future.',kw:'RENT'},
  {url:'https://www.instagram.com/reel/DdXSp6qN-8t/',v:'DdXSp6qN-8t',ph:'ig-rent',tag:'Long-term rental',cap:'Still renting? Build an exit plan.',kw:'RENT'},
- {url:'https://www.instagram.com/reel/Dcbxkttv358/',v:'Dcbxkttv358',ph:'ig-health',tag:'Healthcare heroes',cap:'You help others. Let us help you.',kw:'HERO'},
+ {url:'https://www.instagram.com/reel/Dcbxkttv358/',v:'Dcbxkttv358',ph:'ig-health',tag:'Nurses program',cap:'You help others. Let us help you.',kw:'NURSE'},
  {url:'https://www.instagram.com/reel/Dap180JR4Nt/',v:'Dap180JR4Nt',poster:'video/oab-Dap180JR4Nt.jpg',tag:'Credit wins',cap:'Better credit: $400 a month back in her pocket.',cta:['See what I qualify for','#apply']},
- {url:'',ph:'ig-biz-trucks',tag:'Coming soon',cap:'Veterans & first responders program',soon:1}
+ {url:'',ph:'ig-biz-trucks',tag:'Now live',cap:'Veterans & truck drivers programs',soon:1,sub:'Get pre-qualified in 2 minutes',href:'start/?p=vet'}
 ];
 const igId=u=>{const m=String(u||'').match(/instagram\.com\/(?:[^/]+\/)?(reel|reels|p|tv)\/([A-Za-z0-9_-]+)/);return m?{t:m[1]==='reels'?'reel':m[1],id:m[2]}:null};
 
@@ -4330,7 +4334,7 @@ function igHTML(){return `<section class="sec dark ig12" id="instagram"><div cla
     <img src="${r.poster||P(r.ph)}" alt="" loading="lazy" onerror="this.remove()"><span class="ig12-sh"></span>
     <span class="ig12-tag">${r.tag}</span>
     ${r.soon?`<span class="ig12-soon"><img src="brand/oab-logo-160.png" alt=""></span>`:`<button type="button" class="ig12-pl" aria-label="Play video"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></button>`}
-    <div class="ig12-cp"><b>${r.cap}</b><span>${r.soon?'Text “HERO” to get early access':'@oautobrokers'}</span></div></div>`}).join('')}</div>
+    <div class="ig12-cp"><b>${r.cap}</b><span>${r.soon?(r.sub||'Text “HERO” to get early access'):'@oautobrokers'}</span></div>${r.href?`<a class="ig12-lnk" href="${r.href}" aria-label="${r.cap}"></a>`:''}</div>`}).join('')}</div>
   <div class="cta12 rv"><a class="sq red" href="#apply">Be the next story ${ic('arrow')}</a><span class="cta12-t">Start your application in 5 minutes · or text <a href="${sms()}">${BIZ.text}</a></span></div>
 </div></section>`}
 
@@ -4477,7 +4481,7 @@ const _footer0=footer;
 footer=function(){return _footer0()
   .replace(`<div class="fx-mid">`,`<div class="fx-motto"><b>${MOTTO}.</b><a class="sq red sm" href="${sms()}">Text ${BIZ.text}</a></div><div class="fx-mid">`)
   .replace(`${'<a href="#credit">Credit to Car</a>'}`,'<a href="#credit">Credit to Car</a>')
-  .replace(/(<h4>Programs<\/h4>)/,'$1<a href="#programs">C2C Program</a><a href="#programs">Single Moms Program</a><a href="#programs">Long-term rental</a><a href="#sell">Car payment help</a>')
+  .replace(/(<h4>Programs<\/h4>)/,'$1<a href="start/?p=c2c">Credit to Car</a><a href="start/?p=mom">Single Moms</a><a href="start/?p=truck">Truck Drivers</a><a href="start/?p=credit">Challenged Credit</a><a href="start/?p=vet">Veterans</a><a href="start/?p=nurse">Nurses</a><a href="start/?p=inf">Influencers</a><a href="#programs">Long-term rental</a><a href="#sell">Car payment help</a><a href="start/">Get pre-qualified</a>')
   .replace(/(<h4>Customer service<\/h4>)/,`$1<a href="${sms()}">Text ${BIZ.text}</a>`)
   .replace(/(<a class="fx-agency"[\s\S]*?<\/a>)/,m=>{fxAg=m;return ''})
   .replace(/(<div class="fx-soc">[\s\S]*?)(<\/div>)/,(m,a,b)=>a+(fxAg||'')+b)};
@@ -4503,4 +4507,17 @@ new MutationObserver(()=>{igBind();sellBind();rvHint();marqIO()}).observe(docume
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){const m=document.getElementById('mnav');m&&m.classList.remove('open')}});
 new MutationObserver(()=>{const m=document.getElementById('mnav');document.documentElement.classList.toggle('mn-open',!!(m&&m.classList.contains('open')))}).observe(document.getElementById('root'),{subtree:true,attributes:true,attributeFilter:['class']});
 render();a12();igBind();sellBind();setTimeout(rvHint,300);marqIO();
+</script>
+
+<script>
+/* programs → pre-qualification funnel: main "Get approved" CTAs go to /start/ */
+(function(){
+ const MAP=[['.nav-cta','Get pre-qualified'],['.nav-links a[href="#apply"]',null],['.bxh a.sq.red[href="#apply"]','Get pre-qualified'],['.ig12 a.sq.red[href="#apply"]',null],['.rv2 a.sq.red[href="#apply"]',null],['.ofoot a[href="#apply"]','Get pre-qualified'],['a.btn.red[href="#apply"]','Get pre-qualified']];
+ function patch(){
+  MAP.forEach(([s,t])=>document.querySelectorAll(s).forEach(a=>{if(a.dataset.pq)return;a.dataset.pq=1;a.setAttribute('href','start/');if(t){const ic=a.querySelector('svg');a.textContent=t+(ic?' ':'');if(ic)a.appendChild(ic)}}));
+  const m=document.querySelector('#dd .ddm');if(m&&!m.querySelector('.ddm-pq')){const a=document.createElement('a');a.href='start/';a.className='ddm-pq';a.textContent='Get pre-qualified';m.insertBefore(a,m.firstChild)}
+ }
+ const r=document.getElementById('root');if(r)new MutationObserver(()=>requestAnimationFrame(patch)).observe(r,{childList:true,subtree:true});
+ patch();setTimeout(patch,400);
+})();
 </script>
