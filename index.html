@@ -4561,6 +4561,29 @@ html body .lg-body .lg-s{border-top-color:rgba(255,255,255,.08)!important}
  .zmb a.p{background:#D7262B;border-color:#D7262B}
  .zmb svg{width:17px;height:17px}
  html[data-r="apply"] .zmb{display:none}
+
+ /* footer: compact, organized */
+ .ofoot .fx-word{display:none!important}
+ .ofoot{padding-top:28px!important;padding-bottom:20px!important}
+ .ofoot .fx-in{display:flex!important;flex-direction:column!important;gap:0!important}
+ .ofoot .fx-motto{order:-1;text-align:center;display:flex!important;flex-direction:column;align-items:center;gap:14px!important;padding:0 0 22px!important;margin:0!important;border:0!important}
+ .ofoot .fx-motto b{font-size:22px!important;line-height:1.15!important}
+ .ofoot .fx-cols{display:block!important;border-top:1px solid rgba(255,255,255,.1);margin:0!important;padding:0!important}
+ .ofoot .fx-col{display:block!important;border-bottom:1px solid rgba(255,255,255,.1);padding:0!important;margin:0!important}
+ .ofoot .fx-col h4{display:flex!important;align-items:center;justify-content:space-between;height:54px;margin:0!important;cursor:pointer;font-size:13px!important;letter-spacing:.12em!important}
+ .ofoot .fx-col h4{color:#F4F4F1!important;padding:0!important;border:0!important;background:none!important}
+ .ofoot .fx-col h4::before{display:none!important}
+ .ofoot .fx-col h4::after{content:"+"!important;position:static!important;display:block!important;width:auto!important;height:auto!important;background:none!important;border:0!important;transform:none!important;animation:none!important;font:400 22px/1 Geist,system-ui,sans-serif!important;color:#8C8D92!important;letter-spacing:0!important}
+ .ofoot .fx-col.open h4::after{content:"\2212"!important}
+ .ofoot .fx-motto b{font-size:20px!important}
+ .ofoot .fx-col a{display:none!important}
+ .ofoot .fx-col.open{padding-bottom:12px!important}
+ .ofoot .fx-col.open a{display:block!important;padding:8px 0!important;font-size:15px!important}
+ .ofoot .fx-mid{display:flex!important;flex-direction:column-reverse!important;align-items:center!important;text-align:center!important;gap:14px!important;padding:22px 0 0!important;margin:0!important;border:0!important}
+ .ofoot .fx-mid>*{text-align:center!important;align-items:center!important}
+ .ofoot .fx-legal{justify-content:center!important;flex-wrap:wrap}
+ .ofoot .fx-soc{justify-content:center!important;flex-wrap:wrap;gap:12px!important;padding:18px 0 0!important;margin:0!important}
+ .ofoot .fx-soc .fx-agency{flex-basis:100%;display:flex!important;justify-content:center;margin:6px 0 0!important}
 }
 </style>
 <script>
@@ -4572,5 +4595,17 @@ html body .lg-body .lg-s{border-top-color:rgba(255,255,255,.08)!important}
  const BAR=`<nav class="zmb" aria-label="Quick actions"><a href="tel:+12488648387">${S('<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>')}Call</a><a href="sms:+13135461388">${S('<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>')}Text</a><a class="p" href="start/">Get pre-qualified</a></nav>`;
  function apply(){const r=(location.hash||'#home').slice(1)||'home';document.documentElement.dataset.r=r;if(!document.querySelector('.zmb'))document.body.insertAdjacentHTML('beforeend',BAR)}
  addEventListener('hashchange',()=>setTimeout(apply,30));apply();
+})();
+</script>
+
+<script>
+(function(){
+ /* footer: remove duplicate links, mobile accordion */
+ function ft(){const f=document.querySelector('.ofoot');if(!f||f.dataset.ok)return;f.dataset.ok=1;
+  f.querySelectorAll('.fx-col').forEach((c,i)=>{const seen=new Set();c.querySelectorAll('a').forEach(a=>{const k=a.textContent.trim().toLowerCase();if(seen.has(k))a.remove();else seen.add(k)});
+   if(/programs/i.test((c.querySelector('h4')||{}).textContent||'')){c.querySelectorAll('a').forEach(a=>{if(/first time buyer|business credit|trade-ins/i.test(a.textContent))a.remove()})}
+   const h=c.querySelector('h4');if(h){h.setAttribute('role','button');h.setAttribute('tabindex','0');const t=()=>c.classList.toggle('open');h.onclick=t;h.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}}}
+   if(/customer service/i.test((h||{}).textContent||''))c.classList.add('open')})}
+ const r=document.getElementById('root');if(r)new MutationObserver(()=>requestAnimationFrame(ft)).observe(r,{childList:true});ft();
 })();
 </script>
