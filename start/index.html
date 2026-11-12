@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Get Pre-Qualified · O Auto Brokers</title>
+<meta name="description" content="Pick your program and get pre-qualified in about 2 minutes. No hard credit pull. O Auto Brokers & Leasing, Southfield, MI.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B0B0C">
+<link rel="icon" href="../brand/oab-logo-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0B0B0C;--ink2:#141416;--ink3:#1C1C1F;--line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.16);--tx:#F4F4F1;--tx2:#A6A7AB;--tx3:#6E7076;--red:#D7262B;--red2:#B81E23;--ok:#F4F4F1;
+ --f:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--ft:"Chakra Petch","Geist",sans-serif;--r:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--ink);color:var(--tx);font-family:var(--f);font-size:16px;line-height:1.5;min-height:100svh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+svg{display:block}
+.wrap{width:min(720px,100%);margin:0 auto;padding:0 20px}
+/* backdrop */
+.bg{position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+ radial-gradient(900px 520px at 50% -8%,rgba(215,38,43,.16),transparent 60%),
+ radial-gradient(700px 400px at 100% 100%,rgba(255,255,255,.035),transparent 60%),var(--ink)}
+.bg::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(600px 380px at 50% 0%,#000,transparent 75%);opacity:.35}
+/* header */
+.top{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(11,11,12,.72);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;width:min(1100px,100%)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px}
+.brand img{width:40px;height:40px;border-radius:50%}
+.call{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border:1px solid var(--line2);border-radius:999px;font-size:14px;font-weight:500;transition:background .2s,border-color .2s}
+.call:hover{background:var(--ink3);border-color:var(--tx3)}
+.call svg{width:16px;height:16px;color:var(--red)}
+/* hero */
+.hero{padding:64px 0 22px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:500;color:var(--tx2);border:1px solid var(--line2);border-radius:999px;padding:6px 14px;opacity:0;animation:up .7s .05s cubic-bezier(.2,.7,.2,1) forwards}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(215,38,43,.18);animation:pulse 2s infinite}
+h1{font-family:var(--ft);font-weight:700;text-transform:uppercase;font-size:clamp(38px,8.4vw,72px);line-height:.98;letter-spacing:.005em;margin-top:22px;opacity:0;animation:up .8s .15s cubic-bezier(.2,.7,.2,1) forwards}
+h1 em{font-style:normal;color:var(--red);white-space:nowrap}
+.lead{color:var(--tx2);font-size:clamp(16px,2.2vw,18px);max-width:34ch;margin:18px auto 0;opacity:0;animation:up .8s .3s cubic-bezier(.2,.7,.2,1) forwards}
+.trust{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 18px;margin-top:20px;font-size:13px;color:var(--tx2);opacity:0;animation:up .8s .42s cubic-bezier(.2,.7,.2,1) forwards}
+.trust span{display:inline-flex;align-items:center;gap:6px}
+.trust svg{width:15px;height:15px;color:var(--tx)}
+.stars{color:#F4B400;letter-spacing:1px}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(215,38,43,0)}}
+/* programs */
+.pick{padding:18px 0 40px}
+.pick-h{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;opacity:0;animation:up .6s .55s forwards}
+.pick-h b{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--tx2)}
+.pick-h span{font-size:12.5px;color:var(--tx3)}
+.progs{display:flex;flex-direction:column;gap:10px}
+.prog{border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015));overflow:hidden;opacity:0;transform:translateY(14px);transition:border-color .25s,background .25s,box-shadow .25s}
+.prog.in{animation:up .55s cubic-bezier(.2,.7,.2,1) forwards}
+.prog:hover{border-color:var(--line2)}
+.prog.open{border-color:rgba(215,38,43,.55);background:var(--ink2);box-shadow:0 30px 60px -30px rgba(0,0,0,.8),0 0 0 1px rgba(215,38,43,.25)}
+.prog-b{width:100%;display:flex;align-items:center;gap:14px;padding:16px 18px;text-align:left;min-height:72px}
+.prog-ic{width:42px;height:42px;border-radius:12px;background:var(--ink3);border:1px solid var(--line);display:grid;place-items:center;flex:none;transition:background .25s,border-color .25s}
+.prog-ic svg{width:20px;height:20px}
+.prog.open .prog-ic{background:var(--red);border-color:var(--red)}
+.prog-t{flex:1;min-width:0}
+.prog-t b{display:block;font-size:16.5px;font-weight:600;letter-spacing:-.005em}
+.prog-t span{display:block;font-size:13.5px;color:var(--tx2);margin-top:1px}
+.prog-tag{font-size:11.5px;font-weight:600;color:var(--tx2);border:1px solid var(--line2);padding:3px 9px;border-radius:999px;white-space:nowrap}
+.prog-tag.hot{color:#fff;background:var(--red);border-color:var(--red)}
+.chev{width:20px;height:20px;color:var(--tx3);transition:transform .35s cubic-bezier(.2,.7,.2,1),color .2s;flex:none}
+.prog.open .chev{transform:rotate(180deg);color:var(--tx)}
+.prog-p{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.2,.7,.2,1)}
+.prog.open .prog-p{grid-template-rows:1fr}
+.prog-p>div{overflow:hidden}
+/* form */
+.fm{padding:4px 18px 20px}
+.bar{height:4px;border-radius:4px;background:var(--ink3);overflow:hidden;margin:2px 0 6px}
+.bar i{display:block;height:100%;width:0;background:var(--red);border-radius:4px;transition:width .45s cubic-bezier(.2,.7,.2,1)}
+.meta{display:flex;justify-content:space-between;font-size:12px;color:var(--tx3);margin-bottom:16px}
+.q{animation:qin .4s cubic-bezier(.2,.7,.2,1)}
+@keyframes qin{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+.q h3{font-size:20px;font-weight:600;letter-spacing:-.01em;line-height:1.25}
+.q p.h{font-size:13.5px;color:var(--tx2);margin-top:4px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+.opts.one{grid-template-columns:1fr}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:54px;padding:12px 14px;border:1px solid var(--line2);border-radius:12px;background:var(--ink3);text-align:left;font-size:15px;font-weight:500;transition:border-color .2s,background .2s,transform .12s}
+.opt small{display:block;font-size:12px;color:var(--tx3);font-weight:400;margin-top:1px}
+.opt:hover{border-color:var(--tx3)}
+.opt:active{transform:scale(.985)}
+.opt.on{border-color:var(--red);background:rgba(215,38,43,.12)}
+.opt .dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--tx3);flex:none;transition:all .2s}
+.opt.on .dot{border:5px solid var(--red);background:#fff}
+.sub-l{font-size:12.5px;color:var(--tx2);font-weight:500;margin:16px 0 0}
+.fields{display:grid;gap:10px;margin-top:16px}
+.fields .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fld{display:block}
+.fld span{display:block;font-size:12.5px;color:var(--tx2);margin-bottom:6px;font-weight:500}
+.fld input{width:100%;height:52px;border-radius:12px;border:1px solid var(--line2);background:var(--ink3);color:var(--tx);font:inherit;font-size:16px;padding:0 14px;outline:none;transition:border-color .2s,box-shadow .2s}
+.fld input:focus{border-color:var(--red);box-shadow:0 0 0 4px rgba(215,38,43,.15)}
+.fld input.bad{border-color:#F0524F}
+.agree{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--tx3);margin-top:4px;line-height:1.45;cursor:pointer}
+.agree input{width:18px;height:18px;margin-top:1px;accent-color:var(--red);flex:none}
+.nav{display:flex;align-items:center;gap:10px;margin-top:18px}
+.back{height:50px;padding:0 16px;border-radius:12px;color:var(--tx2);font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px;transition:color .2s,background .2s}
+.back:hover{color:var(--tx);background:var(--ink3)}
+.back svg{width:16px;height:16px}
+.go{margin-left:auto;height:52px;padding:0 24px;border-radius:12px;background:var(--red);color:#fff;font-weight:600;font-size:15px;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .12s,opacity .2s}
+.go:hover{background:var(--red2)}
+.go:active{transform:scale(.98)}
+.go:disabled{opacity:.35;cursor:not-allowed}
+.go svg{width:17px;height:17px}
+.safe{display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;color:var(--tx3);margin-top:14px}
+.safe svg{width:14px;height:14px}
+/* result */
+.res{text-align:center;padding:10px 0 4px;animation:qin .5s cubic-bezier(.2,.7,.2,1)}
+.badge{width:68px;height:68px;border-radius:50%;margin:4px auto 14px;display:grid;place-items:center;background:rgba(215,38,43,.14);border:1px solid rgba(215,38,43,.5)}
+.badge svg{width:30px;height:30px;color:var(--red)}
+.res.top .badge{background:var(--red);border-color:var(--red)}.res.top .badge svg{color:#fff}
+.res h3{font-size:23px;font-weight:600;letter-spacing:-.01em}
+.res p{color:var(--tx2);font-size:14.5px;max-width:40ch;margin:8px auto 0}
+.res .acts{display:grid;gap:8px;margin-top:20px}
+.res .acts a{height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:15px}
+.res .acts a.p{background:var(--red);color:#fff}.res .acts a.p:hover{background:var(--red2)}
+.res .acts a.s{border:1px solid var(--line2)}.res .acts a.s:hover{background:var(--ink3)}
+.res .acts svg{width:17px;height:17px}
+.steps{display:grid;gap:8px;margin:20px 0 0;text-align:left}
+.steps div{display:flex;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font-size:14px}
+.steps b{width:26px;height:26px;border-radius:50%;background:var(--ink3);display:grid;place-items:center;font-size:12px;flex:none}
+/* why */
+.why{padding:30px 0 50px}
+.why-g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.why-g div{border:1px solid var(--line);border-radius:var(--r);padding:18px;background:rgba(255,255,255,.02)}
+.why-g b{display:block;font-family:var(--ft);font-size:28px;letter-spacing:.01em}
+.why-g span{font-size:13px;color:var(--tx2)}
+.quote{margin-top:10px;border:1px solid var(--line);border-radius:var(--r);padding:20px;background:rgba(255,255,255,.02)}
+.quote p{font-size:15.5px;line-height:1.55}
+.quote div{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:13px;color:var(--tx2)}
+.quote .g{width:22px;height:22px;background:#fff;border-radius:50%;padding:3px}
+/* footer */
+footer{border-top:1px solid var(--line);padding:34px 0 calc(110px + env(safe-area-inset-bottom))}
+footer .wrap{width:min(1100px,100%);display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:28px}
+footer .fb img{width:52px;height:52px;border-radius:50%}
+footer .fb p{color:var(--tx2);font-size:13.5px;margin-top:12px;max-width:30ch}
+footer h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);font-weight:600;margin-bottom:12px}
+footer ul{list-style:none;display:grid;gap:8px;font-size:14px}
+footer ul a{color:var(--tx2);transition:color .2s}footer ul a:hover{color:var(--tx)}
+.full{display:inline-flex;align-items:center;gap:8px;margin-top:16px;height:44px;padding:0 18px;border-radius:999px;background:var(--tx);color:var(--ink);font-weight:600;font-size:14px;transition:opacity .2s}
+.full:hover{opacity:.88}.full svg{width:16px;height:16px}
+.legal{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;font-size:12px;color:var(--tx3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+/* sticky mobile */
+.dock{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:30;display:grid;grid-template-columns:1fr 1fr;gap:8px;transform:translateY(140%);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.dock.show{transform:none}
+.dock a{height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:15px;box-shadow:0 18px 40px -12px rgba(0,0,0,.8)}
+.dock a:first-child{background:var(--ink3);border:1px solid var(--line2)}
+.dock a:last-child{background:var(--red);color:#fff}
+.dock svg{width:17px;height:17px}
+.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);opacity:0;background:var(--tx);color:var(--ink);padding:10px 16px;border-radius:999px;font-size:13.5px;font-weight:500;transition:all .3s;z-index:40;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (min-width:860px){.dock{display:none}footer{padding-bottom:40px}}
+@media (max-width:640px){.hero{padding-top:44px}.opts{grid-template-columns:1fr}.why-g{grid-template-columns:1fr 1fr 1fr}.why-g div{padding:14px}.why-g b{font-size:22px}footer .wrap{grid-template-columns:1fr 1fr}.fb{grid-column:1/-1}.brand span{display:none}.prog-tag{display:none}.fields .two{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+
+<header class="top"><div class="wrap">
+ <a class="brand" href="../"><img src="../brand/oab-logo-160.png" alt="O Auto Brokers logo"><span>O Auto Brokers &amp; Leasing</span></a>
+ <a class="call" href="tel:+12488648387"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>(248) 864-8387</a>
+</div></header>
+
+<main>
+ <section class="hero"><div class="wrap">
+  <span class="eyebrow"><i></i><span id="hi">Concierges online now</span></span>
+  <h1>Welcome to<br><em>O Auto Brokers</em></h1>
+  <p class="lead">Pick your program below. Get pre-qualified in about 2 minutes, with no hard credit pull.</p>
+  <div class="trust">
+   <span><span class="stars">★★★★★</span> 4.9 from 59 Google reviews</span>
+   <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Won't affect your credit</span>
+   <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Answers in 24 hours</span>
+  </div>
+ </div></section>
+
+ <section class="pick" id="programs"><div class="wrap">
+  <div class="pick-h"><b>Choose your program</b><span>Tap one to start</span></div>
+  <div class="progs" id="progs"></div>
+ </div></section>
+
+ <section class="why"><div class="wrap">
+  <div class="why-g">
+   <div><b>24 hrs</b><span>Most approvals</span></div>
+   <div><b>540→793</b><span>A Credit to Car client</span></div>
+   <div><b>365</b><span>Days of delivery</span></div>
+  </div>
+  <div class="quote">
+   <p>“Did the Credit to Car program, they took me from a 540 to a 793 in four months. Orlando and the team made it simple.”</p>
+   <div><svg class="g" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3Z"/><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z"/><path fill="#FBBC05" d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 0 0 0 9.2L6.4 14Z"/><path fill="#EA4335" d="M12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 0 0 3.1 7.4L6.4 10C7.2 7.7 9.4 6 12 6Z"/></svg>Google review · Credit to Car client</div>
+  </div>
+ </div></section>
+</main>
+
+<footer><div class="wrap">
+ <div class="fb"><img src="../brand/oab-logo-160.png" alt=""><p>If you can dream it, you can drive it. Leasing and financing for every credit story.</p>
+  <a class="full" href="../">Visit the full website <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+ <div><h4>Explore</h4><ul>
+  <li><a href="../#inventory">Inventory</a></li><li><a href="../#programs">All programs</a></li><li><a href="../#lease">Lease specials</a></li><li><a href="../#sell">Car payment help</a></li><li><a href="../#apply">Full application</a></li></ul></div>
+ <div><h4>Visit</h4><ul>
+  <li><a href="https://maps.google.com/?q=24681+Northwestern+Hwy+%23309+Southfield+MI+48075" target="_blank" rel="noopener">24681 Northwestern Hwy #309<br>Southfield, MI 48075</a></li>
+  <li><a href="tel:+12488648387">(248) 864-8387</a></li><li><a href="sms:+13135461388">Text (313) 546-1388</a></li>
+  <li style="color:var(--tx3);font-size:13px">Mon–Thu 11–6 · Fri 11–5</li></ul></div>
+ <div class="legal"><span>© 2026 O Auto Brokers &amp; Leasing LLC</span><span>Pre-qualification is not a credit approval. Final terms depend on lender review.</span></div>
+</div></footer>
+
+<nav class="dock" id="dock" aria-label="Quick actions"><a href="tel:+12488648387"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call</a><a href="#programs" id="dockGo">Get pre-qualified</a></nav>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const svg=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const IC={
+ c2c:'<path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/>',
+ mom:'<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"/>',
+ truck:'<path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>',
+ credit:'<rect width="20" height="14" x="2" y="5" rx="2"/><path d="M2 10h20M6 15h4"/>',
+ vet:'<path d="M12 2 4 5v6c0 5.5 3.4 9.7 8 11 4.6-1.3 8-5.5 8-11V5z"/><path d="m9 12 2 2 4-4"/>',
+ nurse:'<path d="M11 2a2 2 0 0 0-2 2v5H4a2 2 0 0 0-2 2v2c0 1.1.9 2 2 2h5v5c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2v-5h5a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-5V4a2 2 0 0 0-2-2z"/>',
+ inf:'<path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/>',
+ chev:'<path d="m6 9 6 6 6-6"/>',
+ arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+ back:'<path d="M19 12H5M11 18l-6-6 6-6"/>',
+ lock:'<rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+ check:'<path d="M20 6 9 17l-5-5"/>',
+ phone:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>',
+ cal:'<rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+ clock:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+ msg:'<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>'
+};
+/* program-specific first question */
+const P=[
+ {k:'c2c',t:'Credit to Car',s:'Start with $1,500 and rebuild while you drive',tag:'Most popular',hot:1,
+  q:{id:'c2c_down',h:'Can you put $1,500 toward getting started?',p:'This is the Credit to Car starting amount.',o:[['Yes, ready now',3],['Within 2 weeks',2],['Within a month',1],['Not right now',0]]}},
+ {k:'mom',t:'Single Moms Package',s:'A reliable car for your family, any credit',tag:'Family',
+  q:{id:'kids',h:'How many kids ride with you?',p:'So we match the right size and safety ratings.',o:[['1',2],['2',2],['3',2],['4 or more',2]]}},
+ {k:'truck',t:'Truck Drivers',s:'CDL, owner-operators and company drivers',tag:'CDL',
+  q:{id:'pay',h:'How do you get paid?',p:'W-2, 1099 and owner-operator income all count.',o:[['W-2 company driver',3],['1099 contractor',2],['Owner-operator',2],['Just starting out',1]]}},
+ {k:'credit',t:'Challenged Credit',s:'Repos, bankruptcies and low scores welcome',tag:'500+ OK',
+  q:{id:'report',h:'What’s on your credit report?',p:'Pick the biggest one. No judgment, it helps us pick the right lender.',o:[['Late payments',2],['Collections',2],['Past repo',1],['Bankruptcy',1],['No credit yet',2],['Not sure',1]]}},
+ {k:'vet',t:'Veterans Program',s:'Military and VA income count, priority scheduling',tag:'Thank you',
+  q:{id:'service',h:'What’s your service status?',p:'Thank you for your service.',o:[['Veteran',3],['Active duty',3],['Reserve / Guard',3],['Military spouse',2]]}},
+ {k:'nurse',t:'Nurses Program',s:'Approvals built around shift work',tag:'Healthcare',
+  q:{id:'role',h:'What’s your role?',p:'Night, weekend and travel shifts welcome.',o:[['RN',3],['LPN',3],['CNA / Tech',2],['Travel nurse',3],['Student',1],['Other healthcare',2]]}},
+ {k:'inf',t:'Influencers Package',s:'Creator partnerships and content collabs',tag:'Collab',
+  q:{id:'followers',h:'How big is your audience?',p:'Your biggest platform.',o:[['Under 10K',1],['10K to 50K',2],['50K to 250K',3],['250K+',3]],handle:true}}
+];
+const COMMON=[
+ {id:'score',h:'Roughly where is your credit score?',p:'Your best guess is fine. We don’t pull your credit here.',o:[['720+',4],['650–719',3],['580–649',2],['500–579',1],['Under 500',0],['Not sure',1]]},
+ {id:'income',h:'What’s your monthly income before taxes?',p:'All sources count: job, 1099, benefits, support.',o:[['$5,000+',4],['$3,500–5,000',3],['$2,500–3,500',2],['$1,800–2,500',1],['Under $1,800',0]]},
+ {id:'job',h:'How long at your current job or income source?',o:[['2+ years',3],['1–2 years',2],['6–12 months',1],['Under 6 months',0]]},
+ {id:'down',h:'How much can you put down?',p:'More down means more lenders say yes.',o:[['$3,000+',4],['$1,500–3,000',3],['$500–1,500',2],['Up to $500',1],['$0',0]]},
+ {id:'goal',h:'What are you looking to do?',multi:[{k:'plan',l:'Plan',o:['Lease','Finance','Not sure']},{k:'type',l:'Vehicle',o:['SUV','Truck','Sedan','Luxury']},{k:'when',l:'When',o:['This week','This month','Just looking']}]},
+ {id:'contact',h:'Where should we send your results?',p:'A real concierge will reach out. No spam, ever.',contact:true}
+];
+const params=new URLSearchParams(location.search);
+const SRC=(params.get('utm_source')||params.get('src')||document.referrer.replace(/^https?:\/\/(www\.)?([^/]+).*/,'$2')||'direct').toLowerCase();
+const srcName={ig:'Instagram',instagram:'Instagram',tiktok:'TikTok',fb:'Facebook',facebook:'Facebook',yt:'YouTube',youtube:'YouTube'}[SRC];
+if(srcName)$('#hi').textContent='Welcome, '+srcName+' fam · concierges online';
+const hr=new Date().getHours(),dy=new Date().getDay();const open=dy>=1&&dy<=5&&hr>=11&&hr<(dy===5?17:18);
+if(!srcName)$('#hi').textContent=open?'Concierges online now':'Apply now · we reply first thing tomorrow';
+
+let cur=null,st=null;
+const host=$('#progs');
+host.innerHTML=P.map((p,i)=>`<article class="prog" id="p-${p.k}" data-k="${p.k}" style="animation-delay:${.6+i*.07}s">
+ <button class="prog-b" type="button" aria-expanded="false" aria-controls="f-${p.k}"><span class="prog-ic">${svg(IC[p.k])}</span><span class="prog-t"><b>${p.t}</b><span>${p.s}</span></span><span class="prog-tag ${p.hot?'hot':''}">${p.tag}</span><span class="chev">${svg(IC.chev)}</span></button>
+ <div class="prog-p" id="f-${p.k}"><div><div class="fm"></div></div></div></article>`).join('');
+/* reveal after load */
+requestAnimationFrame(()=>document.querySelectorAll('.prog').forEach(e=>e.classList.add('in')));
+document.querySelectorAll('.prog-b').forEach(b=>b.onclick=()=>toggle(b.closest('.prog').dataset.k));
+
+function toggle(k,scroll){
+ const el=$('#p-'+k);const wasOpen=el.classList.contains('open');
+ document.querySelectorAll('.prog.open').forEach(o=>{o.classList.remove('open');o.querySelector('.prog-b').setAttribute('aria-expanded','false')});
+ if(wasOpen){cur=null;return}
+ cur=P.find(p=>p.k===k);
+ st={i:0,a:{program:cur.t},steps:[cur.q,...COMMON],score:0,done:false};
+ el.classList.add('open');el.querySelector('.prog-b').setAttribute('aria-expanded','true');
+ paint();
+ setTimeout(()=>{const r=el.getBoundingClientRect();if(scroll||r.top<70||r.top>innerHeight*.45)scrollTo({top:scrollY+r.top-84,behavior:'smooth'})},260);
+ track('open',k);
+}
+function fm(){return $('#p-'+cur.k+' .fm')}
+function paint(){
+ const s=st.steps[st.i],n=st.steps.length,pct=Math.round(st.i/n*100);
+ const left=Math.max(1,Math.ceil((n-st.i)*15/60));
+ let body='';
+ if(s.o){body=`<div class="opts ${s.o.length>4?'':'one'}">${s.o.map((o,j)=>`<button type="button" class="opt ${st.a[s.id]===o[0]?'on':''}" data-j="${j}"><span>${o[0]}</span><span class="dot"></span></button>`).join('')}</div>`+
+  (s.handle?`<div class="fields"><label class="fld"><span>Your handle (optional)</span><input id="handle" placeholder="@yourname" value="${esc(st.a.handle||'')}" autocomplete="off"></label></div>`:'')}
+ else if(s.multi){body=s.multi.map(g=>`<p class="sub-l">${g.l}</p><div class="opts ${g.o.length===3?'':''}" style="grid-template-columns:repeat(${g.o.length>3?2:3},1fr)">${g.o.map(o=>`<button type="button" class="opt ${st.a[g.k]===o?'on':''}" data-g="${g.k}" data-v="${o}"><span>${o}</span></button>`).join('')}</div>`).join('')}
+ else if(s.contact){const a=st.a;body=`<div class="fields">
+   <div class="two"><label class="fld"><span>First name</span><input id="fn" autocomplete="given-name" value="${esc(a.first||'')}"></label><label class="fld"><span>Last name</span><input id="ln" autocomplete="family-name" value="${esc(a.last||'')}"></label></div>
+   <label class="fld"><span>Mobile number</span><input id="ph" type="tel" inputmode="tel" autocomplete="tel" placeholder="(313) 555-0123" value="${esc(a.phone||'')}"></label>
+   <label class="fld"><span>Email (optional)</span><input id="em" type="email" inputmode="email" autocomplete="email" placeholder="you@email.com" value="${esc(a.email||'')}"></label>
+   <label class="agree"><input type="checkbox" id="ok" ${a.consent!==false?'checked':''}><span>I agree to be contacted by call or text about my pre-qualification. This is a soft inquiry and won’t affect my credit. Msg &amp; data rates may apply.</span></label></div>`}
+ const isLast=st.i===n-1, needNext=!s.o||s.handle;
+ fm().innerHTML=`<div class="bar"><i style="width:${pct}%"></i></div><div class="meta"><span>Step ${st.i+1} of ${n}</span><span>About ${left} min left</span></div>
+  <div class="q"><h3>${s.h}</h3>${s.p?`<p class="h">${s.p}</p>`:''}${body}</div>
+  <div class="nav">${st.i?`<button type="button" class="back" data-back>${svg(IC.back)}Back</button>`:''}${needNext?`<button type="button" class="go" data-next ${ready(s)?'':'disabled'}>${isLast?'See my results':'Continue'} ${svg(IC.arrow)}</button>`:''}</div>
+  <div class="safe">${svg(IC.lock)}Secure · soft inquiry only · takes 2 minutes</div>`;
+ bind(s);
+ requestAnimationFrame(()=>{const b=fm().querySelector('.bar i');if(b)b.style.width=Math.round((st.i+.35)/n*100)+'%'});
+}
+function ready(s){const a=st.a;if(s.o)return !!a[s.id];if(s.multi)return s.multi.every(g=>a[g.k]);if(s.contact)return true;return true}
+function bind(s){
+ const f=fm();
+ f.querySelectorAll('.opt[data-j]').forEach(b=>b.onclick=()=>{const o=s.o[+b.dataset.j];st.a[s.id]=o[0];st.a['_'+s.id]=o[1];
+  f.querySelectorAll('.opt[data-j]').forEach(x=>x.classList.toggle('on',x===b));
+  if(s.handle){const g=f.querySelector('[data-next]');if(g)g.disabled=false;return}
+  setTimeout(next,240)});
+ f.querySelectorAll('.opt[data-g]').forEach(b=>b.onclick=()=>{st.a[b.dataset.g]=b.dataset.v;f.querySelectorAll(`.opt[data-g="${b.dataset.g}"]`).forEach(x=>x.classList.toggle('on',x===b));const g=f.querySelector('[data-next]');if(g)g.disabled=!ready(s);
+  if(ready(s))setTimeout(next,280)});
+ const h=f.querySelector('#handle');if(h)h.oninput=()=>st.a.handle=h.value;
+ const bk=f.querySelector('[data-back]');if(bk)bk.onclick=()=>{st.i--;paint()};
+ const nx=f.querySelector('[data-next]');if(nx)nx.onclick=()=>s.contact?submit():next();
+ if(s.contact){const ph=f.querySelector('#ph');ph.oninput=()=>{let d=ph.value.replace(/\D/g,'').slice(0,10);ph.value=d.length>6?`(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`:d.length>3?`(${d.slice(0,3)}) ${d.slice(3)}`:d};
+  f.querySelectorAll('input').forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();submit()}}));setTimeout(()=>f.querySelector('#fn').focus({preventScroll:true}),350)}
+}
+function next(){if(st.i<st.steps.length-1){st.i++;paint();track('step',cur.k+':'+st.i)}}
+function submit(){
+ const f=fm(),g=id=>f.querySelector('#'+id);
+ const fn=g('fn').value.trim(),ph=g('ph').value.replace(/\D/g,''),em=g('em').value.trim();
+ let bad=false;[['fn',fn.length>=2],['ph',ph.length===10],['em',!em||/^\S+@\S+\.\S+$/.test(em)]].forEach(([id,ok])=>{g(id).classList.toggle('bad',!ok);if(!ok)bad=true});
+ if(!g('ok').checked){toast('Please agree to be contacted so we can send results');return}
+ if(bad){toast(fn.length<2?'Add your first name':ph.length!==10?'Add a 10-digit mobile number':'Check your email');return}
+ Object.assign(st.a,{first:fn,last:g('ln').value.trim(),phone:g('ph').value,email:em,consent:true});
+ result();
+}
+function grade(){
+ const a=st.a,sc=(+a._score||0),inc=(+a._income||0),job=(+a._job||0),dn=(+a._down||0),pq=(+a['_'+cur.q.id]||0);
+ const pts=sc*3+inc*3+job*1.5+dn*2+pq;              // max ≈ 12+12+4.5+8+3 = 39.5
+ let tier=pts>=24?'A':pts>=15?'B':'C';
+ if(inc===0&&dn<=1)tier='C';                          // income floor
+ if(sc>=3&&inc>=2)tier='A';
+ return {tier,pts:Math.round(pts)};
+}
+function result(){
+ const {tier,pts}=grade(),a=st.a,name=esc(a.first);
+ const lead={id:'L'+Date.now().toString(36).toUpperCase(),at:new Date().toISOString(),program:cur.t,tier,score:pts,source:srcName||SRC,answers:{...a}};
+ try{const L=JSON.parse(localStorage.getItem('oab_leads')||'[]');L.unshift(lead);localStorage.setItem('oab_leads',JSON.stringify(L.slice(0,200)))}catch(e){}
+ track('lead',cur.k+':'+tier);
+ const T={
+  A:{c:'top',ic:'check',h:`You’re pre-qualified, ${name}`,p:open?'Your file is at the top of the list. A concierge will call you in the next 15 minutes.':'Your file is at the top of the list. A concierge will call you first thing when we open.',acts:[['p','tel:+12488648387','phone','Call now · skip the wait'],['s','../#book','cal','Pick a time to visit']],steps:['Concierge confirms your details','We match you with the right lender','Pick your car and drive']},
+  B:{c:'',ic:'check',h:`Good news, ${name}. You’re a fit.`,p:`Based on your answers, ${cur.t} is a strong match. We’ll text your options within 24 hours.`,acts:[['p','sms:+13135461388','msg','Text us to speed it up'],['s','../#inventory','arrow','Browse cars while you wait']],steps:['We review your answers today','You get a text with your options','Bring your documents and drive']},
+  C:{c:'',ic:'clock',h:`Thanks, ${name}. Here’s your path.`,p:'You’re not quite ready for a traditional approval yet, but you have options. Credit to Car starts at $1,500, and long-term rentals start at $299 a week.',acts:[['p','../#programs','arrow','See Credit to Car & rentals'],['s','tel:+12488648387','phone','Talk it through with us']],steps:['Save toward $1,500 to start Credit to Car','Or drive now with a weekly rental','Reapply anytime, it only takes 2 minutes']}
+ }[tier];
+ fm().innerHTML=`<div class="bar"><i style="width:100%"></i></div><div class="res ${T.c}"><div class="badge">${svg(IC[T.ic])}</div><h3>${T.h}</h3><p>${T.p}</p>
+  <div class="acts">${T.acts.map(x=>`<a class="${x[0]}" href="${x[1]}">${svg(IC[x[2]])}${x[3]}</a>`).join('')}</div>
+  <div class="steps">${T.steps.map((s,i)=>`<div><b>${i+1}</b><span>${s}</span></div>`).join('')}</div></div>`;
+ st.done=true;
+ const el=$('#p-'+cur.k),r=el.getBoundingClientRect();if(r.top<70||r.top>innerHeight*.4)scrollTo({top:scrollY+r.top-84,behavior:'smooth'});
+}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)}
+function track(ev,v){try{const k='oab_lp_ev';const E=JSON.parse(localStorage.getItem(k)||'[]');E.push([Date.now(),ev,v,SRC]);localStorage.setItem(k,JSON.stringify(E.slice(-500)))}catch(e){}}
+track('visit',location.hash||'');
+/* deep link: /start/?p=c2c or #vet */
+const dl=(params.get('p')||location.hash.slice(1)).toLowerCase();
+const map={c2c:'c2c',credit2car:'c2c',mom:'mom',moms:'mom',truck:'truck',cdl:'truck',credit:'credit',vet:'vet',veterans:'vet',nurse:'nurse',nurses:'nurse',inf:'inf',influencer:'inf',creators:'inf'};
+if(map[dl])setTimeout(()=>toggle(map[dl],true),1200);
+/* mobile dock */
+const dock=$('#dock');addEventListener('scroll',()=>dock.classList.toggle('show',scrollY>380&&!(cur&&!st.done)),{passive:true});
+$('#dockGo').onclick=e=>{e.preventDefault();if(!cur)toggle('c2c',true);else scrollTo({top:$('#p-'+cur.k).getBoundingClientRect().top+scrollY-84,behavior:'smooth'})};
+})();
+</script>
+</body>
+</html>
