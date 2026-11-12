@@ -2812,6 +2812,9 @@ html.iv-open #root *{animation-play-state:paused!important}
 .bxh .ph::after{display:none}
 .bxh::after{background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,transparent 16%,transparent 70%,#000 100%)!important}
 @media (max-width:800px){.bxh .ph{width:100%!important;right:0!important;top:0!important;height:100%!important;aspect-ratio:auto}.bxh .ph img{-webkit-mask-image:none;mask-image:none}.bxh .ph img{opacity:.55;object-position:62% 55%!important}.bxh .ph::after{background:linear-gradient(90deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.45) 60%,rgba(0,0,0,.2) 100%),linear-gradient(180deg,rgba(0,0,0,.5) 0%,transparent 25%,transparent 55%,#000 100%)}}
+
+/* programs: 9 cards, 3 per row */
+@media (min-width:1001px){.pg12-g{grid-template-columns:repeat(3,minmax(0,1fr))!important}.pg12-c{min-height:330px}}
 </style>
 <div id="root"></div>
 <script>
@@ -3550,7 +3553,7 @@ yesStepper();
 /* ================= concierge chat (answers from the business's own info) ================= */
 /* ===== concierge brain v2: intents, moderation, guided chips ===== */
 const CC_TEL='tel:+12488648387',CC_SMS='sms:+12488648387';
-const CC_ACT={apply:['Get approved','#apply'],inv:['See inventory','#inventory'],lease:['Lease specials','#lease'],call:['Call (248) 864-8387',CC_TEL],text:['Text us',CC_SMS],prog:['View programs','#programs'],sell:['Get an offer','#sell'],book:['Book a visit','#book']};
+const CC_ACT={start:['Get pre-qualified','start/'],apply:['Get approved','#apply'],inv:['See inventory','#inventory'],lease:['Lease specials','#lease'],call:['Call (248) 864-8387',CC_TEL],text:['Text us',CC_SMS],prog:['View programs','#programs'],sell:['Get an offer','#sell'],book:['Book a visit','#book']};
 const CC_START=['Can I get approved with bad credit?','How fast is approval?','What programs do you have?','Do you take trade-ins?'];
 const CC_INTENTS=[
  {k:'credit',w:[/bad credit|credit score|low score|poor credit|no credit|first.?time|5[0-9]{2}\b|4[0-9]{2}\b|approv(e|ed|al)? with|denied|turned down/],
@@ -3564,7 +3567,7 @@ const CC_INTENTS=[
  {k:'down',w:[/down ?payment|money down|nothing down|zero down|\$0 down|deposit/],
   t:"It depends on your file. Many clients start with little down, and Credit to Car starts at $1,500. Tell us your budget and we'll build the deal around it.",a:['apply','prog'],c:['What programs do you have?','Lease or finance?']},
  {k:'prog',w:[/program|single mom|\bmoms?\b|c2c|credit to car|rebuild|repair|improve|\brental|\brent\b|weekly|hero|veteran|first responder|nurse|healthcare|payment help|behind on/],
-  t:"Our programs: Credit to Car (start with $1,500 and rebuild while you drive), Long-term rental from $299/week, the Single Moms program, and Car Payment Help with a same-day call back. A Heroes program for veterans, first responders and healthcare workers is coming soon.",a:['prog','apply'],c:['How does Credit to Car work?','Can I get approved with bad credit?']},
+  t:"Our programs: Credit to Car (start with $1,500), Single Moms, Truck Drivers, Challenged Credit, Veterans, Nurses, Influencers, Long-term rental from $299/week, and Car Payment Help. Pick yours and get pre-qualified in 2 minutes at the link below.",a:['start','prog'],c:['How does Credit to Car work?','Can I get approved with bad credit?']},
  {k:'c2c',w:[/how does credit to car|credit to car work|540|793/],
   t:"Credit to Car puts you in a car while your on-time payments rebuild your score. You start with $1,500. One client went from 540 to 793 in 4 months.",a:['apply','prog'],c:['What do I need to bring?','Do you deliver?']},
  {k:'lease',w:[/lease|finance|monthly|payment|price|cost|how much|afford|budget|\$\d|per month|\/mo/],
@@ -4279,10 +4282,15 @@ const IG_REELS=[
 const igId=u=>{const m=String(u||'').match(/instagram\.com\/(?:[^/]+\/)?(reel|reels|p|tv)\/([A-Za-z0-9_-]+)/);return m?{t:m[1]==='reels'?'reel':m[1],id:m[2]}:null};
 
 const PROGRAMS=[
- {k:'c2c',n:'01',tag:'Credit to Car',t:'C2C Program',price:'$1,500',sub:'to get started',p:'Get into a newer car while you build the credit for the one you really want.',kw:'C2C',cta:'Text “C2C”'},
- {k:'rent',n:'02',tag:'Long-term rental',t:'Long-Term Rental',price:'$299',sub:'/week + insurance',p:'Reliable transportation today. Upgrade or downsize as your budget changes.',kw:'RENT',cta:'Text “RENT”'},
- {k:'mom',n:'03',tag:'Single moms',t:'Single Moms Program',price:'Any',sub:'credit welcome',p:'School drop-offs, work, groceries. A car your family can count on, with credit help included.',kw:'MOM',cta:'Text “MOM”'},
- {k:'sell',n:'04',tag:'Can’t afford your car?',t:'Car Payment Help',price:'Help',sub:'same-day call back',p:'Behind on payments? We’ll help you find a way out before a missed payment turns into a repo.',kw:'HELP',cta:'Get help now',href:'#sell'}
+ {k:'c2c',n:'01',tag:'Credit to Car',t:'C2C Program',price:'$1,500',sub:'to get started',p:'Get into a newer car while you build the credit for the one you really want.',kw:'C2C',cta:'Get pre-qualified',href:'start/?p=c2c'},
+ {k:'mom',n:'02',tag:'Single moms',t:'Single Moms Package',price:'Any',sub:'credit welcome',p:'School drop-offs, work, groceries. A car your family can count on, with credit help included.',kw:'MOM',cta:'Get pre-qualified',href:'start/?p=mom'},
+ {k:'truck',n:'03',tag:'Truck drivers',t:'Truck Drivers Program',price:'CDL',sub:'W-2, 1099 & owner-ops',p:'Company drivers, contractors and owner-operators. Your road income counts.',kw:'TRUCK',cta:'Get pre-qualified',href:'start/?p=truck'},
+ {k:'credit',n:'04',tag:'Challenged credit',t:'Challenged Credit',price:'500+',sub:'scores welcome',p:'Repos, bankruptcies, collections or no credit at all. We know which lenders say yes.',kw:'CREDIT',cta:'Get pre-qualified',href:'start/?p=credit'},
+ {k:'vet',n:'05',tag:'Veterans',t:'Veterans Program',price:'VA',sub:'military income counts',p:'Thank you for your service. Priority scheduling and lenders who understand military pay.',kw:'VET',cta:'Get pre-qualified',href:'start/?p=vet'},
+ {k:'nurse',n:'06',tag:'Nurses',t:'Nurses Program',price:'RN · LPN',sub:'CNA & travel nurses too',p:'Long shifts need a car that starts. Approvals built around your schedule.',kw:'NURSE',cta:'Get pre-qualified',href:'start/?p=nurse'},
+ {k:'inf',n:'07',tag:'Influencers',t:'Influencers Package',price:'Collab',sub:'creator partnerships',p:'Drive something worth posting. Content partnerships and creator-friendly financing.',kw:'DRIVE',cta:'Get pre-qualified',href:'start/?p=inf'},
+ {k:'rent',n:'08',tag:'Long-term rental',t:'Long-Term Rental',price:'$299',sub:'/week + insurance',p:'Reliable transportation today. Upgrade or downsize as your budget changes.',kw:'RENT',cta:'Text “RENT”'},
+ {k:'sell',n:'09',tag:'Can’t afford your car?',t:'Car Payment Help',price:'Help',sub:'same-day call back',p:'Behind on payments? We’ll help you find a way out before a missed payment turns into a repo.',kw:'HELP',cta:'Get help now',href:'#sell'}
 ];
 
 function progHTML(){return `<section class="sec dark pg12" id="programs"><div class="wrap wide">
@@ -4296,7 +4304,7 @@ function progHTML(){return `<section class="sec dark pg12" id="programs"><div cl
     <div class="pg12-cta">${x.href?`<a class="sq red sm" href="${x.href}">${x.cta} ${ic('arrow')}</a>`:`<a class="sq red sm" href="${sms(x.kw)}" data-sms="${x.kw}" data-prog="${x.t}">${x.cta} ${ic('arrow')}</a>`}
       <div class="pg12-sub">${x.href?`<a href="${sms(x.kw)}" data-sms="${x.kw}" data-prog="${x.t}">Text “${x.kw}”</a>`:`<a href="tel:${BIZ.textTel}">${PH_IC}Call to ask</a>`}<a href="#apply">Apply online</a></div></div>
   </article>`).join('')}</div>
-  <div class="pg12-soon rv"><span class="pg12-sb">Coming soon</span><div><b>Heroes Program</b><span>Veterans, first responders and healthcare workers. Get on the early list.</span></div><a class="sq ol sm" href="${sms('HERO')}" data-sms="HERO" data-prog="Heroes Program">Text “HERO” ${ic('arrow')}</a></div>
+  <div class="pg12-soon rv"><span class="pg12-sb">2 minutes</span><div><b>Not sure which program fits?</b><span>Answer a few quick questions and we’ll match you. No hard credit pull.</span></div><a class="sq red sm" href="start/">Get pre-qualified ${ic('arrow')}</a></div>
   <!--BRING-->
 </div></section>`}
 
