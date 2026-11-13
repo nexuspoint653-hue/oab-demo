@@ -314,6 +314,25 @@ html.lock{overflow:hidden}
 .pc:first-child .pc-ph img{position:absolute;inset:0}
 @media (max-width:1000px){.pc:first-child{grid-column:span 3}.pc:first-child .pc-ph{padding-bottom:35%}}
 @media (max-width:760px){.pc:first-child{grid-column:span 2}.pc:first-child .pc-ph{padding-bottom:52%}}
+
+/* conversion tweaks */
+.hctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.hctas .hcta{margin-top:0}
+.hcall{display:inline-flex;align-items:center;height:54px;padding:0 20px;border-radius:12px;border:1px solid var(--line2);color:#111;font-weight:600;font-size:15px;opacity:0;animation:up .8s .58s cubic-bezier(.2,.7,.2,1) forwards;transition:background .2s}
+.hcall:hover{background:#F5F5F5}
+.res-n{font-size:12.5px!important;color:var(--tx3)!important;margin-top:10px!important}
+.resume{position:fixed;left:0;right:0;margin:0 auto;bottom:calc(84px + env(safe-area-inset-bottom));z-index:35;display:flex;align-items:center;gap:12px;background:#111;color:#fff;border-radius:16px;padding:10px 14px 10px 10px;box-shadow:0 20px 50px -14px rgba(0,0,0,.5);width:min(420px,calc(100% - 24px));text-align:left;animation:up .5s 1s both}
+.resume img{width:44px;height:44px;border-radius:10px;object-fit:cover}
+.resume span{flex:1;display:flex;flex-direction:column}
+.resume b{font-size:14.5px}.resume small{font-size:12.5px;color:#BDBDBD}
+.resume svg{width:18px;height:18px}
+@media (min-width:860px){.resume{bottom:24px}}
+@media (max-width:860px){
+ .hx-ph{aspect-ratio:16/9}
+ .hctas{display:grid;grid-template-columns:1fr;gap:8px}
+ .hcall{justify-content:center}
+ .hero{padding-bottom:20px}
+}
 </style>
 </head>
 <body>
@@ -334,7 +353,7 @@ html.lock{overflow:hidden}
     <span><svg class="gg" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3Z"/><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z"/><path fill="#FBBC05" d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 0 0 0 9.2L6.4 14Z"/><path fill="#EA4335" d="M12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 0 0 3.1 7.4L6.4 10C7.2 7.7 9.4 6 12 6Z"/></svg><b>4.9</b> <span class="stars">★★★★★</span> 59 Google reviews</span>
     <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Won’t affect your credit</span>
    </div>
-   <a class="hcta" href="#programs">Pick your program <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a>
+   <div class="hctas"><a class="hcta" href="#programs">Pick your program <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a><a class="hcall" href="tel:+12488648387">Call (248) 864-8387</a></div>
   </div>
   <figure class="hx-ph"><img src="../photos/life/durango-gt-2.jpg" alt="A family loading their new SUV" fetchpriority="high"><figcaption><b>They said no. We said yes.</b><span>Most approvals in 24 hours</span></figcaption></figure>
  </div></section>
@@ -433,7 +452,7 @@ const COMMON=[
  {id:'income',h:'What do you bring in a month?',p:'Before taxes. Job, 1099, benefits, support. It all counts.',o:[['$5,000+',4],['$3,500–5,000',3],['$2,500–3,500',2],['$1,800–2,500',1],['Under $1,800',0]]},
  {id:'job',h:'How long at your job or income?',o:[['2+ years',3],['1–2 years',2],['6–12 months',1],['Under 6 months',0]]},
  {id:'down',h:'What can you put down?',p:'More down = more lenders say yes.',o:[['$3,000+',4],['$1,500–3,000',3],['$500–1,500',2],['Up to $500',1],['$0',0]]},
- {id:'goal',h:'What are you trying to do?',multi:[{k:'plan',l:'Plan',o:['Lease','Finance','Not sure']},{k:'type',l:'Vehicle',o:['SUV','Truck','Sedan','Luxury']},{k:'when',l:'When',o:['This week','This month','Just looking']}]},
+ {id:'goal',h:'Lease or finance, and when?',multi:[{k:'plan',l:'Plan',o:['Lease','Finance','Not sure']},{k:'when',l:'When',o:['This week','This month','Just looking']}]},
  {id:'contact',h:'Where do we send your results?',p:'A real person reaches out. No spam. No games.',contact:true}
 ];
 const params=new URLSearchParams(location.search);
@@ -455,6 +474,7 @@ $('#ovX').onclick=closeOv;ov.addEventListener('click',e=>{if(e.target===ov)close
 function toggle(k){
  cur=P.find(p=>p.k===k);if(!cur)return;
  st={i:0,a:{program:cur.t},steps:[cur.q,...COMMON],score:0,done:false};
+ try{const d=JSON.parse(localStorage.getItem('oab_lp_draft')||'null');if(d&&d.k===k&&Date.now()-d.t<7*864e5&&d.i>0){st.i=d.i;st.a=d.a}}catch(e){}
  $('#ovI').src='../photos/life/'+cur.ph+'.jpg';$('#ovT').textContent=cur.t;$('#ovS').textContent=cur.s;
  ov.classList.add('on');ov.setAttribute('aria-hidden','false');document.documentElement.classList.add('lock');
  paint();track('open',k);
@@ -495,7 +515,8 @@ function bind(s){
  if(s.contact){const ph=f.querySelector('#ph');ph.oninput=()=>{let d=ph.value.replace(/\D/g,'').slice(0,10);ph.value=d.length>6?`(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`:d.length>3?`(${d.slice(0,3)}) ${d.slice(3)}`:d};
   f.querySelectorAll('input').forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();submit()}}));setTimeout(()=>{const x=f.querySelector('#fn');x&&x.focus({preventScroll:true})},350)}
 }
-function next(){if(st.i<st.steps.length-1){st.i++;paint();track('step',cur.k+':'+st.i)}}
+function saveDraft(){try{localStorage.setItem('oab_lp_draft',JSON.stringify({k:cur.k,i:st.i,a:st.a,t:Date.now()}))}catch(e){}}
+function next(){if(st.i<st.steps.length-1){st.i++;saveDraft();paint();track('step',cur.k+':'+st.i)}}
 function submit(){
  const f=fm(),g=id=>f.querySelector('#'+id);
  const fn=g('fn').value.trim(),ph=g('ph').value.replace(/\D/g,''),em=g('em').value.trim();
@@ -518,21 +539,24 @@ function result(){
  const lead={id:'L'+Date.now().toString(36).toUpperCase(),at:new Date().toISOString(),program:cur.t,tier,score:pts,source:srcName||SRC,answers:{...a}};
  try{const L=JSON.parse(localStorage.getItem('oab_leads')||'[]');L.unshift(lead);localStorage.setItem('oab_leads',JSON.stringify(L.slice(0,200)))}catch(e){}
  track('lead',cur.k+':'+tier);
+ const sms='sms:+13135461388'+(/iPhone|iPad|Mac/i.test(navigator.userAgent)?'&':'?')+'body='+encodeURIComponent(`Hi O Auto Brokers, I just pre-qualified online.\nName: ${a.first} ${a.last||''}\nProgram: ${cur.t}\nCredit: ${a.score}\nIncome: ${a.income}/mo\nDown: ${a.down}\nPlan: ${a.plan||''}, ${a.when||''}\nPhone: ${a.phone}\nRef: ${lead.id}`);
  const T={
-  A:{c:'top',ic:'check',h:`You’re in, ${name}.`,p:open?'You’re at the top of the list. Expect a call in the next 15 minutes.':'You’re at the top of the list. We’ll call you first thing when we open.',acts:[['p','tel:+12488648387','phone','Call now · skip the wait'],['s','../#book','cal','Pick a time to visit']],steps:['Concierge confirms your details','We match you with the right lender','Pick your car and drive']},
-  B:{c:'',ic:'check',h:`Good news, ${name}. You’ve got options.`,p:`${cur.t} fits you. We’ll text your options within 24 hours.`,acts:[['p','sms:+13135461388','msg','Text us to speed it up'],['s','../#inventory','arrow','Browse cars while you wait']],steps:['We review your answers today','You get a text with your options','Bring your documents and drive']},
-  C:{c:'',ic:'clock',h:`Not today. Not never, ${name}.`,p:'You’re not there yet for a regular approval, but we don’t leave you hanging. Credit to Car starts at $1,500. Rentals start at $299 a week.',acts:[['p','../#programs','arrow','See Credit to Car & rentals'],['s','tel:+12488648387','phone','Talk it through with us']],steps:['Save toward $1,500 to start Credit to Car','Or drive now with a weekly rental','Reapply anytime, it only takes 2 minutes']}
+  A:{c:'top',ic:'check',h:`You’re in, ${name}.`,p:open?'You’re at the top of the list. Expect a call in the next 15 minutes.':'You’re at the top of the list. We’ll call you first thing when we open.',acts:[['p',sms,'msg','Text my results to O · get called first'],['s','tel:+12488648387','phone','Or call now · (248) 864-8387']],steps:['Concierge confirms your details','We match you with the right lender','Pick your car and drive']},
+  B:{c:'',ic:'check',h:`Good news, ${name}. You’ve got options.`,p:`${cur.t} fits you. We’ll text your options within 24 hours.`,acts:[['p',sms,'msg','Text my results to O · skip the line'],['s','../#inventory','arrow','Browse cars while you wait']],steps:['We review your answers today','You get a text with your options','Bring your documents and drive']},
+  C:{c:'',ic:'clock',h:`Not today. Not never, ${name}.`,p:'You’re not there yet for a regular approval, but we don’t leave you hanging. Credit to Car starts at $1,500. Rentals start at $299 a week.',acts:[['p',sms,'msg','Text O · let’s make a plan'],['s','../#programs','arrow','See Credit to Car & rentals']],steps:['Save toward $1,500 to start Credit to Car','Or drive now with a weekly rental','Reapply anytime, it only takes 2 minutes']}
  }[tier];
  fm().innerHTML=`<div class="bar"><i style="width:100%"></i></div><div class="res ${T.c}"><div class="badge">${svg(IC[T.ic])}</div><h3>${T.h}</h3><p>${T.p}</p>
   <div class="acts">${T.acts.map(x=>`<a class="${x[0]}" href="${x[1]}">${svg(IC[x[2]])}${x[3]}</a>`).join('')}</div>
-  <div class="steps">${T.steps.map((s,i)=>`<div><b>${i+1}</b><span>${s}</span></div>`).join('')}</div></div>`;
- st.done=true;
+  <p class="res-n">Tap the button. Your answers are already typed in. Just hit send.</p><div class="steps">${T.steps.map((s,i)=>`<div><b>${i+1}</b><span>${s}</span></div>`).join('')}</div></div>`;
+ st.done=true;try{localStorage.removeItem('oab_lp_draft')}catch(e){}
  $('#ov .ov-s').scrollTop=0;
 }
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)}
 function track(ev,v){try{const k='oab_lp_ev';const E=JSON.parse(localStorage.getItem(k)||'[]');E.push([Date.now(),ev,v,SRC]);localStorage.setItem(k,JSON.stringify(E.slice(-500)))}catch(e){}}
 track('visit',location.hash||'');
+/* resume banner */
+try{const d=JSON.parse(localStorage.getItem('oab_lp_draft')||'null');const pp=d&&P.find(x=>x.k===d.k);if(pp&&Date.now()-d.t<7*864e5&&d.i>0){document.body.insertAdjacentHTML('beforeend',`<button type="button" class="resume" id="resume"><img src="../photos/life/${pp.ph}.jpg" alt=""><span><b>Finish your ${pp.t} form</b><small>You were ${Math.round(d.i/7*100)}% done</small></span>${svg(IC.arrow)}</button>`);$('#resume').onclick=()=>{$('#resume').remove();toggle(pp.k)}}}catch(e){}
 /* deep link: /start/?p=c2c or #vet */
 const dl=(params.get('p')||location.hash.slice(1)).toLowerCase();
 const map={c2c:'c2c',credit2car:'c2c',mom:'mom',moms:'mom',truck:'truck',cdl:'truck',credit:'credit',vet:'vet',veterans:'vet',nurse:'nurse',nurses:'nurse',inf:'inf',influencer:'inf',creators:'inf'};
