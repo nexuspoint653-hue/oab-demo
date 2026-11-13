@@ -264,6 +264,56 @@ footer ul a{color:var(--tx2)}footer ul a:hover{color:#111}
  .how-g{grid-template-columns:1fr}
  .why-g{grid-template-columns:1fr 1fr 1fr}
 }
+
+/* ===== program grid + form sheet ===== */
+.pick .wrap{width:min(1120px,100%)}
+.progs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.pc{display:flex;flex-direction:column;text-align:left;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;opacity:0;transform:translateY(14px);transition:border-color .2s,box-shadow .25s,transform .25s;cursor:pointer;padding:0}
+.pc.in{animation:up .55s cubic-bezier(.2,.7,.2,1) forwards}
+.pc:hover{border-color:#111;box-shadow:0 18px 40px -22px rgba(0,0,0,.35)}
+.pc:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.pc-ph{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;background:#EEE}
+.pc-ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.pc:hover .pc-ph img{transform:scale(1.05)}
+.pc-ph em{position:absolute;left:10px;top:10px;font-style:normal;font-size:11.5px;font-weight:600;background:#fff;color:#111;padding:4px 9px;border-radius:999px}
+.pc-ph em.hot{background:var(--red);color:#fff}
+.pc-t{display:flex;flex-direction:column;flex:1;padding:14px 16px 16px}
+.pc-t b{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.pc-t span{font-size:13.5px;color:var(--tx2);margin-top:4px;line-height:1.4;flex:1}
+.pc-t i{font-style:normal;display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13.5px;font-weight:600;color:var(--red)}
+.pc-t i svg{width:15px;height:15px;transition:transform .2s}
+.pc:hover .pc-t i svg{transform:translateX(3px)}
+.progs::after{content:"";display:none}
+.ov{position:fixed;inset:0;z-index:50;background:rgba(10,10,10,.55);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
+.ov.on{opacity:1;pointer-events:auto}
+.ov-s{width:min(560px,100%);max-height:calc(100svh - 40px);overflow:auto;background:#fff;border-radius:20px;box-shadow:0 30px 80px -20px rgba(0,0,0,.5);transform:translateY(16px) scale(.98);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.ov.on .ov-s{transform:none}
+.ov-h{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:1}
+.ov-h img{width:46px;height:46px;border-radius:10px;object-fit:cover;flex:none}
+.ov-h div{flex:1;min-width:0}
+.ov-h b{display:block;font-size:16.5px;font-weight:600}
+.ov-h span{display:block;font-size:13px;color:var(--tx2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ov-x{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;color:var(--tx2);flex:none}
+.ov-x:hover{background:#F3F3F3;color:#111}
+.ov-x svg{width:18px;height:18px}
+.ov .fm{padding:18px 18px 22px}
+html.lock{overflow:hidden}
+.lead b{color:#111;font-weight:600}
+@media (max-width:1000px){.progs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){
+ .progs{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .pc-t{padding:11px 12px 13px}.pc-t b{font-size:15px}.pc-t span{font-size:12.5px}.pc-t i{margin-top:8px;font-size:12.5px}
+ .pc-ph{aspect-ratio:1/1}
+ .ov{align-items:flex-end;padding:0}
+ .ov-s{width:100%;max-height:92svh;border-radius:20px 20px 0 0;transform:translateY(100%)}
+ .ov.on .ov-s{transform:none}
+}
+
+.pc:first-child{grid-column:span 2}
+.pc:first-child .pc-ph{aspect-ratio:auto;height:0;padding-bottom:calc(37.5% - 7px);flex:none}
+.pc:first-child .pc-ph img{position:absolute;inset:0}
+@media (max-width:1000px){.pc:first-child{grid-column:span 3}.pc:first-child .pc-ph{padding-bottom:35%}}
+@media (max-width:760px){.pc:first-child{grid-column:span 2}.pc:first-child .pc-ph{padding-bottom:52%}}
 </style>
 </head>
 <body>
@@ -277,29 +327,29 @@ footer ul a{color:var(--tx2)}footer ul a:hover{color:#111}
 <main>
  <section class="hero"><div class="wrap hw">
   <div class="hx-t">
-   <span class="eyebrow"><span id="hi">Concierges online now</span></span>
-   <h1>Welcome to<br><em>O Auto Brokers</em></h1>
-   <p class="lead">Pick your program below and get pre-qualified in about 2 minutes. No hard credit pull, no pressure.</p>
+   <span class="eyebrow"><span id="hi">Welcome to O Auto Brokers</span></span>
+   <h1>If you can dream it,<br><em>you can drive it.</em></h1>
+   <p class="lead">The dealership said no? <b>We say yes.</b> Pick your program, answer a few questions, and we’ll give you that chance.</p>
    <div class="trust">
     <span><svg class="gg" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3Z"/><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z"/><path fill="#FBBC05" d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 0 0 0 9.2L6.4 14Z"/><path fill="#EA4335" d="M12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 0 0 3.1 7.4L6.4 10C7.2 7.7 9.4 6 12 6Z"/></svg><b>4.9</b> <span class="stars">★★★★★</span> 59 Google reviews</span>
     <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Won’t affect your credit</span>
    </div>
-   <a class="hcta" href="#programs">Choose your program <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a>
+   <a class="hcta" href="#programs">Pick your program <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a>
   </div>
-  <figure class="hx-ph"><img src="../photos/life/durango-gt-2.jpg" alt="A family loading their new SUV" fetchpriority="high"><figcaption><b>Approvals in 24 hours</b><span>Most files come back the next day</span></figcaption></figure>
+  <figure class="hx-ph"><img src="../photos/life/durango-gt-2.jpg" alt="A family loading their new SUV" fetchpriority="high"><figcaption><b>They said no. We said yes.</b><span>Most approvals in 24 hours</span></figcaption></figure>
  </div></section>
 
  <section class="pick" id="programs"><div class="wrap">
-  <div class="pick-h"><b>Choose your program</b><span>Tap one to start</span></div>
+  <div class="pick-h"><b>Pick your program</b><span>Tap one. Two minutes. That’s it.</span></div>
   <div class="progs" id="progs"></div>
  </div></section>
 
  <section class="how"><div class="wrap">
   <h2 class="sh">How it works</h2>
   <ol class="how-g">
-   <li><b>1</b><div><h3>Pick your program</h3><p>Answer a few quick questions. Takes about 2 minutes.</p></div></li>
-   <li><b>2</b><div><h3>We match your lender</h3><p>A real concierge reviews your file and finds who says yes.</p></div></li>
-   <li><b>3</b><div><h3>Pick your car and drive</h3><p>Come in, or we deliver to your home or job.</p></div></li>
+   <li><b>1</b><div><h3>Pick your program</h3><p>A few quick questions. Two minutes.</p></div></li>
+   <li><b>2</b><div><h3>We fight for your yes</h3><p>We know which lenders approve. You apply once.</p></div></li>
+   <li><b>3</b><div><h3>Drive off</h3><p>Pick it up, or we bring it to your door.</p></div></li>
   </ol>
  </div></section>
 
@@ -316,10 +366,10 @@ footer ul a{color:var(--tx2)}footer ul a:hover{color:#111}
 
   <div class="faq">
    <h2 class="sh">Questions</h2>
-   <details><summary>Will this hurt my credit?</summary><p>No. Pre-qualifying here is a soft inquiry. A lender only pulls your credit after you choose to move forward.</p></details>
-   <details><summary>Can I get approved with bad credit or a repo?</summary><p>We work with scores under 580, past repos, bankruptcies and first-time buyers every day.</p></details>
-   <details><summary>How much do I need down?</summary><p>It depends on your file. Credit to Car starts at $1,500, and many clients start with less on other programs.</p></details>
-   <details><summary>What should I bring?</summary><p>Driver’s license, proof of income (two recent pay stubs or bank statements) and proof of address.</p></details>
+   <details><summary>Will this hurt my credit?</summary><p>No. This is a soft check. Nobody pulls your credit until you say go.</p></details>
+   <details><summary>Bad credit, repo, bankruptcy?</summary><p>That’s every day for us. Under 580, past repos, bankruptcies, no credit at all.</p></details>
+   <details><summary>How much do I need down?</summary><p>Depends on your file. Credit to Car starts at $1,500. Plenty of people start with less.</p></details>
+   <details><summary>What do I bring?</summary><p>License, two recent pay stubs or bank statements, and proof of address. That’s it.</p></details>
   </div>
  </div></section>
 </main>
@@ -363,57 +413,53 @@ const IC={
 };
 /* program-specific first question */
 const P=[
- {k:'c2c',ph:'cadillac-xt4-2',t:'Credit to Car',s:'Start with $1,500 and rebuild while you drive',tag:'Most popular',hot:1,
+ {k:'c2c',ph:'cadillac-xt4-2',t:'Credit to Car',s:'$1,500 down. Drive now, fix your credit while you do.',tag:'Most popular',hot:1,
   q:{id:'c2c_down',h:'Can you put $1,500 toward getting started?',p:'This is the Credit to Car starting amount.',o:[['Yes, ready now',3],['Within 2 weeks',2],['Within a month',1],['Not right now',0]]}},
- {k:'mom',ph:'escape-active-2',t:'Single Moms Package',s:'A reliable car for your family, any credit',tag:'Family',
+ {k:'mom',ph:'escape-active-2',t:'Single Moms',s:'You hold it down. We’ll get you rolling.',tag:'Moms',
   q:{id:'kids',h:'How many kids ride with you?',p:'So we match the right size and safety ratings.',o:[['1',2],['2',2],['3',2],['4 or more',2]]}},
- {k:'truck',ph:'ram-3500-2',t:'Truck Drivers',s:'CDL, owner-operators and company drivers',tag:'CDL',
+ {k:'truck',ph:'ram-3500-2',t:'Truck Drivers',s:'You keep everything moving. Let’s get you moving.',tag:'CDL',
   q:{id:'pay',h:'How do you get paid?',p:'W-2, 1099 and owner-operator income all count.',o:[['W-2 company driver',3],['1099 contractor',2],['Owner-operator',2],['Just starting out',1]]}},
- {k:'credit',ph:'malibu-lt-2',t:'Challenged Credit',s:'Repos, bankruptcies and low scores welcome',tag:'500+ OK',
-  q:{id:'report',h:'What’s on your credit report?',p:'Pick the biggest one. No judgment, it helps us pick the right lender.',o:[['Late payments',2],['Collections',2],['Past repo',1],['Bankruptcy',1],['No credit yet',2],['Not sure',1]]}},
- {k:'vet',ph:'f150-xlt-2',t:'Veterans Program',s:'Military and VA income count, priority scheduling',tag:'Thank you',
+ {k:'credit',ph:'malibu-lt-2',t:'Challenged Credit',s:'Repo? Bankruptcy? 500 score? Still a yes.',tag:'500+',
+  q:{id:'report',h:'What’s on your credit report?',p:'Pick the biggest one. No judgment here.',o:[['Late payments',2],['Collections',2],['Past repo',1],['Bankruptcy',1],['No credit yet',2],['Not sure',1]]}},
+ {k:'vet',ph:'f150-xlt-2',t:'Veterans',s:'You served. Now let us serve you.',tag:'Vets',
   q:{id:'service',h:'What’s your service status?',p:'Thank you for your service.',o:[['Veteran',3],['Active duty',3],['Reserve / Guard',3],['Military spouse',2]]}},
- {k:'nurse',ph:'gmc-terrain-2',t:'Nurses Program',s:'Approvals built around shift work',tag:'Healthcare',
+ {k:'nurse',ph:'gmc-terrain-2',t:'Nurses',s:'Long shifts deserve a car that starts.',tag:'RN · LPN · CNA',
   q:{id:'role',h:'What’s your role?',p:'Night, weekend and travel shifts welcome.',o:[['RN',3],['LPN',3],['CNA / Tech',2],['Travel nurse',3],['Student',1],['Other healthcare',2]]}},
- {k:'inf',ph:'camaro-lt-2',t:'Influencers Package',s:'Creator partnerships and content collabs',tag:'Collab',
+ {k:'inf',ph:'camaro-lt-2',t:'Influencers',s:'Drive something worth posting.',tag:'Creators',
   q:{id:'followers',h:'How big is your audience?',p:'Your biggest platform.',o:[['Under 10K',1],['10K to 50K',2],['50K to 250K',3],['250K+',3]],handle:true}}
 ];
 const COMMON=[
- {id:'score',h:'Roughly where is your credit score?',p:'Your best guess is fine. We don’t pull your credit here.',o:[['720+',4],['650–719',3],['580–649',2],['500–579',1],['Under 500',0],['Not sure',1]]},
- {id:'income',h:'What’s your monthly income before taxes?',p:'All sources count: job, 1099, benefits, support.',o:[['$5,000+',4],['$3,500–5,000',3],['$2,500–3,500',2],['$1,800–2,500',1],['Under $1,800',0]]},
- {id:'job',h:'How long at your current job or income source?',o:[['2+ years',3],['1–2 years',2],['6–12 months',1],['Under 6 months',0]]},
- {id:'down',h:'How much can you put down?',p:'More down means more lenders say yes.',o:[['$3,000+',4],['$1,500–3,000',3],['$500–1,500',2],['Up to $500',1],['$0',0]]},
- {id:'goal',h:'What are you looking to do?',multi:[{k:'plan',l:'Plan',o:['Lease','Finance','Not sure']},{k:'type',l:'Vehicle',o:['SUV','Truck','Sedan','Luxury']},{k:'when',l:'When',o:['This week','This month','Just looking']}]},
- {id:'contact',h:'Where should we send your results?',p:'A real concierge will reach out. No spam, ever.',contact:true}
+ {id:'score',h:'Where’s your credit at?',p:'Best guess is fine. We don’t pull your credit here.',o:[['720+',4],['650–719',3],['580–649',2],['500–579',1],['Under 500',0],['Not sure',1]]},
+ {id:'income',h:'What do you bring in a month?',p:'Before taxes. Job, 1099, benefits, support. It all counts.',o:[['$5,000+',4],['$3,500–5,000',3],['$2,500–3,500',2],['$1,800–2,500',1],['Under $1,800',0]]},
+ {id:'job',h:'How long at your job or income?',o:[['2+ years',3],['1–2 years',2],['6–12 months',1],['Under 6 months',0]]},
+ {id:'down',h:'What can you put down?',p:'More down = more lenders say yes.',o:[['$3,000+',4],['$1,500–3,000',3],['$500–1,500',2],['Up to $500',1],['$0',0]]},
+ {id:'goal',h:'What are you trying to do?',multi:[{k:'plan',l:'Plan',o:['Lease','Finance','Not sure']},{k:'type',l:'Vehicle',o:['SUV','Truck','Sedan','Luxury']},{k:'when',l:'When',o:['This week','This month','Just looking']}]},
+ {id:'contact',h:'Where do we send your results?',p:'A real person reaches out. No spam. No games.',contact:true}
 ];
 const params=new URLSearchParams(location.search);
 const SRC=(params.get('utm_source')||params.get('src')||document.referrer.replace(/^https?:\/\/(www\.)?([^/]+).*/,'$2')||'direct').toLowerCase();
 const srcName={ig:'Instagram',instagram:'Instagram',tiktok:'TikTok',fb:'Facebook',facebook:'Facebook',yt:'YouTube',youtube:'YouTube'}[SRC];
-if(srcName)$('#hi').textContent='Welcome, '+srcName+' fam · concierges online';
+if(srcName)$('#hi').textContent='Welcome, '+srcName+' fam';
 const hr=new Date().getHours(),dy=new Date().getDay();const open=dy>=1&&dy<=5&&hr>=11&&hr<(dy===5?17:18);
-if(!srcName)$('#hi').textContent=open?'Concierges online now':'Apply now · we reply first thing tomorrow';
+
 
 let cur=null,st=null;
 const host=$('#progs');
-host.innerHTML=P.map((p,i)=>`<article class="prog" id="p-${p.k}" data-k="${p.k}" style="animation-delay:${.6+i*.07}s">
- <button class="prog-b" type="button" aria-expanded="false" aria-controls="f-${p.k}"><span class="prog-ic"><img src="../photos/life/${p.ph}.jpg" alt="" loading="lazy"></span><span class="prog-t"><b>${p.t}</b><span>${p.s}</span></span><span class="prog-tag ${p.hot?'hot':''}">${p.tag}</span><span class="chev">${svg(IC.chev)}</span></button>
- <div class="prog-p" id="f-${p.k}"><div><div class="fm"></div></div></div></article>`).join('');
-/* reveal after load */
-requestAnimationFrame(()=>document.querySelectorAll('.prog').forEach(e=>e.classList.add('in')));
-document.querySelectorAll('.prog-b').forEach(b=>b.onclick=()=>toggle(b.closest('.prog').dataset.k));
+host.innerHTML=P.map((p,i)=>`<button type="button" class="pc" id="p-${p.k}" data-k="${p.k}" style="animation-delay:${.55+i*.06}s"><span class="pc-ph"><img src="../photos/life/${p.ph}.jpg" alt="" loading="${i<4?'eager':'lazy'}"><em class="${p.hot?'hot':''}">${p.tag}</em></span><span class="pc-t"><b>${p.t}</b><span>${p.s}</span><i>Start ${svg(IC.arrow)}</i></span></button>`).join('');
+document.body.insertAdjacentHTML('beforeend',`<div class="ov" id="ov" aria-hidden="true"><div class="ov-s" role="dialog" aria-modal="true" aria-labelledby="ovT"><header class="ov-h"><img id="ovI" alt=""><div><b id="ovT"></b><span id="ovS"></span></div><button type="button" class="ov-x" id="ovX" aria-label="Close">${svg('<path d="M18 6 6 18M6 6l12 12"/>')}</button></header><div class="fm"></div></div></div>`);
+requestAnimationFrame(()=>document.querySelectorAll('.pc').forEach(e=>e.classList.add('in')));
+document.querySelectorAll('.pc').forEach(b=>b.onclick=()=>toggle(b.dataset.k));
+const ov=$('#ov');const closeOv=()=>{ov.classList.remove('on');ov.setAttribute('aria-hidden','true');document.documentElement.classList.remove('lock');if(cur){const b=$('#p-'+cur.k);b&&b.focus({preventScroll:true})}cur=null};
+$('#ovX').onclick=closeOv;ov.addEventListener('click',e=>{if(e.target===ov)closeOv()});addEventListener('keydown',e=>{if(e.key==='Escape'&&ov.classList.contains('on'))closeOv()});
 
-function toggle(k,scroll){
- const el=$('#p-'+k);const wasOpen=el.classList.contains('open');
- document.querySelectorAll('.prog.open').forEach(o=>{o.classList.remove('open');o.querySelector('.prog-b').setAttribute('aria-expanded','false')});
- if(wasOpen){cur=null;return}
- cur=P.find(p=>p.k===k);
+function toggle(k){
+ cur=P.find(p=>p.k===k);if(!cur)return;
  st={i:0,a:{program:cur.t},steps:[cur.q,...COMMON],score:0,done:false};
- el.classList.add('open');el.querySelector('.prog-b').setAttribute('aria-expanded','true');
- paint();
- setTimeout(()=>{const r=el.getBoundingClientRect();if(scroll||r.top<70||r.top>innerHeight*.45)scrollTo({top:scrollY+r.top-84,behavior:'smooth'})},260);
- track('open',k);
+ $('#ovI').src='../photos/life/'+cur.ph+'.jpg';$('#ovT').textContent=cur.t;$('#ovS').textContent=cur.s;
+ ov.classList.add('on');ov.setAttribute('aria-hidden','false');document.documentElement.classList.add('lock');
+ paint();track('open',k);
 }
-function fm(){return $('#p-'+cur.k+' .fm')}
+function fm(){return $('#ov .fm')}
 function paint(){
  const s=st.steps[st.i],n=st.steps.length,pct=Math.round(st.i/n*100);
  const left=Math.max(1,Math.ceil((n-st.i)*15/60));
@@ -447,7 +493,7 @@ function bind(s){
  const bk=f.querySelector('[data-back]');if(bk)bk.onclick=()=>{st.i--;paint()};
  const nx=f.querySelector('[data-next]');if(nx)nx.onclick=()=>s.contact?submit():next();
  if(s.contact){const ph=f.querySelector('#ph');ph.oninput=()=>{let d=ph.value.replace(/\D/g,'').slice(0,10);ph.value=d.length>6?`(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`:d.length>3?`(${d.slice(0,3)}) ${d.slice(3)}`:d};
-  f.querySelectorAll('input').forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();submit()}}));setTimeout(()=>f.querySelector('#fn').focus({preventScroll:true}),350)}
+  f.querySelectorAll('input').forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();submit()}}));setTimeout(()=>{const x=f.querySelector('#fn');x&&x.focus({preventScroll:true})},350)}
 }
 function next(){if(st.i<st.steps.length-1){st.i++;paint();track('step',cur.k+':'+st.i)}}
 function submit(){
@@ -473,15 +519,15 @@ function result(){
  try{const L=JSON.parse(localStorage.getItem('oab_leads')||'[]');L.unshift(lead);localStorage.setItem('oab_leads',JSON.stringify(L.slice(0,200)))}catch(e){}
  track('lead',cur.k+':'+tier);
  const T={
-  A:{c:'top',ic:'check',h:`You’re pre-qualified, ${name}`,p:open?'Your file is at the top of the list. A concierge will call you in the next 15 minutes.':'Your file is at the top of the list. A concierge will call you first thing when we open.',acts:[['p','tel:+12488648387','phone','Call now · skip the wait'],['s','../#book','cal','Pick a time to visit']],steps:['Concierge confirms your details','We match you with the right lender','Pick your car and drive']},
-  B:{c:'',ic:'check',h:`Good news, ${name}. You’re a fit.`,p:`Based on your answers, ${cur.t} is a strong match. We’ll text your options within 24 hours.`,acts:[['p','sms:+13135461388','msg','Text us to speed it up'],['s','../#inventory','arrow','Browse cars while you wait']],steps:['We review your answers today','You get a text with your options','Bring your documents and drive']},
-  C:{c:'',ic:'clock',h:`Thanks, ${name}. Here’s your path.`,p:'You’re not quite ready for a traditional approval yet, but you have options. Credit to Car starts at $1,500, and long-term rentals start at $299 a week.',acts:[['p','../#programs','arrow','See Credit to Car & rentals'],['s','tel:+12488648387','phone','Talk it through with us']],steps:['Save toward $1,500 to start Credit to Car','Or drive now with a weekly rental','Reapply anytime, it only takes 2 minutes']}
+  A:{c:'top',ic:'check',h:`You’re in, ${name}.`,p:open?'You’re at the top of the list. Expect a call in the next 15 minutes.':'You’re at the top of the list. We’ll call you first thing when we open.',acts:[['p','tel:+12488648387','phone','Call now · skip the wait'],['s','../#book','cal','Pick a time to visit']],steps:['Concierge confirms your details','We match you with the right lender','Pick your car and drive']},
+  B:{c:'',ic:'check',h:`Good news, ${name}. You’ve got options.`,p:`${cur.t} fits you. We’ll text your options within 24 hours.`,acts:[['p','sms:+13135461388','msg','Text us to speed it up'],['s','../#inventory','arrow','Browse cars while you wait']],steps:['We review your answers today','You get a text with your options','Bring your documents and drive']},
+  C:{c:'',ic:'clock',h:`Not today. Not never, ${name}.`,p:'You’re not there yet for a regular approval, but we don’t leave you hanging. Credit to Car starts at $1,500. Rentals start at $299 a week.',acts:[['p','../#programs','arrow','See Credit to Car & rentals'],['s','tel:+12488648387','phone','Talk it through with us']],steps:['Save toward $1,500 to start Credit to Car','Or drive now with a weekly rental','Reapply anytime, it only takes 2 minutes']}
  }[tier];
  fm().innerHTML=`<div class="bar"><i style="width:100%"></i></div><div class="res ${T.c}"><div class="badge">${svg(IC[T.ic])}</div><h3>${T.h}</h3><p>${T.p}</p>
   <div class="acts">${T.acts.map(x=>`<a class="${x[0]}" href="${x[1]}">${svg(IC[x[2]])}${x[3]}</a>`).join('')}</div>
   <div class="steps">${T.steps.map((s,i)=>`<div><b>${i+1}</b><span>${s}</span></div>`).join('')}</div></div>`;
  st.done=true;
- const el=$('#p-'+cur.k),r=el.getBoundingClientRect();if(r.top<70||r.top>innerHeight*.4)scrollTo({top:scrollY+r.top-84,behavior:'smooth'});
+ $('#ov .ov-s').scrollTop=0;
 }
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)}
@@ -490,10 +536,10 @@ track('visit',location.hash||'');
 /* deep link: /start/?p=c2c or #vet */
 const dl=(params.get('p')||location.hash.slice(1)).toLowerCase();
 const map={c2c:'c2c',credit2car:'c2c',mom:'mom',moms:'mom',truck:'truck',cdl:'truck',credit:'credit',vet:'vet',veterans:'vet',nurse:'nurse',nurses:'nurse',inf:'inf',influencer:'inf',creators:'inf'};
-if(map[dl])setTimeout(()=>toggle(map[dl],true),1200);
+if(map[dl])setTimeout(()=>toggle(map[dl]),900);
 /* mobile dock */
-const dock=$('#dock');addEventListener('scroll',()=>dock.classList.toggle('show',scrollY>380&&!(cur&&!st.done)),{passive:true});
-$('#dockGo').onclick=e=>{e.preventDefault();if(!cur)toggle('c2c',true);else scrollTo({top:$('#p-'+cur.k).getBoundingClientRect().top+scrollY-84,behavior:'smooth'})};
+const dock=$('#dock');addEventListener('scroll',()=>dock.classList.toggle('show',scrollY>380&&!cur),{passive:true});
+$('#dockGo').onclick=e=>{e.preventDefault();scrollTo({top:$('#programs').getBoundingClientRect().top+scrollY-70,behavior:'smooth'})};
 })();
 </script>
 </body>
