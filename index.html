@@ -2873,7 +2873,7 @@ const CARS=[
  ['V2116',2026,'Jeep','Grand Cherokee Laredo','SUV',399,'Lease','studio/grand-cherokee','4x4','5 seats','23 mpg'],
  ['V2117',2025,'Ford','Explorer ST-Line','SUV',424,'Lease','studio/explorer-stline','AWD','7 seats','23 mpg'],
  ['V2118',2025,'Cadillac','Escalade-V','SUV',899,'Finance','studio/escalade-v','AWD','7 seats','14 mpg']
-].map(c=>({id:c[0],year:c[1],make:c[2],model:c[3],body:c[4],pay:c[5],type:c[6],ph:c[7],drive:c[8],seats:c[9],mpg:c[10],pos:c[11]||''}));CARS.forEach(c=>{const sl=c.ph.split('/')[1];c.gal=[1,2,3].map(i=>'life/'+sl+'-'+i)});
+].map(c=>({id:c[0],year:c[1],make:c[2],model:c[3],body:c[4],pay:c[5],type:c[6],ph:c[7],drive:c[8],seats:c[9],mpg:c[10],pos:c[11]||''}));CARS.forEach(c=>{const sl=c.ph.split('/')[1];c.gal=[1,3].map(i=>'life/'+sl+'-'+i)});
 const byId=id=>CARS.find(c=>c.id===id);
 let FAV=new Set();
 
