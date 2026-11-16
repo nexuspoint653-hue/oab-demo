@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="en">
-<head><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Get Pre-Qualified · O Auto Brokers</title>
 <meta name="description" content="Pick your program and get pre-qualified in about 2 minutes. No hard credit pull. O Auto Brokers & Leasing, Southfield, MI.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#FFFFFF">
-
+<link rel="icon" href="../brand/oab-logo-64.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -385,6 +385,40 @@ html.lock{overflow:hidden}
 .cbk-ok a{display:flex;align-items:center;justify-content:center;height:50px;border-radius:12px;font-weight:600;margin-top:10px}
 .cbk-ok a.p{background:#D7262B;color:#fff}.cbk-ok a.s{border:1px solid #dcdcdc;color:#111}
 @media (max-width:860px){.callc{flex-direction:column;align-items:flex-start;gap:12px;padding:18px}.callc-b{width:100%;display:grid;grid-template-columns:1.4fr 1fr}.hnote{text-align:center}}
+
+/* how it works: animated */
+.how{position:relative}
+.how .wrap{position:relative}
+.hw-track{position:relative;height:3px;margin:6px 0 18px;background:#ececec;border-radius:3px;overflow:hidden}
+.hw-track i{position:absolute;inset:0;background:linear-gradient(90deg,#D7262B,#ff5a4e);transform:scaleX(0);transform-origin:left;transition:transform 1.4s cubic-bezier(.2,.8,.2,1) .15s}
+.how.in .hw-track i{transform:none}
+.how-g.hw li{position:relative;opacity:0;transform:translateY(26px);transition:opacity .6s ease var(--d),transform .7s cubic-bezier(.2,.8,.2,1) var(--d),box-shadow .3s,border-color .3s;background:#fff;overflow:hidden}
+.how.in .how-g.hw li{opacity:1;transform:none}
+.how-g.hw li:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(0,0,0,.08);border-color:#f0c9c9}
+.how-g.hw li::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:100%;background:#D7262B;transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.how-g.hw li:hover::after{transform:none}
+.how-g.hw b{background:#111;transform:scale(.4);transition:transform .5s cubic-bezier(.3,1.6,.5,1) calc(var(--d) + .25s),background .4s calc(var(--d) + .5s)}
+.how.in .how-g.hw b{transform:none;background:#D7262B}
+.hw-ic{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:11px;background:#FFF1F1;color:#D7262B;margin-bottom:10px}
+.hw-ic svg{width:20px;height:20px}
+/* colored stats + quote */
+.why-g.wc div{position:relative;overflow:hidden;border:0;opacity:0;transform:translateY(18px);transition:opacity .6s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.why.in .why-g.wc div{opacity:1;transform:none}
+.why.in .why-g.wc div:nth-child(2){transition-delay:.12s}.why.in .why-g.wc div:nth-child(3){transition-delay:.24s}
+.why-g.wc .wc1{background:#111!important;color:#fff}.why-g.wc .wc1 span{color:#bdbdbd}.why-g.wc .wc1 b span{color:#fff}
+.why-g.wc .wc2{background:linear-gradient(135deg,#D7262B,#9e1519)!important;color:#fff}.why-g.wc .wc2>span{color:#ffd9d9}.why-g.wc .wc2 b span{color:#fff}
+.why-g.wc .wc3{background:#FFF1F1!important}.why-g.wc .wc3 b,.why-g.wc .wc3 b span{color:#D7262B}.why-g.wc .wc3>span{color:#7a3a3a}
+.why-g.wc div::before{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,.07)}
+.why-g.wc .wc3::before{background:rgba(215,38,43,.07)}
+.quote.wq{position:relative;background:#111!important;color:#fff;border:0;padding:26px 26px 22px;overflow:hidden;opacity:0;transform:translateY(18px);transition:opacity .6s .3s,transform .7s cubic-bezier(.2,.8,.2,1) .3s}
+.why.in .quote.wq{opacity:1;transform:none}
+.quote.wq::before{content:"\201C";position:absolute;right:22px;top:-18px;font:700 140px/1 Georgia,serif;color:#D7262B;opacity:.9}
+.quote.wq p{color:#fff;font-size:17px;max-width:62ch;position:relative}
+.quote.wq div{color:#bdbdbd}
+.quote.wq .g{background:#fff;border-radius:50%;padding:3px}
+.quote.wq .wq-st{display:block;color:#FBBC05;letter-spacing:3px;font-size:17px;margin:0 0 8px}
+.why-g.wc b span{font-size:inherit!important;font-family:inherit;display:inline}
+@media (prefers-reduced-motion:reduce){.how-g.hw li,.why-g.wc div,.quote.wq{opacity:1!important;transform:none!important}.hw-track i{transform:none}}
 </style>
 </head>
 <body>
@@ -423,20 +457,17 @@ html.lock{overflow:hidden}
 
  <section class="how"><div class="wrap">
   <h2 class="sh">How it works</h2>
-  <ol class="how-g">
-   <li><b>1</b><div><h3>Pick your program</h3><p>A few quick questions. Two minutes.</p></div></li>
-   <li><b>2</b><div><h3>We fight for your yes</h3><p>We know which lenders approve. You apply once.</p></div></li>
-   <li><b>3</b><div><h3>Drive off</h3><p>Pick it up, or we bring it to your door.</p></div></li>
-  </ol>
+  <div class="hw-track" aria-hidden="true"><i></i></div><ol class="how-g hw"><li style="--d:0.0s"><b><span>1</span></b><div><span class="hw-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></span><h3>Pick your program</h3><p>A few quick questions. Two minutes.</p></div></li><li style="--d:0.18s"><b><span>2</span></b><div><span class="hw-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></span><h3>We fight for your yes</h3><p>We know which lenders approve. You apply once.</p></div></li><li style="--d:0.36s"><b><span>3</span></b><div><span class="hw-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M6 17l1.5-5h9L18 17"/><circle cx="8" cy="17" r="2"/><circle cx="16" cy="17" r="2"/><path d="M8.5 12 10 8h4l1.5 4"/></svg></span><h3>Drive off</h3><p>Pick it up, or we bring it to your door.</p></div></li></ol>
  </div></section>
 
  <section class="why"><div class="wrap">
-  <div class="why-g">
-   <div><b>24 hrs</b><span>Most approvals</span></div>
-   <div><b>540→793</b><span>A Credit to Car client</span></div>
-   <div><b>365</b><span>Days a year we deliver</span></div>
+  <div class="why-g wc">
+   <div class="wc1"><b><span data-n="24">0</span> hrs</b><span>Most approvals</span></div>
+   <div class="wc2"><b><span data-n="540" data-from="540">540</span>→<span data-n="793" data-from="540">540</span></b><span>A Credit to Car client</span></div>
+   <div class="wc3"><b><span data-n="365">0</span></b><span>Days a year we deliver</span></div>
   </div>
-  <div class="quote">
+  <div class="quote wq">
+   <div class="wq-st" aria-label="5 stars">★★★★★</div>
    <p>“Did the Credit to Car program, they took me from a 540 to a 793 in four months. Orlando and the team made it simple.”</p>
    <div><svg class="g" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3Z"/><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z"/><path fill="#FBBC05" d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 0 0 0 9.2L6.4 14Z"/><path fill="#EA4335" d="M12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 0 0 3.1 7.4L6.4 10C7.2 7.7 9.4 6 12 6Z"/></svg>Google review · Credit to Car client</div>
   </div>
@@ -667,6 +698,11 @@ q('form').addEventListener('submit',e=>{e.preventDefault();const n=q('#cbN').val
  const esc=x=>x.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
  q('#cbkF').hidden=true;const ok2=q('#cbkOk');ok2.hidden=false;ok2.innerHTML=`<div class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><h3 style="margin:0 0 6px">You’re on the list, ${esc(n)}.</h3><p class="cbk-s" style="margin-bottom:8px">We’ll call ${esc(ph.value)} ${when}.</p><a class="p" href="${sms}">Want it faster? Text us now</a><a class="s" href="tel:+12488648387">Or call (248) 864-8387</a>`;
 });})();
+</script>
+<script>
+(()=>{const run=(el)=>{el.classList.add('in');el.querySelectorAll('[data-n]').forEach(n=>{const to=+n.dataset.n,fr=+(n.dataset.from||0);if(to===fr){n.textContent=to;return}const t0=performance.now(),D=1400;const f=t=>{const k=Math.min(1,(t-t0)/D),e=1-Math.pow(1-k,3);n.textContent=Math.round(fr+(to-fr)*e);if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)})};
+const els=document.querySelectorAll('.how,.why');if(!('IntersectionObserver' in window)){els.forEach(run);return}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){run(e.target);io.unobserve(e.target)}}),{threshold:.25});els.forEach(e=>io.observe(e))})();
 </script>
 </body>
 </html>
