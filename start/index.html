@@ -250,8 +250,13 @@ footer ul a{color:var(--tx2)}footer ul a:hover{color:#111}
 .faq details:last-child{border-bottom:1px solid var(--line)}
 .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:16px 0;font-size:16px;font-weight:500}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";font-size:22px;color:var(--tx3);font-weight:400}
-.faq details[open] summary::after{content:"\2212"}
+.faq summary::after{content:"+";font-size:24px;line-height:1;color:var(--tx3);font-weight:300;width:32px;height:32px;display:grid;place-items:center;border-radius:50%;transition:transform .35s cubic-bezier(.2,.8,.2,1),background .25s,color .25s}
+.faq summary{transition:color .2s,padding-left .3s cubic-bezier(.2,.8,.2,1)}
+.faq summary:hover{color:#B22222}
+.faq summary:hover::after{background:#f3f3f3}
+.faq details.on summary{color:#B22222;padding-left:6px}
+.faq details.on summary::after{transform:rotate(135deg);background:#B22222;color:#fff}
+.faq p{overflow:hidden}
 .faq p{font-size:15px;color:var(--tx2);padding:0 0 16px;max-width:65ch}
 @media (max-width:860px){
  .wrap.hw{grid-template-columns:1fr;gap:0}
@@ -456,7 +461,7 @@ const P=[
   q:{id:'c2c_down',h:'Can you put $1,500 toward getting started?',p:'This is the Credit to Car starting amount.',o:[['Yes, ready now',3],['Within 2 weeks',2],['Within a month',1],['Not right now',0]]}},
  {k:'mom',ph:'../lp/rp-mom',t:'Single Moms',s:'You hold it down. We’ll get you rolling.',tag:'Moms',
   q:{id:'kids',h:'How many kids ride with you?',p:'So we match the right size and safety ratings.',o:[['1',2],['2',2],['3',2],['4 or more',2]]}},
- {k:'truck',ph:'../lp/rp-truck',t:'Truck Drivers',s:'You keep everything moving. Let’s get you moving.',tag:'CDL',
+ {k:'truck',ph:'../lp/rp-truck2',t:'Truck Drivers',s:'You keep everything moving. Let’s get you moving.',tag:'CDL',
   q:{id:'pay',h:'How do you get paid?',p:'W-2, 1099 and owner-operator income all count.',o:[['W-2 company driver',3],['1099 contractor',2],['Owner-operator',2],['Just starting out',1]]}},
  {k:'credit',ph:'../lp/rp-credit',t:'Challenged Credit',s:'Repo? Bankruptcy? 500 score? Still a yes.',tag:'500+',
   q:{id:'report',h:'What’s on your credit report?',p:'Pick the biggest one. No judgment here.',o:[['Late payments',2],['Collections',2],['Past repo',1],['Bankruptcy',1],['No credit yet',2],['Not sure',1]]}},
@@ -585,6 +590,13 @@ if(map[dl])setTimeout(()=>toggle(map[dl]),900);
 const dock=$('#dock');addEventListener('scroll',()=>dock.classList.toggle('show',scrollY>380&&!cur),{passive:true});
 $('#dockGo').onclick=e=>{e.preventDefault();scrollTo({top:$('#programs').getBoundingClientRect().top+scrollY-70,behavior:'smooth'})};
 })();
+</script>
+<script>
+document.querySelectorAll('.faq details').forEach(d=>{const sm=d.querySelector('summary'),p=d.querySelector('p');if(d.open)d.classList.add('on');
+sm.addEventListener('click',e=>{e.preventDefault();if(d._a)d._a.cancel();
+ if(!d.open){d.open=true;d.classList.add('on');const h=p.scrollHeight;d._a=p.animate([{height:'0px',opacity:0,transform:'translateY(-6px)'},{height:h+'px',opacity:1,transform:'none'}],{duration:380,easing:'cubic-bezier(.2,.8,.2,1)'});d._a.onfinish=()=>d._a=null;}
+ else{d.classList.remove('on');const h=p.offsetHeight;d._a=p.animate([{height:h+'px',opacity:1},{height:'0px',opacity:0,paddingBottom:'0px'}],{duration:280,easing:'cubic-bezier(.4,0,.2,1)'});d._a.onfinish=()=>{d.open=false;d._a=null};}
+});});
 </script>
 </body>
 </html>
