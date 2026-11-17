@@ -2525,7 +2525,7 @@ html.mn-open,html.mn-open body{overflow:hidden}
 .mn12-m{margin-top:14px;font-family:var(--f-tech);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--on-dark-3);text-align:center}
 .mnav.mn12 .mn12-p a,.mnav.mn12 .mn12-s a{opacity:0;transform:translateY(10px);transition:opacity .4s,transform .5s cubic-bezier(.2,.7,.2,1)}
 .mnav.mn12.open .mn12-p a,.mnav.mn12.open .mn12-s a{opacity:1;transform:none;transition-delay:calc(60ms + var(--i)*40ms)}
-@media (min-width:1001px){.mnav.mn12{display:none!important}}
+@media (min-width:1101px){.mnav.mn12{display:none!important}}
 .sl12-f .ps-btn{height:50px;background:var(--ink)!important;border:1px solid var(--ink-line)!important;padding:0 14px!important;color:#fff!important}
 .sl12-f .ps-v{font-family:var(--f)!important;font-size:15px!important;letter-spacing:0!important;text-transform:none!important;font-weight:400!important}
 .sl12-f .ps.open .ps-btn{border-color:var(--red)!important}
@@ -2883,8 +2883,24 @@ function vcard(c){const alt=esc(c.year+' '+c.make+' '+c.model);return `<a class=
   <div class="vs-p"><span>${c.type==='Lease'?'Lease from':'Finance from'}</span><i class="vs-k">${c.type}</i><b class="num">${fmt(c.pay)}</b><em>/mo</em></div>
   <span class="btn ink sm vs-b">Check availability ${ic('arrow')}</span></div></a>`}
 
+
+/* ---------- RENTAL (weekly / monthly) ---------- */
+function rWeek(c){return Math.round(c.pay*0.62/5)*5}function rMonth(c){return Math.round(c.pay*2.1/5)*5}
+function rcard(c){const alt=esc(c.year+' '+c.make+' '+c.model);return `<a class="tc rv" data-body="${c.body}" href="sms:+13135461388?body=${encodeURIComponent('Hi O, I want to rent the '+c.year+' '+c.make+' '+c.model+'. Is it available?')}">
+  <div class="tc-ph"><img src="${P(c.ph)}" alt="${alt}" loading="lazy">${c.pay<330?'<span class="tc-b">Great deal</span>':''}</div>
+  <div class="tc-b2"><h3>${esc(c.make)} ${esc(c.model)}</h3><small>${c.year} · ${c.seats}</small>
+  <div class="tc-p"><b class="num">${fmt(rWeek(c))}</b><em>/wk</em></div><span class="tc-m">or ${fmt(rMonth(c))}/mo</span><span class="tc-go">Request</span></div></a>`}
+function lcard(c){const alt=esc(c.year+' '+c.make+' '+c.model);return `<a class="tc rv" data-body="${c.body}" href="#car-${c.id}">
+  <div class="tc-ph"><img src="${P(c.ph)}" alt="${alt}" loading="lazy">${c.pay<330?'<span class="tc-b">Great deal</span>':''}</div>
+  <div class="tc-b2"><h3>${esc(c.make)} ${esc(c.model)}</h3><small>${c.year} · ${c.seats}</small>
+  <div class="tc-p"><b class="num">${fmt(c.pay)}</b><em>/mo</em></div><span class="tc-m">${c.type==='Lease'?'10k mi/yr lease':'Finance'}</span><span class="tc-go">View</span></div></a>`}
+function vRental(){const L=CARS.slice().sort((a,b)=>a.pay-b.pay);
+ return `<section class="page-top tp"><div class="wrap"><div class="ptitle"><div><h1>Weekly &amp; monthly <span>rentals</span></h1><p>No long contract. Rent by the week or month while you rebuild your credit.</p></div></div></div></section>
+ <div class="wrap tl"><div class="tchips" data-g="rgrid">${['All','SUV','Truck','Sedan','Coupe'].map((b,i)=>`<button type="button" data-b="${b}" class="${i?'':'on'}">${b}</button>`).join('')}</div>
+ <div class="tgrid" id="rgrid">${L.map(rcard).join('')}</div><p class="tnote">Sample rates. Text us to confirm availability and your exact weekly price.</p></div>`}
+
 /* ---------- NAV / FOOTER ---------- */
-const LINKS=[['home','Home'],['inventory','Inventory'],['lease','Lease specials'],['apply','Get approved'],['services','Concierge'],['about','About']];
+const LINKS=[['home','Home'],['inventory','Inventory'],['lease','Lease specials'],['rental','Rentals'],['apply','Get approved'],['services','Concierge'],['about','About']];
 function nav(r){return `<header class="nav ${r==='home'||r==='apply'?'':'solid'}" id="nav"><div class="nav-in">
   <a class="logo" href="#home"><span class="mark">O</span>O Auto Brokers</a>
   <nav class="nav-links" aria-label="Main">${LINKS.map(l=>`<a href="#${l[0]}" class="${r===l[0]||(r.startsWith('car-')&&l[0]==='inventory')?'on':''}">${l[1]}</a>`).join('')}</nav>
@@ -3039,7 +3055,7 @@ function vInventory(lease){
     <div><div class="bar"><b id="count"></b><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn line sm fbtn" id="fbtn">${ic('filter')}Filters</button><label class="srch">${ic('search')}<input id="q" placeholder="Search make or model" value="${esc(F.q)}"></label>
       <select class="sel" id="sort" aria-label="Sort"><option value="pop">Most popular</option><option value="low">Lowest payment</option><option value="high">Highest payment</option><option value="new">Newest</option></select></div></div>
       <div class="bchips" role="group" aria-label="Body type">${['All','SUV','Truck','Sedan','Coupe'].map(b=>`<button type="button" data-b="${b}" class="${(b==='All'&&!F.bodies.size)||F.bodies.has(b)?'on':''}">${b}</button>`).join('')}</div>
-      <div class="vgrid" id="grid"></div></div>
+      <div class="vgrid" id="grid"></div>${lease?`<div class="tchips" data-g="lgrid">${['All','SUV','Truck','Sedan','Coupe'].map((b,i)=>`<button type="button" data-b="${b}" class="${i?'':'on'}">${b}</button>`).join('')}</div><div class="tgrid lgrid" id="lgrid">${CARS.filter(c=>c.type==='Lease').sort((x,y)=>x.pay-y.pay).map(lcard).join('')}</div>`:''}</div>
   </div>`;
 }
 function filtered(){
@@ -3142,7 +3158,7 @@ function route(){return (location.hash||'#home').slice(1)||'home'}
 function render(){
   const r=route();clearInterval(heroT);
   let body;
-  if(r==='inventory')body=vInventory();else if(r==='lease')body=vInventory(true);else if(r.startsWith('car-'))body=vDetail(r.slice(4));else if(r==='apply')body=vApply();
+  if(r==='inventory')body=vInventory();else if(r==='lease')body=vInventory(true);else if(r==='rental')body=vRental();else if(r.startsWith('car-'))body=vDetail(r.slice(4));else if(r==='apply')body=vApply();
   else body=vHome();
   root.innerHTML=nav(r)+`<main>${body}</main>`+(r==='apply'?'':footer())+'<div class="toast" id="toast" role="status"></div>';
   window.scrollTo(0,0);
@@ -3384,7 +3400,7 @@ function render(){
   let r=route();clearInterval(heroT);
   const homeAnchors={services:'services',about:'about',credit:'credit',business:'business-anchor',book:'book',reviews:'reviews'};
   let body;
-  if(r==='inventory')body=vInventory();else if(r==='lease')body=vInventory(true);else if(r.startsWith('car-'))body=vDetail(r.slice(4));else if(r==='apply')body=vApply();else body=vHome();
+  if(r==='inventory')body=vInventory();else if(r==='lease')body=vInventory(true);else if(r==='rental')body=vRental();else if(r.startsWith('car-'))body=vDetail(r.slice(4));else if(r==='apply')body=vApply();else body=vHome();
   root.innerHTML=nav(r)+`<main>${body}</main>`+(r==='apply'?'':footer())+'<div class="toast" id="toast" role="status"></div>';
   window.scrollTo(0,0);
   if(homeAnchors[r]){const go=()=>{const t=document.getElementById(homeAnchors[r]);t&&window.scrollTo({top:t.getBoundingClientRect().top+scrollY-84})};setTimeout(go,30);setTimeout(go,450);document.fonts&&document.fonts.ready.then(go)}
@@ -3896,7 +3912,7 @@ function footer(){
   const today=new Date().getDay(),H={1:'11 AM–6 PM',2:'11 AM–6 PM',3:'11 AM–6 PM',4:'11 AM–6 PM',5:'11 AM–5 PM'};
   return `<footer class="ofoot"><div class="fx-in">
     <div class="fx-cols">
-      ${col('Vehicles',[['Inventory','#inventory'],['Lease specials','#lease'],['SUVs','#inventory'],['Trucks','#inventory'],['Sedans & coupes','#inventory'],['Business vehicles','#business']])}
+      ${col('Vehicles',[['Inventory','#inventory'],['Lease specials','#lease'],['Rentals','#rental'],['SUVs','#inventory'],['Trucks','#inventory'],['Sedans & coupes','#inventory'],['Business vehicles','#business']])}
       ${col('Programs',[['Credit to Car','#credit'],['First Time Buyer','#credit'],['Business credit','#business'],['Trade-ins','#services'],['Get approved','#apply']])}
       ${col('O Auto Brokers',[['The O experience','#about'],['Concierge','#services'],['Real reviews','#reviews'],['Book a visit','#book'],['Staff desk','#desk']])}
       ${col('Customer service',[['Call '+BIZ.phone,'tel:+12488648387'],['info@oautobrokers.org','mailto:info@oautobrokers.org'],['Upload documents','#apply'],['Directions','https://goo.gl/maps/YCVvxHafwDYbp1gE7']])}
@@ -4224,7 +4240,7 @@ function sDiv(){const m=document.querySelector('main');if(!m)return;const kids=[
   kids.forEach((s,i)=>{if(i<2)return;const prev=s.previousElementSibling;if(prev&&prev.classList.contains('sdiv'))return;if(s.classList.contains('br2')||(prev&&prev.classList.contains('br2')&&false))return;const d=document.createElement('div');d.className='sdiv';d.setAttribute('aria-hidden','true');s.before(d)})}
 new MutationObserver(()=>setTimeout(sDiv,30)).observe(document.getElementById('root'),{childList:true});setTimeout(sDiv,100);
 /* inventory, lease and vehicle pages use a white canvas */
-function lightPg(){const r=(location.hash||'#home').slice(1);document.documentElement.classList.toggle('light-pg',r==='inventory'||r==='lease'||r.startsWith('car-'))}
+function lightPg(){const r=(location.hash||'#home').slice(1);document.documentElement.classList.toggle('light-pg',r==='inventory'||r==='lease'||r==='rental'||r.startsWith('car-'))}
 addEventListener('hashchange',lightPg);new MutationObserver(lightPg).observe(document.getElementById('root'),{childList:true});lightPg();
 /* footer wordmark: fits the page, invisible until the cursor comes near */
 function fxFit(){const w=document.getElementById('fxWord');if(!w)return;const s=[...w.querySelectorAll('.fx-track span:first-child')];if(!s.length)return;
@@ -4460,14 +4476,14 @@ oxHTML=function(){return _oxHTML0().replace(/<p class="ox2-lead rv">[\s\S]*?<\/p
 /* nav: programs + sell up front */
 const _nav0=nav;
 nav=function(r){let h=_nav0(r);
-  h=h.replace(/<nav class="nav-links" aria-label="Main">[\s\S]*?(<div class="dd")/,`<nav class="nav-links" aria-label="Main">${[['inventory','Inventory'],['programs','Programs'],['lease','Lease specials'],['sell','Car help']].map(l=>`<a href="#${l[0]}" class="${r===l[0]||(r.startsWith('car-')&&l[0]==='inventory')?'on':''}">${rl(l[1])}</a>`).join('')}$1`);
+  h=h.replace(/<nav class="nav-links" aria-label="Main">[\s\S]*?(<div class="dd")/,`<nav class="nav-links" aria-label="Main">${[['inventory','Inventory'],['programs','Programs'],['lease','Lease specials'],['rental','Rentals'],['sell','Car help']].map(l=>`<a href="#${l[0]}" class="${r===l[0]||(r.startsWith('car-')&&l[0]==='inventory')?'on':''}">${rl(l[1])}</a>`).join('')}$1`);
   h=h.replace(/<button class="burger" id="burger" aria-label="Open menu">[\s\S]*?<\/button>/,'<button class="burger bg12" id="burger" aria-label="Open menu"><i></i><i></i><i></i></button>');
   const add=`<a href="#programs">Programs</a><a href="#sell">Car payment help</a>`;
   h=h.replace('<a href="#credit">Credit to Car</a>',`<a href="#credit">Credit to Car</a>${add}`);
   h=h.replace(/<div class="mnav" id="mnav">[\s\S]*$/,mnavHTML());
   return h};
 function mnavHTML(){
-  const P1=[['inventory','Inventory','Browse every car'],['programs','Programs','C2C, rental, single moms'],['lease','Lease specials','Monthly deals'],['sell','Car payment help','Behind on payments? We’ll help'],['credit','Credit to Car','Any credit story']];
+  const P1=[['inventory','Inventory','Browse every car'],['programs','Programs','C2C, rental, single moms'],['lease','Lease specials','Monthly deals'],['rental','Rentals','Weekly & monthly'],['sell','Car payment help','Behind on payments? We’ll help'],['credit','Credit to Car','Any credit story']];
   const P2=[['business','Business'],['services','Concierge'],['book','Book a visit'],['reviews','Reviews'],['about','About us'],['home','Home']];
   return `<div class="mnav mn12" id="mnav" role="dialog" aria-modal="true" aria-label="Menu">
   <div class="mn12-top"><a class="mn12-lg" href="#home"><img src="brand/oab-logo-160.png" alt="O Auto Brokers and Leasing" width="56" height="56"></a><button class="x mn12-x" id="mx" aria-label="Close menu"><i></i><i></i></button></div>
@@ -4835,6 +4851,180 @@ html,body{background-color:#0B0B0C}
  .vc.vs .vs-k{display:block;width:100%;font-style:normal;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#D7262B;font-weight:700;margin-top:1px}
  .vc.vs .vs-b{display:none!important}
 }
+
+/* ===== v6: Turo/Tiveo cards (lease + rental), mobile light homepage ===== */
+.tl{padding-top:20px;padding-bottom:60px}
+.tchips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-bottom:16px;position:relative}
+.tchips::-webkit-scrollbar{display:none}
+.tchips button{flex:0 0 auto;height:36px;padding:0 16px;border-radius:999px;border:1px solid #e3e3e3;background:#fff;color:#111;font-family:inherit;font-weight:500;font-size:13.5px;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .2s}
+.tchips button.on{background:#111;color:#fff;border-color:#111}
+.tchips button:active{transform:scale(.95)}
+.tgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;transition:opacity .25s}
+.tgrid.fade{opacity:0}
+.tc{display:flex;flex-direction:column;text-decoration:none;color:#111;background:#fff;border-radius:16px;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.tc:hover{transform:translateY(-3px)}.tc:active{transform:scale(.97)}
+.tc-ph{position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:#f2f2f0}
+.tc-ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.tc:hover .tc-ph img{transform:scale(1.05)}
+.tc-b{position:absolute;left:8px;top:8px;background:#fff;color:#111;font-size:10.5px;font-weight:700;padding:4px 8px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.tc-b2{padding:9px 2px 4px;display:grid;grid-template-columns:1fr auto;column-gap:6px}
+.tc-b2 h3{grid-column:1/-1;font-size:14px;font-weight:600;line-height:1.2;margin:0;font-family:inherit;text-transform:none;letter-spacing:0;color:#111}
+.tc-b2 small{grid-column:1/-1;font-size:11.5px;color:#777;margin-top:2px}
+.tc-p{margin-top:6px;display:flex;align-items:baseline;gap:2px}.tc-p b{font-size:17px;color:#111}.tc-p em{font-style:normal;font-size:11px;color:#777}
+.tc-m{grid-column:1;font-size:10.5px;color:#999}
+.tc-go{grid-column:2;grid-row:3/5;align-self:end;font-size:11px;font-weight:700;color:#D7262B;text-transform:uppercase;letter-spacing:.06em}
+.tnote{font-size:12px;color:#888;text-align:center;margin-top:20px}
+.page-top.tp h1 span{color:#D7262B}
+/* lease page uses the same cards */
+html[data-r="lease"] #grid.vgrid{display:none!important}
+.lgrid,.tchips[data-g="lgrid"]{display:none}
+html[data-r="lease"] .tchips[data-g="lgrid"]{display:flex}
+html[data-r="lease"] .wrap.inv .bar{display:none!important}
+html[data-r="lease"] .lgrid{display:grid}
+@media (max-width:1000px){.tgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){
+ .tgrid,html[data-r="lease"] .lgrid{grid-template-columns:1fr 1fr!important;gap:14px 10px!important}
+ .tl{padding-left:16px!important;padding-right:16px!important}
+ .page-top.tp{padding:80px 0 4px!important}
+ .page-top.tp h1{font-size:28px!important;text-align:center}.page-top.tp p{text-align:center;font-size:13px!important}
+ html[data-r="lease"] .bchips{display:none!important}
+}
+
+/* ===== v6 mobile homepage: mostly light (Tiveo) + new sections ===== */
+.mh{display:none}
+@media (max-width:760px){
+ html[data-r="home"],html[data-r="home"] body,html[data-r="home"] #root main{background:#fff!important}
+ html[data-r="home"] meta{}
+ /* hero clarity */
+ .mh-hc{display:block;margin:14px auto 0;max-width:32ch;font-size:13.5px;line-height:1.5;color:#ffffffd9;text-align:center}
+ .mh-proof{display:flex;justify-content:center;gap:18px;margin-top:16px}
+ .mh-proof div{text-align:center}.mh-proof b{display:block;color:#fff;font-size:19px;font-weight:700;line-height:1}.mh-proof span{font-size:10.5px;color:#ffffffa6;letter-spacing:.04em}
+ /* hide sections replaced by Tiveo blocks */
+ html[data-r="home"] #lease-deals,html[data-r="home"] #credit,html[data-r="home"] #programs .pg12-h,html[data-r="home"] #programs .pg12-g,html[data-r="home"] #programs .pg12-soon{display:none!important}
+ html[data-r="home"] #programs{padding-top:0!important}
+ html[data-r="home"] #programs .pg12-bring{border-top:0!important;margin-top:0!important}
+ /* light sections */
+ html[data-r="home"] .fband,html[data-r="home"] .pbx,html[data-r="home"] #programs,html[data-r="home"] #sell,html[data-r="home"] #book,html[data-r="home"] #reviews{background:#fff!important;color:#111!important}
+ html[data-r="home"] .pbx,html[data-r="home"] #sell,html[data-r="home"] #reviews{background:#F6F6F4!important}
+ html[data-r="home"] .pbx::before,html[data-r="home"] .pbx::after,html[data-r="home"] #sell::before,html[data-r="home"] #sell::after,html[data-r="home"] #book::before,html[data-r="home"] #book::after,html[data-r="home"] #reviews::before,html[data-r="home"] #reviews::after,html[data-r="home"] #programs::before,html[data-r="home"] #programs::after,html[data-r="home"] .bk-bg,html[data-r="home"] .bk .ph{display:none!important}
+ html[data-r="home"] :is(.pbx,#programs,#sell,#book,#reviews) :is(h2,h3,h4,b,strong,li,.mr,.pg12-bt,.pbx-r,.pbx-r *,.sl12-k li span,.lau *,.rv2-link,label,label span){color:#111!important}
+ html[data-r="home"] :is(.pbx,#programs,#sell,#book,#reviews) :is(p,small,.mr-p,.dk2-s,.eb,.rc p,.rc small,.rc span){color:#555!important}
+ html[data-r="home"] :is(.pbx,#programs,#sell,#book,#reviews) .eb{color:#D7262B!important}
+ html[data-r="home"] :is(.pbx,#programs,#sell,#book,#reviews) a:not(.sq):not(.mtog){color:#111!important}
+ html[data-r="home"] .pb-tabs{border-color:#e2e2e2!important}
+ html[data-r="home"] .pb-tabs button:not(.on){color:#111!important;background:#fff!important}
+ html[data-r="home"] .pbx-r,html[data-r="home"] .pbx .pbx-l [class*="row"]{border-color:#e6e6e6!important}
+ html[data-r="home"] .mtog:not(.mtog-r){color:#111!important;border-color:#11111133!important}
+ html[data-r="home"] .cta12 .sq.red,html[data-r="home"] .pbx-cta .sq.red,html[data-r="home"] .h2cta .sq.wht{color:#111!important}
+ html[data-r="home"] .h2cta .sq.wht{color:#fff!important}
+ html[data-r="home"] #reviews .rc{background:#fff!important;border:1px solid #e8e8e8!important;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+ html[data-r="home"] #reviews .rc *{color:#333!important}
+ html[data-r="home"] #reviews .rc [class*="st"],html[data-r="home"] #reviews .rc .stars{color:#D7262B!important}
+ html[data-r="home"] .rv2-leave{background:#fff!important;color:#111!important;border-color:#e2e2e2!important}
+ html[data-r="home"] .rv2 .lau svg,html[data-r="home"] .rv2 .lau path{fill:#111!important;stroke:#111!important;color:#111!important}
+ html[data-r="home"] .rv2-h{border-color:#e6e6e6!important}
+ html[data-r="home"] .sl12-f{background:#fff!important;border-color:#e6e6e6!important}
+ html[data-r="home"] .sl12-f input,html[data-r="home"] .sl12-f select{background:#F6F6F4!important;color:#111!important;border-color:#e2e2e2!important}
+ html[data-r="home"] .dk2-i{background:#fff!important;border-color:#e6e6e6!important}
+ /* --- new blocks --- */
+ .mh{display:block;padding:44px 0 40px;background:#fff;color:#111}
+ .mh .w{padding:0 18px}
+ .mh-h{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:14px}
+ .mh-h h2{font-family:var(--f-title);font-size:24px;line-height:1.05;text-transform:uppercase;color:#111;margin:0}
+ .mh-h p{font-size:13px;color:#666;margin:6px 0 0}
+ .mh-h a{font-size:12.5px;font-weight:600;color:#111;white-space:nowrap;text-decoration:none;border-bottom:1px solid #D7262B;padding-bottom:2px}
+ .mh-chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;margin:0 -18px 14px;padding:0 18px}
+ .mh-chips::-webkit-scrollbar{display:none}
+ .mh-chips button{flex:0 0 auto;height:34px;padding:0 15px;border-radius:999px;border:1px solid #e3e3e3;background:#fff;color:#111;font-family:inherit;font-weight:500;font-size:13px;transition:background .25s,color .25s,transform .2s}
+ .mh-chips button.on{background:#111;color:#fff;border-color:#111}.mh-chips button:active{transform:scale(.95)}
+ .mh-cars{display:grid;grid-template-columns:1fr 1fr;gap:14px 10px;transition:opacity .25s}.mh-cars.fade{opacity:0}
+ .mh-all{display:flex;justify-content:center;margin-top:18px}
+ .mh-all a{height:42px;padding:0 20px;border-radius:999px;border:1px solid #e2e2e2;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#111;text-decoration:none}
+ /* program tiles */
+ .mh-progs{background:#F6F6F4}
+ .mh-tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+ .mh-t{position:relative;display:block;border-radius:16px;overflow:hidden;aspect-ratio:1/1;text-decoration:none;transition:transform .25s}
+ .mh-t:active{transform:scale(.97)}
+ .mh-t:first-child{grid-column:1/-1;aspect-ratio:16/9}
+ .mh-t img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+ .mh-t::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.72))}
+ .mh-t b{position:absolute;left:12px;bottom:28px;z-index:2;color:#fff;font-size:16px;font-weight:700;line-height:1.1}
+ .mh-t span{position:absolute;left:12px;bottom:11px;z-index:2;color:#ffffffcc;font-size:11.5px}
+ .mh-t i{position:absolute;right:10px;bottom:10px;z-index:2;width:28px;height:28px;border-radius:50%;background:#fff;display:grid;place-items:center}
+ .mh-t i svg{width:14px;height:14px;color:#111}
+ .mh-t:first-child b{font-size:20px}
+ .mh-pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+ .mh-pills a{height:34px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid #e3e3e3;display:inline-flex;align-items:center;font-size:12.5px;color:#111;text-decoration:none}
+ /* steps */
+ .mh-steps ol{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+ .mh-steps li{display:flex;gap:14px;align-items:flex-start;padding:16px;border:1px solid #ececec;border-radius:16px;background:#fff}
+ .mh-steps li em{flex:none;width:34px;height:34px;border-radius:10px;background:#FFF0F0;color:#D7262B;display:grid;place-items:center;font-style:normal;font-weight:700;font-size:14px}
+ .mh-steps li b{display:block;font-size:15px;color:#111}.mh-steps li p{margin:3px 0 0;font-size:13px;color:#666;line-height:1.45}
+ .mh-steps .mh-go{display:flex;margin-top:16px;height:50px;border-radius:12px;background:#D7262B;color:#fff;align-items:center;justify-content:center;font-weight:600;font-size:14.5px;text-decoration:none}
+ /* fade-up */
+ .mh [data-fu]{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+ .mh [data-fu].in{opacity:1;transform:none}
+}
+
+@media (max-width:760px){
+ .mh .mh-h{display:flex!important;flex-direction:row!important;text-align:left!important}
+ .mh .mh-h h2,.mh .mh-h p{text-align:left!important;margin-left:0!important;margin-right:0!important;max-width:none!important}
+ .mh .mh-h a{align-self:flex-end}
+ .mh-steps .mh-h{display:block!important}
+ .mh-t:not(:first-child) span{display:none}
+ .mh-t:not(:first-child) b{bottom:12px;font-size:14px}
+ .mh-all a svg{width:14px;height:14px}
+ .mh-all a{white-space:nowrap}
+ html[data-r="home"] .ofoot,html[data-r="home"] footer{background:#0B0B0C!important}
+ html[data-r="home"] .rv2 .lau svg,html[data-r="home"] .rv2 .lau path{fill:revert!important;stroke:revert!important;color:revert!important}
+ html[data-r="home"] .rv2 .lau svg.lau-w{visibility:hidden}
+ html[data-r="home"] .rv2 .lau .lau-eb i{background:#11111133!important}
+ html[data-r="home"] .rv2 .lau{transform:none!important;margin:4px 0 0!important}
+ html[data-r="home"] .rv2 .lau,html[data-r="home"] .rv2 .lau *{color:#111!important}
+ html[data-r="home"] .rv2-h>*:not(.rv2-l) .eb,html[data-r="home"] .rv2 [class*="lau"] + *{color:#111!important}
+ html[data-r="home"] #book .mr-p,html[data-r="home"] #book .mr-p *{color:#555!important}
+ html[data-r="home"] #book .mr-p a,html[data-r="home"] #book .mr-p button{color:#111!important}
+}
+
+/* ===== v7: responsive fixes (tablet 761-1100 + all) ===== */
+.nav-r{margin-left:auto}
+html[data-r="lease"] #rail{display:none!important}
+html[data-r="lease"] .wrap.inv{grid-template-columns:minmax(0,1fr)!important}
+@media (max-width:1100px){
+ .burger{display:grid!important}
+ .wrap.inv{grid-template-columns:minmax(0,1fr)!important}
+}
+@media (min-width:761px) and (max-width:1100px){
+ /* hero */
+ .bx>i[aria-hidden]{display:none!important}
+ #nav .nav-in{max-width:none!important;width:calc(100vw - 32px)!important;justify-content:space-between!important}
+ #nav .nav-r{margin-left:auto!important}
+ .finder2 .sq{min-height:50px!important}
+ /* finder: 3 fields on row 1, actions on row 2 */
+ .finder2{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ .finder2 .fcell{min-width:0}
+ .finder2 .sq.red{grid-column:1/3}
+ .finder2 .sq.fall{grid-column:3/4}
+ /* inventory: 3-up */
+ .vgrid,.inv .vgrid,#grid.vgrid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important}
+ .wrap.inv .bar{display:flex!important;flex-wrap:wrap;gap:10px;align-items:center}
+ .wrap.inv .bar>div{flex:1;justify-content:flex-end}
+ .tgrid,html[data-r="lease"] .lgrid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ /* landing-style program grids, reviews etc stay fluid */
+}
+
+/* v7: car detail on mobile, price + CTA right under the title */
+@media (max-width:760px){
+ .wrap.det{display:flex!important;flex-direction:column;gap:16px}
+ .wrap.det>div:first-child{display:contents}
+ .wrap.det .gal{order:1}
+ .wrap.det>div:first-child>.dcard:nth-of-type(2){order:2}
+ .wrap.det>aside.side{order:3;position:static!important}
+ .wrap.det>div:first-child>.dcard{order:4}
+ .wrap.det>div:first-child>.dcard:nth-of-type(2){order:2}
+ .wrap.det>div:first-child>div:last-child:not(.dcard){order:6}
+ .wrap.det .dcard,.wrap.det .gal{margin:0!important}
+}
 </style>
 <script>
 (function(){
@@ -4869,4 +5059,40 @@ document.addEventListener('click',e=>{const b=e.target.closest('.mtog');if(!b)re
 </script>
 <script>
 document.addEventListener('click',e=>{const b=e.target.closest('.bchips button');if(!b||typeof F==='undefined')return;const v=b.dataset.b;F.bodies=new Set(v==='All'?[]:[v]);b.parentElement.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));try{drawGrid()}catch(_){}});
+</script>
+<script>
+document.addEventListener('click',e=>{const b=e.target.closest('.tchips button');if(!b)return;const bar=b.parentElement,g=document.getElementById(bar.dataset.g);if(!g)return;bar.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));g.classList.add('fade');setTimeout(()=>{g.querySelectorAll('.tc').forEach(c=>{c.style.display=(b.dataset.b==='All'||c.dataset.body===b.dataset.b)?'':'none';c.classList.remove('pre')});g.classList.remove('fade')},200)});
+</script>
+<script>
+(()=>{const AR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const PR=[['c2c','Credit to Car','$1,500 down. Build credit as you drive.'],['mom','Single Moms','You hold it down. We get you rolling.'],['truck2','Truck Drivers','W-2, 1099 or owner-op.'],['vet','Veterans','You served. Now let us serve you.'],['nurse','Nurses','Long shifts deserve a car that starts.']];
+const PK={c2c:'c2c',mom:'mom',truck2:'truck',vet:'vet',nurse:'nurse'};
+function build(){
+ if(innerWidth>760)return;const r=(location.hash||'#home').slice(1)||'home';if(r!=='home')return;
+ const main=document.querySelector('#root main');if(!main||main.querySelector('#mhCars'))return;
+ const sub=document.querySelector('#top .h12-s');if(sub&&!document.querySelector('.mh-hc')){sub.insertAdjacentHTML('afterend','<p class="mh-hc">O Auto Brokers leases, finances and rents cars to Detroit drivers with any credit. Bad credit, repo or no credit.</p>');const cta=document.querySelector('#top .h2cta');cta&&cta.insertAdjacentHTML('afterend','<div class="mh-proof"><div><b>4.9★</b><span>59 reviews</span></div><div><b>24 hr</b><span>approvals</span></div><div><b>'+CARS.length+'</b><span>cars ready</span></div></div>')}
+ const cars=CARS.slice().sort((a,b)=>a.pay-b.pay);
+ const carsHTML=`<section class="mh" id="mhCars"><div class="w"><div class="mh-h" data-fu><div><h2>Cars ready now</h2><p>Monthly prices, any credit.</p></div><a href="#inventory">See all ${CARS.length}</a></div>
+  <div class="mh-chips" data-fu>${['All','SUV','Truck','Sedan','Lease','Finance'].map((b,i)=>`<button type="button" data-k="${b}" class="${i?'':'on'}">${b}</button>`).join('')}</div>
+  <div class="mh-cars" id="mhGrid">${cars.map((c,i)=>lcard(c).replace('<a class="tc rv"','<a class="tc" data-type="'+c.type+'"'+(i>5?' style="display:none"':''))).join('')}</div>
+  <div class="mh-all"><a href="#lease">Lease specials ${AR}</a></div></div></section>`;
+ const progHTML=`<section class="mh mh-progs" id="mhProgs"><div class="w"><div class="mh-h" data-fu><div><h2>Pick your program</h2><p>Built for where you are right now.</p></div><a href="start/">All programs</a></div>
+  <div class="mh-tiles">${PR.map(p=>`<a class="mh-t" data-fu href="start/?p=${PK[p[0]]}"><img src="photos/lp/rp-${p[0]}.jpg" alt="" loading="lazy"><b>${p[1]}</b><span>${p[2]}</span><i>${AR}</i></a>`).join('')}</div>
+  <div class="mh-pills" data-fu><a href="start/?p=credit">Challenged credit</a><a href="start/?p=inf">Influencers</a><a href="#rental">Weekly rentals</a><a href="#sell">Car payment help</a><a href="#business">Business</a></div></div></section>`;
+ const stepsHTML=`<section class="mh mh-steps" id="mhSteps"><div class="w"><div class="mh-h" data-fu><div><h2>Three steps to the keys</h2><p>No runaround. One application, the right lender.</p></div></div>
+  <ol><li data-fu><em>1</em><div><b>Tell us about you</b><p>A few quick questions. Two minutes, no credit hit.</p></div></li><li data-fu><em>2</em><div><b>We fight for your yes</b><p>We know which lenders approve your file. Most answers in 24 hours.</p></div></li><li data-fu><em>3</em><div><b>Pick up or we deliver</b><p>Sign, grab the keys, drive. We can bring it to your door.</p></div></li></ol>
+  <a class="mh-go" data-fu href="start/">Get pre-qualified</a></div></section>`;
+ const fb=main.querySelector('.fband');const anchor=fb||main.querySelector('#top');
+ anchor.insertAdjacentHTML('afterend',carsHTML+progHTML+stepsHTML);
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
+ main.querySelectorAll('.mh [data-fu]').forEach((el,i)=>{el.style.transitionDelay=((i%4)*70)+'ms';io.observe(el)});
+}
+document.addEventListener('click',e=>{const b=e.target.closest('.mh-chips button');if(!b)return;const g=document.getElementById('mhGrid');b.parentElement.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));g.classList.add('fade');setTimeout(()=>{const k=b.dataset.k;let n=0;g.querySelectorAll('.tc').forEach(c=>{const ok=(k==='All'||c.dataset.body===k||c.dataset.type===k)&&n<6;if(ok)n++;c.style.display=ok?'':'none'});g.classList.remove('fade')},200)});
+const root=document.getElementById('root');new MutationObserver(()=>setTimeout(build,40)).observe(root,{childList:true});setTimeout(build,300);
+})();
+</script>
+<script>
+/* reveal failsafe: never leave content hidden (fast scroll, anchor jumps, small screens) */
+(()=>{let t=0;const run=()=>{t=0;const lim=innerHeight*1.15;document.querySelectorAll('.rv.pre,.mh [data-fu]:not(.in)').forEach(e=>{const r=e.getBoundingClientRect();if(r.top<lim){e.classList.remove('pre');e.classList.add('in')}})};
+const q=()=>{if(!t)t=requestAnimationFrame(run)};addEventListener('scroll',q,{passive:true});addEventListener('resize',q);addEventListener('hashchange',()=>setTimeout(run,400));setInterval(run,1200);setTimeout(run,600)})();
 </script>
