@@ -2880,7 +2880,7 @@ let FAV=new Set();
 function vcard(c){const alt=esc(c.year+' '+c.make+' '+c.model);return `<a class="vc vs rv" href="#car-${c.id}">
   <div class="ph vs-ph"><img src="${P(c.ph)}" alt="${alt}" loading="lazy" onerror="this.onerror=null;this.parentNode.classList.add('photo');this.src='${P(c.ph)}';${c.pos?`this.style.objectPosition='${c.pos}'`:''}"><div class="tagl"><span class="chip ${c.type==='Lease'?'red':'dk'}">${c.type}</span>${c.pay<320?'<span class="chip">Under $320</span>':''}</div><button class="fav ${FAV.has(c.id)?'on':''}" data-fav="${c.id}" aria-label="Save" onclick="event.preventDefault()">${ic('heart')}</button></div>
   <div class="vb"><h3 class="vs-t"><span>${c.year}</span> ${esc(c.make)} ${esc(c.model)}</h3><small class="vs-m">${c.body} · ${c.drive} · ${c.seats} · ${c.mpg}</small>
-  <div class="vs-p"><span>${c.type==='Lease'?'Lease from':'Finance from'}</span><b class="num">${fmt(c.pay)}</b><em>/mo</em></div>
+  <div class="vs-p"><span>${c.type==='Lease'?'Lease from':'Finance from'}</span><i class="vs-k">${c.type}</i><b class="num">${fmt(c.pay)}</b><em>/mo</em></div>
   <span class="btn ink sm vs-b">Check availability ${ic('arrow')}</span></div></a>`}
 
 /* ---------- NAV / FOOTER ---------- */
@@ -3038,6 +3038,7 @@ function vInventory(lease){
     </aside>
     <div><div class="bar"><b id="count"></b><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn line sm fbtn" id="fbtn">${ic('filter')}Filters</button><label class="srch">${ic('search')}<input id="q" placeholder="Search make or model" value="${esc(F.q)}"></label>
       <select class="sel" id="sort" aria-label="Sort"><option value="pop">Most popular</option><option value="low">Lowest payment</option><option value="high">Highest payment</option><option value="new">Newest</option></select></div></div>
+      <div class="bchips" role="group" aria-label="Body type">${['All','SUV','Truck','Sedan','Coupe'].map(b=>`<button type="button" data-b="${b}" class="${(b==='All'&&!F.bodies.size)||F.bodies.has(b)?'on':''}">${b}</button>`).join('')}</div>
       <div class="vgrid" id="grid"></div></div>
   </div>`;
 }
@@ -4786,6 +4787,54 @@ html,body{background-color:#0B0B0C}
  #reviews{overflow:hidden}
 }
 @media (max-width:760px) and (prefers-reduced-motion:reduce){#reviews .rrow{animation:none!important}}
+
+/* ===== mobile v5: inventory page, 3-up grid ===== */
+.bchips,.vs-k{display:none}
+@media (max-width:760px){
+ /* compact header */
+ .page-top{padding:76px 0 14px!important;min-height:0!important}
+ .page-top .crumbs{display:none!important}
+ .page-top .ptitle{display:block!important;text-align:center}
+ .page-top h1{font-size:28px!important;line-height:1.02!important;margin:0!important}
+ .page-top .mr-p{font-size:13px!important;margin:8px auto 0!important;max-width:30ch}
+ .page-top .disc{display:none!important}
+ .wrap.inv{padding-top:6px!important;padding-left:14px!important;padding-right:14px!important}
+ /* toolbar: search full width, filters + sort side by side */
+ .wrap.inv .bar{display:block!important;margin-bottom:10px!important}
+ .wrap.inv .bar #count{display:block;font-size:12px!important;color:#777;margin:0 0 8px;font-weight:500}
+ .wrap.inv .bar>div{display:grid!important;grid-template-columns:1fr 1fr;gap:8px!important}
+ .wrap.inv .bar .srch{grid-column:1/-1;order:-1;height:42px!important;width:100%!important;max-width:none!important;border-radius:12px!important}
+ .wrap.inv .bar .fbtn,.wrap.inv .bar .ps,.wrap.inv .bar .sel{height:40px!important;width:100%!important;border-radius:12px!important;justify-content:center;font-size:12px!important}
+ /* body chips */
+ .bchips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -14px 12px;padding:0 14px}
+ .bchips::-webkit-scrollbar{display:none}
+ .bchips button{flex:0 0 auto;height:34px;padding:0 16px;border-radius:999px;border:1px solid #e2e2e2;background:#fff;color:#111;font:500 13px/1 inherit;font-family:inherit;cursor:pointer;transition:all .2s}
+ .bchips button.on{background:#111;color:#fff;border-color:#111}
+ /* 3-up grid */
+ .vgrid,.inv .vgrid,#grid.vgrid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+ .vc.vs{border-radius:12px!important;border:1px solid #ececec!important;box-shadow:none!important;background:#fff!important;transition:transform .2s}
+ .vc.vs:active{transform:scale(.97)}
+ .vc.vs .vs-ph{aspect-ratio:1/0.82!important;background:#f4f4f4!important}
+ .vc.vs .vs-ph img{padding:4px!important;object-fit:contain!important}
+ .vc.vs .tagl,.vc.vs .fav{display:none!important}
+ .vc.vs .vb{padding:7px 8px 9px!important;min-height:0!important;flex:none!important;height:auto!important}
+ .vc.vs{height:auto!important;min-height:0!important;display:flex!important;flex-direction:column}
+ .vgrid{align-items:start!important}
+ .vc.vs .vs-ph img{transform:scale(1.14)}
+ .vc.vs .vs-p em{margin-left:1px}
+ .page-top{padding-bottom:6px!important}
+ .page-top .ptitle>div{margin:0!important;padding:0!important}
+ .vc.vs .vs-t{font-size:11px!important;line-height:1.2!important;min-height:2.4em;border:0!important;padding:0!important;font-weight:600!important;letter-spacing:0!important;text-transform:none!important}
+ .vc.vs .vs-t span{display:block;font-size:9.5px;color:#888;font-weight:500}
+ .vc.vs .vs-t{white-space:normal!important;text-overflow:clip!important;display:-webkit-box!important;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+ .vc.vs .vs-m{display:none!important}
+ .vc.vs .vs-p{margin:5px 0 0!important;display:flex!important;align-items:baseline;gap:2px;flex-wrap:wrap}
+ .vc.vs .vs-p>span{display:none!important}
+ .vc.vs .vs-p b{font-size:14.5px!important}
+ .vc.vs .vs-p em{font-size:10px!important}
+ .vc.vs .vs-k{display:block;width:100%;font-style:normal;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#D7262B;font-weight:700;margin-top:1px}
+ .vc.vs .vs-b{display:none!important}
+}
 </style>
 <script>
 (function(){
@@ -4817,4 +4866,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('.mtog');if(!b)re
  if(b.dataset.t==='bring'){b.querySelector('span').textContent=on?'Hide the list':'See the 4 things to bring';}
  else if(on){const f=box.querySelector('.sl12-f,.bk-form');setTimeout(()=>{f&&f.scrollIntoView({behavior:'smooth',block:'start'});const i=f&&f.querySelector('input');i&&i.focus({preventScroll:true})},60)}
 });
+</script>
+<script>
+document.addEventListener('click',e=>{const b=e.target.closest('.bchips button');if(!b||typeof F==='undefined')return;const v=b.dataset.b;F.bodies=new Set(v==='All'?[]:[v]);b.parentElement.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));try{drawGrid()}catch(_){}});
 </script>
