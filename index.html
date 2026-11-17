@@ -3310,7 +3310,7 @@ function vHome(){
 
   <section class="sec dk2" id="bring"><div class="wrap wide">
     <div class="dk2-h">
-      <div class="rv"><span class="eb">Be ready</span><h2>What to bring</h2><p>Have these ready and most approvals come back within 24 hours. Upload them securely from your phone.</p></div>
+      <div class="rv"><span class="eb">Be ready</span><h2>What to bring</h2><p>Have these ready and most approvals come back within 24 hours. Upload them securely from your phone.</p></div><button type="button" class="mtog" data-t="bring" aria-expanded="false"><span>See the 4 things to bring</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button>
       <div class="dk2-meter rv"><div class="dk2-mt"><span>Your checklist</span><b id="dkCount">0/4 ready</b></div><i><u id="dkBar"></u></i>
         <div class="dk2-cta"><a class="sq red" href="#apply">Upload documents ${ic('upload')}</a><a class="sq ol" href="#apply">Apply first</a></div></div>
     </div>
@@ -4316,6 +4316,7 @@ function sellHTML(){return `<section class="sec white sl12" id="sell"><div class
   <div class="sl12-l rv"><span class="eb">Car payment help</span><h2>Can’t afford your car anymore?</h2>
     <p>We’ll help you find a way out. Financed or paid off, any make or model.</p>
     <ul class="sl12-k">${['Same-day evaluations','Options that fit you','Financed or paid-off','Avoid repossession'].map(x=>`<li>${ic('check')}<span>${x}</span></li>`).join('')}</ul>
+    <button type="button" class="mtog mtog-r" data-t="sell" aria-expanded="false"><span>Get help with my car</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     <a class="sl12-call" href="tel:${BIZ.textTel}">Or call ${BIZ.text}</a></div>
   <form class="sl12-f rv" id="sellF" novalidate>
     <b class="sl12-ft">Get help with my car</b>
@@ -4641,6 +4642,33 @@ html body .lg-body .lg-s{border-top-color:rgba(255,255,255,.08)!important}
 /* no sticky bottom bar on mobile (client: too much going on) */
 .zmb,.mbar{display:none!important}
 @media (max-width:860px){body{padding-bottom:0!important}}
+
+/* ===== mobile trim (approved list) ===== */
+.mtog{display:none}
+@media (max-width:760px){
+ /* 1. empty section labels */
+ .sdiv3{display:none!important}
+ /* 2. top area: hero stat strip, brand logos, duplicate tabs, empty photo wall */
+ #top .bxs{display:none!important}
+ #top .wrap:has(> .bxs){display:none!important}
+ .br2{display:none!important}
+ .pbx-spec{display:none!important}
+ .pbx-wall{display:none!important}
+ /* 3. Then bring these: collapsed until tapped */
+ .pg12-bring:not(.open) .dk2-meter,.pg12-bring:not(.open) .dk2-g{display:none!important}
+ .pg12-bring.open .dk2-meter,.pg12-bring.open .dk2-g{animation:mtogIn .35s cubic-bezier(.2,.8,.2,1)}
+ /* 4. Car payment help: form opens on tap */
+ #sell:not(.open) .sl12-f{display:none!important}
+ #sell.open .sl12-f{animation:mtogIn .35s cubic-bezier(.2,.8,.2,1)}
+ #sell.open .mtog-r{display:none!important}
+ .mtog{display:flex;align-items:center;justify-content:space-between;width:100%;height:50px;margin-top:16px;padding:0 18px;border:1px solid rgba(255,255,255,.22);border-radius:2px;background:transparent;color:#fff;font:600 12px/1 inherit;font-family:inherit;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+ .mtog svg{width:18px;height:18px;transition:transform .3s}
+ .pg12-bring.open .mtog svg{transform:rotate(180deg)}
+ .mtog-r{background:#D7262B;border-color:#D7262B}
+ #sell .mtog{color:#fff}
+ #sell.sec.white .mtog:not(.mtog-r){color:#111;border-color:#11111133}
+}
+@keyframes mtogIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 </style>
 <script>
 (function(){
@@ -4664,4 +4692,12 @@ html body .lg-body .lg-s{border-top-color:rgba(255,255,255,.08)!important}
    if(/customer service/i.test((h||{}).textContent||''))c.classList.add('open')})}
  const r=document.getElementById('root');if(r)new MutationObserver(()=>requestAnimationFrame(ft)).observe(r,{childList:true});ft();
 })();
+</script>
+<script>
+document.addEventListener('click',e=>{const b=e.target.closest('.mtog');if(!b)return;e.preventDefault();
+ const box=b.dataset.t==='sell'?b.closest('#sell'):b.closest('.pg12-bring,#bring');if(!box)return;
+ const on=box.classList.toggle('open');b.setAttribute('aria-expanded',on);if(on)box.querySelectorAll('.rv.pre').forEach(x=>x.classList.remove('pre'));
+ if(b.dataset.t==='bring'){b.querySelector('span').textContent=on?'Hide the list':'See the 4 things to bring';}
+ else if(on){const f=box.querySelector('.sl12-f');setTimeout(()=>{f&&f.scrollIntoView({behavior:'smooth',block:'start'});const i=f&&f.querySelector('input');i&&i.focus({preventScroll:true})},60)}
+});
 </script>
