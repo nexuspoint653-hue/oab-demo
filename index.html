@@ -4669,6 +4669,41 @@ html body .lg-body .lg-s{border-top-color:rgba(255,255,255,.08)!important}
  #sell.sec.white .mtog:not(.mtog-r){color:#111;border-color:#11111133}
 }
 @keyframes mtogIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+/* ===== mobile polish v2: one alignment system, tight rhythm, real reveals ===== */
+@media (max-width:760px){
+ /* rhythm: every section breathes the same */
+ .fband{padding-top:20px!important;padding-bottom:28px!important}
+ .pbx,#lease-deals,#credit,#programs,#sell,#book,#reviews{padding-top:36px!important;padding-bottom:36px!important;min-height:0!important}
+ .pg12-bring{margin-top:28px!important;margin-bottom:0!important;padding-bottom:0!important}
+ .pg12-g{margin-bottom:0!important}
+ #sell .sl12-in{gap:0!important}
+ .ofoot{padding-top:36px!important}
+ /* headers: centered stack (eyebrow, title, sub, link) */
+ .pbx-l>.eb,.ld .wrap>.eb,.sh,.pg12-h>.rv,.sl12-l,.bk-hd,.rv2-l,.dk2-h>.rv{text-align:center!important;margin-left:auto!important;margin-right:auto!important}
+ main section .eb,.sec .eb{display:flex!important;justify-content:center!important;align-items:center;width:100%;text-align:center!important;margin-left:0!important;padding-left:0!important;border-left:0!important}
+ main section h2,.sec h2,.pg12-bt{text-align:center!important;margin-left:auto!important;margin-right:auto!important}
+ main section h2+p,.mr-p,.ld-s,.pg12-h p,.dk2-h p,.rv2-l p{text-align:center!important;margin-left:auto!important;margin-right:auto!important;max-width:34ch}
+ .sh-row,.pg12-h{flex-direction:column!important;align-items:center!important;gap:10px!important;text-align:center!important;margin-bottom:22px!important}
+ .sh-row>a,.pg12-h>a{align-self:center!important}
+ .rv2-h{justify-items:center;text-align:center}
+ .rv2 .lau{justify-self:center!important}
+ /* lists inside sections read left, but sit centered as a block */
+ .sl12-k{display:inline-flex!important;flex-direction:column;align-items:flex-start;margin:16px auto 0!important;text-align:left}
+ .sl12-l{display:flex!important;flex-direction:column;align-items:center}
+ .sl12-l>.sl12-call{align-self:center}
+ .sl12-l .mtog{align-self:stretch}
+ /* credit card: no dead red space */
+ #credit .cr{min-height:0!important;height:auto!important}
+ #credit .cr>*:last-child{padding-bottom:20px}
+ .pbx-l{padding-top:0!important}
+ .pg12-bring{padding-top:0!important}
+ .pg12-bring:not(.open) .dk2-h{margin-bottom:0!important}
+ /* reveal: fade + rise, staggered inside each block */
+ .rv{transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .6s ease!important}
+ .rv.pre{opacity:0!important;transform:translateY(22px)!important}
+}
+@media (max-width:760px) and (prefers-reduced-motion:reduce){.rv.pre{opacity:1!important;transform:none!important}}
 </style>
 <script>
 (function(){
