@@ -484,6 +484,10 @@ html.lock{overflow:hidden}
  .faq{margin-top:28px}
  .faq summary{padding:12px 0;font-size:15px}
 }
+
+/* no sticky bottom bar on mobile (client: too much going on) */
+.dock{display:none!important}
+.resume{bottom:calc(14px + env(safe-area-inset-bottom))!important}
 </style>
 </head>
 <body>
