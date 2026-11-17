@@ -488,6 +488,53 @@ html.lock{overflow:hidden}
 /* no sticky bottom bar on mobile (client: too much going on) */
 .dock{display:none!important}
 .resume{bottom:calc(14px + env(safe-area-inset-bottom))!important}
+
+/* ===== landing v2: cleaner, zoomed out ===== */
+footer{padding-bottom:calc(34px + env(safe-area-inset-bottom))!important}
+@media (min-width:861px){
+ .hx-ph{aspect-ratio:16/10}
+ .hx-t h1{font-size:clamp(30px,2.9vw,42px)}
+ .pc-ph{aspect-ratio:16/9}
+ .pc:first-child .pc-ph{padding-bottom:calc(28.125% - 6px)}
+
+}
+@media (max-width:600px){
+ /* hero: shorter photo, no repeat note */
+ .hx-ph{aspect-ratio:16/9!important}
+ .hx-ph figcaption{left:10px;bottom:10px;padding:8px 12px;border-radius:11px}
+ .hx-ph figcaption b{font-size:13px}.hx-ph figcaption span{font-size:11px}
+ .hnote{display:none!important}
+ .hx-t .trust{display:flex;flex-wrap:wrap;gap:6px 14px}
+ .hx-t .eyebrow{white-space:normal}
+ /* section header: one clean line */
+ .pick{padding:22px 0 24px!important}
+ .pick-h{display:block!important;margin:0 0 12px!important}
+ .pick-h span{display:none}
+ /* program tiles: photo + title, tap to start */
+ .progs{grid-template-columns:1fr 1fr!important;gap:8px!important}
+ .pc{position:relative;border-radius:14px!important;border:0!important;aspect-ratio:1/1;min-height:0}
+ .pc:first-child{grid-column:1/-1;aspect-ratio:16/8}
+ .pc .pc-ph{position:absolute!important;inset:0;aspect-ratio:auto!important;height:auto!important;padding:0!important}
+ .pc .pc-ph img{position:absolute;inset:0}
+ .pc .pc-ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.78) 100%)}
+ .pc .pc-t{position:absolute!important;left:0;right:0;bottom:0;padding:10px 12px!important;background:none!important;z-index:2}
+ .pc .pc-t b{color:#fff!important;font-size:15px!important;line-height:1.15}
+ .pc .pc-t span{display:none!important}
+ .pc .pc-t i{color:#fff!important;margin-top:3px!important;font-size:12px!important;opacity:.9}
+ .pc .pc-ph em{z-index:3}
+ .pc:first-child .pc-t b{font-size:18px!important}
+ .pc:first-child .pc-t span{display:block!important;color:rgba(255,255,255,.85)!important;font-size:12.5px!important;margin-top:2px}
+ /* call bar: compact */
+ .callc{margin-top:12px!important}
+ /* how it works: one tidy list */
+ .how-g.hw li{padding:12px 14px!important;align-items:center}
+ .how-g.hw li .hw-ic{display:none}
+ .how-g.hw li b{width:30px;height:30px;font-size:13px}
+ .how-g h3{font-size:14.5px!important}.how-g p{font-size:12.5px!important;margin-top:2px!important}
+ /* footer tighter */
+ footer{padding-top:26px!important}
+ footer .wrap{gap:18px!important}
+}
 </style>
 </head>
 <body>
