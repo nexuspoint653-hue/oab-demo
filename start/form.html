@@ -275,6 +275,29 @@ body{min-height:0}
 .tile.plain{min-height:clamp(46px,7dvh,64px)}
 @media (max-width:960px) and (min-width:600px){.tiles{grid-template-rows:repeat(2,minmax(0,1fr)) auto}}
 @media (max-width:400px){.res .go{font-size:14px;gap:6px;white-space:nowrap}}
+
+/* ===== car tiles + option visuals ===== */
+.ctiles{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:clamp(6px,1.1dvh,10px);margin-top:clamp(12px,2.2dvh,22px)}
+.ct{position:relative;display:flex;flex-direction:column;min-height:0;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;text-align:left;transition:border-color .2s,box-shadow .25s,transform .2s}
+.ct:hover{border-color:#111;box-shadow:0 12px 26px -16px rgba(0,0,0,.35)}
+.ct:active{transform:scale(.98)}
+.ct-img{flex:1;min-height:0;background:#f3f3f3;display:grid;place-items:center;overflow:hidden}
+.ct-img img{width:100%;height:100%;object-fit:contain;transform:scale(1.18);transition:transform .5s var(--ease)}
+.ct:hover .ct-img img{transform:scale(1.26)}
+.ct-any .ct-img svg{width:clamp(22px,4dvh,34px);height:auto;color:#111}
+.ct-b{padding:clamp(6px,1dvh,10px) 12px clamp(7px,1.2dvh,12px);display:block}
+.ct-b b{display:block;font-size:14.5px;font-weight:600;line-height:1.2}
+.ct-b small{display:block;font-size:12px;color:var(--tx3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ct .dot{position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;border:1.5px solid #cfcfcb;background:#fff;display:grid;place-items:center;transition:all .2s}
+.ct.sel{border-color:var(--red);box-shadow:0 0 0 1px var(--red) inset}
+.ct.sel .ct-img{background:#fbeeee}
+.ct.sel .dot{border-color:var(--red);background:var(--red)}
+.ct.sel .dot::after{content:"";width:7px;height:7px;border-radius:50%;background:#fff}
+.opt .viz{flex:none;width:44px;height:26px;display:grid;place-items:center}
+.opt .viz svg{width:44px;height:26px;overflow:visible}
+@media (max-width:520px){.ct-b small{display:none}.ct-b{padding:6px 8px 8px}.ct-b b{font-size:13px}.ct .dot{width:17px;height:17px;top:6px;right:6px}}
+@media (max-height:620px){.ct-b small{display:none}}
+@media (max-width:520px){.opts.two{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -330,6 +353,16 @@ const PROGS=[
 const SCORE={id:'score',k:'Credit',h:'Where’s your credit at?',p:'Best guess is fine. We don’t pull your credit here.',two:1,o:[['720+',4],['650–719',3],['580–649',2],['500–579',1],['Under 500',0],['Not sure',1]]};
 const INCOME={id:'income',k:'Income',h:'What do you bring in a month?',p:'Before taxes. Job, 1099, benefits, support. It all counts.',o:[['$5,000+',4],['$3,500–5,000',3],['$2,500–3,500',2],['$1,800–2,500',1],['Under $1,800',0]]};
 const DOWN={id:'down',k:'Down payment',h:'What can you put down?',p:'More down means more lenders say yes. $0 is still an option.',two:1,o:[['$3,000+',4],['$1,500–3,000',3],['$500–1,500',2],['Up to $500',1],['$0',0]]};
+const CARS=[{v:'SUV',t:'SUV',m:'Like a GMC Terrain',img:'gmc-terrain'},{v:'Luxury SUV',t:'Luxury SUV',m:'Like a Cadillac XT5',img:'cadillac-xt5'},{v:'Large SUV',t:'Large SUV',m:'Like a GMC Yukon Denali',img:'gmc-yukon-denali'},{v:'Sedan',t:'Sedan',m:'Like a Ford Fusion',img:'ford-fusion'},{v:'Truck',t:'Truck',m:'Like a GMC Sierra Denali',img:'gmc-sierra-denali'},{v:'Any',t:'Open to anything',m:'Show me every option',img:''}];
+const GC=['#1f9d55','#7cb342','#f2a516','#ef7d22','#d7262b'];
+function VIZ(id,o,i){
+ if(id==='score'){if(o[0]==='Not sure')return '<span class="viz g"><svg viewBox="0 0 44 26"><path d="M4 23a18 18 0 0 1 36 0" fill="none" stroke="#e6e6e3" stroke-width="5" stroke-linecap="round"/><text x="22" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#8a8a86">?</text></svg></span>';
+  const f=[.96,.76,.54,.34,.14][i],L=Math.PI*18,c=GC[i],an=Math.PI*(1-f),nx=22+13*Math.cos(an),ny=23-13*Math.sin(an);
+  return `<span class="viz g"><svg viewBox="0 0 44 26"><path d="M4 23a18 18 0 0 1 36 0" fill="none" stroke="#e6e6e3" stroke-width="5" stroke-linecap="round"/><path d="M4 23a18 18 0 0 1 36 0" fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${(L*f).toFixed(1)} 99"/><line x1="22" y1="23" x2="${nx.toFixed(1)}" y2="${ny.toFixed(1)}" stroke="#111" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="23" r="2.6" fill="#111"/></svg></span>`}
+ if(id==='down'){const n=[4,3,2,1,0][i];let r='';for(let k=0;k<4;k++){const y=20-k*5.2;r+=k<n?`<rect x="6" y="${y}" width="32" height="4.4" rx="1.2" fill="${k===n-1?'#1f9d55':'#2fb36a'}" stroke="#167a42" stroke-width=".8"/>`:''}
+  if(!n)r='<rect x="6" y="20" width="32" height="4.4" rx="1.2" fill="none" stroke="#c9c9c5" stroke-width="1" stroke-dasharray="2 2"/>';
+  return `<span class="viz b"><svg viewBox="0 0 44 26">${r}</svg></span>`}
+ return ''}
 const IC={SUV:'<path d="M3 16h18v-3l-2-4H6l-3 4z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>',Truck:'<path d="M2 16h20v-4h-6V7H2z"/><circle cx="6" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>',Sedan:'<path d="M3 16h18v-2l-3-4H8l-4 4z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>',Coupe:'<path d="M3 16h18l-2-3-5-3H9l-4 4z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>',Any:'<path d="M12 3v18M3 12h18"/>'};
 
 let st={i:0,a:{},prog:null,dir:1};
@@ -354,9 +387,8 @@ function paint(){
   <button type="button" class="tile plain ${st.prog&&st.prog.k==='any'?'sel':''}" data-p="any"><div><b>None of these, I just need a car</b><small>Any credit. Lease, finance or rent.</small></div><i>${AR}</i></button></div>`;
  }else if(s.id==='car'){
   const v=st.a.vehicle||'',b=+(st.a.budget||400);
-  h=`<div class="q-k">Your car</div><h2 class="q-h">What are you looking to drive?</h2><p class="q-p">Pick a type and slide to your comfortable monthly payment.</p>
-  <div class="opts two">${['SUV','Truck','Sedan','Coupe'].map(x=>`<button type="button" class="opt ${v===x?'sel':''}" data-v="${x}"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">${IC[x]}</svg></span><span class="lab">${x}</span><span class="dot"></span></button>`).join('')}
-  <button type="button" class="opt ${v==='Any'?'sel':''}" data-v="Any" style="grid-column:1/-1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">${IC.Any}</svg></span><span class="lab">Open to anything</span><span class="dot"></span></button></div>
+  h=`<div class="q-k">Your car</div><h2 class="q-h">What are you looking to drive?</h2><p class="q-p">Pick a style and slide to a monthly payment that feels right.</p>
+  <div class="ctiles">${CARS.map(c=>`<button type="button" class="ct ${v===c.v?'sel':''} ${c.img?'':'ct-any'}" data-v="${c.v}"><span class="ct-img">${c.img?`<img src="../photos/studio/${c.img}.jpg" alt="${c.m}" loading="eager">`:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>`}</span><span class="ct-b"><b>${c.t}</b><small>${c.m}</small></span><span class="dot"></span></button>`).join('')}</div>
   <div class="budget"><div class="budget-h"><span>Monthly budget</span><b id="bv">$${b}<small> /mo</small></b></div><input type="range" id="bud" min="150" max="900" step="25" value="${b}" aria-label="Monthly budget"><div class="budget-s"><span>$150</span><span>$900+</span></div></div>
   <button type="button" class="go" id="next" ${v?'':'disabled'}>Continue ${AR}</button>`;
  }else if(s.id==='contact'){
@@ -374,7 +406,7 @@ function paint(){
  }else{
   const cur=st.a[s.id];
   h=`<div class="q-k">${s.k||''}</div><h2 class="q-h">${s.h}</h2>${s.p?`<p class="q-p">${s.p}</p>`:''}
-  <div class="opts ${s.two?'two':''}">${s.o.map(o=>`<button type="button" class="opt ${cur===o[0]?'sel':''}" data-o="${esc(o[0])}" data-s="${o[1]}"><span class="lab">${o[0]}</span><span class="dot"></span></button>`).join('')}</div>`;
+  <div class="opts ${s.two?'two':''}">${s.o.map((o,i)=>`<button type="button" class="opt ${cur===o[0]?'sel':''}" data-o="${esc(o[0])}" data-s="${o[1]}">${VIZ(s.id,o,i)}<span class="lab">${o[0]}</span><span class="dot"></span></button>`).join('')}</div>`;
  }
  const stage=$('#stage');const old=stage.firstElementChild;
  const put=()=>{stage.innerHTML=`<div class="step ${st.dir<0?'backin':''}">${h}</div>`;bind(s);stage.scrollTop=0};
@@ -385,7 +417,7 @@ function next(){const n=steps().length;if(st.i<n-1){st.i++;st.dir=1;save();paint
 function bind(s){
  if(s.id==='prog'){document.querySelectorAll('.tile').forEach(t=>t.onclick=()=>{const p=PROGS.find(x=>x.k===t.dataset.p);st.prog=p;st.a.program=p.t;t.classList.add('sel');setVis(p.ph,p.t,p.h,p.p);setTimeout(next,220)})}
  else if(s.id==='car'){
-  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{st.a.vehicle=b.dataset.v;document.querySelectorAll('.opt').forEach(x=>x.classList.toggle('sel',x===b));$('#next').disabled=false});
+  document.querySelectorAll('.ct').forEach(b=>b.onclick=()=>{st.a.vehicle=b.dataset.v;document.querySelectorAll('.ct').forEach(x=>x.classList.toggle('sel',x===b));$('#next').disabled=false});
   const r=$('#bud');const upd=()=>{const v=+r.value;st.a.budget=v;$('#bv').innerHTML='$'+v+(v>=900?'+':'')+'<small> /mo</small>';r.style.setProperty('--p',((v-150)/750*100)+'%')};r.oninput=upd;upd();
   $('#next').onclick=next;
  }else if(s.id==='contact'){
