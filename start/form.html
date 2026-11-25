@@ -193,6 +193,88 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
  .talk-b a{flex:1;justify-content:center}
 }
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ===== no-scroll v1: every step fits the screen ===== */
+html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+body{min-height:0}
+.app{height:100vh;height:100dvh;min-height:0;overflow:hidden}
+.vis{height:100%}
+.side{min-height:0;height:100%;overflow:hidden}
+.side-in{height:100%;min-height:0;padding-top:clamp(18px,4dvh,40px);padding-bottom:clamp(12px,2.4dvh,28px)}
+.stage{flex:1;min-height:0;display:flex;flex-direction:column;margin-top:clamp(14px,3dvh,30px);overflow-y:auto;scrollbar-width:none}
+.stage::-webkit-scrollbar{display:none}
+.step{flex:1;min-height:0;display:flex;flex-direction:column}
+.q-h{font-size:clamp(21px,min(2.4vw,3.4dvh),30px)}
+.q-p{margin-top:clamp(4px,.8dvh,8px)}
+/* tiles stretch to fill what's left */
+.tiles{flex:1;min-height:0;grid-auto-rows:minmax(0,1fr);margin-top:clamp(12px,2.2dvh,22px);gap:clamp(6px,1.1dvh,10px)}
+.tile{aspect-ratio:auto;min-height:0}
+.tile.plain{padding:0 16px}
+.opts{margin-top:clamp(12px,2.2dvh,22px);gap:clamp(6px,1.1dvh,10px)}
+.opt{min-height:clamp(42px,6.4dvh,58px)}
+.opt .ic{width:clamp(28px,4dvh,36px);height:clamp(28px,4dvh,36px)}
+.budget{margin-top:clamp(10px,2dvh,26px);padding:clamp(10px,1.8dvh,18px) 18px}
+.fields{margin-top:clamp(12px,2.2dvh,22px);gap:clamp(6px,1.2dvh,12px)}
+.fld label{margin-bottom:clamp(2px,.6dvh,6px)}
+.fld input{height:clamp(42px,6dvh,54px)}
+.go{height:clamp(46px,6.4dvh,56px);margin-top:clamp(10px,2.2dvh,22px)}
+.hint{margin-top:clamp(6px,1.4dvh,14px)}
+.side-f{margin-top:clamp(12px,2.4dvh,28px);padding-top:clamp(10px,1.8dvh,18px)}
+.legal{margin-top:clamp(6px,1.4dvh,16px)}
+/* result */
+.res{padding-top:0;justify-content:center}
+.res .ok{width:clamp(44px,7dvh,72px);height:clamp(44px,7dvh,72px)}
+.res .ok svg{width:50%;height:50%}
+.res h2{font-size:clamp(21px,3.2dvh,28px);margin-top:clamp(8px,1.8dvh,18px)}
+.res .go{margin-top:clamp(12px,2.4dvh,24px)}
+.res .sec{height:clamp(42px,5.8dvh,52px);margin-top:clamp(6px,1dvh,10px)}
+.next{margin-top:clamp(10px,2.4dvh,26px);padding:2px 16px}
+.next div{padding:clamp(6px,1.2dvh,12px) 0}
+.res .sec:last-child{margin-top:clamp(8px,1.4dvh,14px)!important}
+@media (max-height:760px){.q-p{display:none}.consent{font-size:11px}}
+@media (min-width:961px) and (max-height:700px){.vis-copy p{display:none}}
+/* tablet + phone: compact photo header, form fills the rest */
+@media (max-width:960px){
+ .app{display:flex;flex-direction:column;grid-template-columns:none}
+ .vis{flex:none;height:auto}
+ .vis-inner{padding:calc(12px + env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 14px max(16px,env(safe-area-inset-left))}
+ .vis-copy{margin-top:clamp(10px,2dvh,26px)}
+ .vis-copy h1{font-size:clamp(22px,min(6.4vw,4dvh),40px);margin-top:6px}
+ .vis-copy .eb{font-size:11px}
+ .proof{margin-top:8px}
+ .app.started .vis-copy{margin-top:10px}
+ .app.started .vis-copy h1{font-size:clamp(19px,min(5.4vw,3.2dvh),30px)}
+ .app.started .vis-copy .eb{display:none}
+ .side{flex:1;height:auto}
+ .side-in{padding:clamp(12px,2dvh,22px) max(16px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+ .side-f,.legal{display:none}
+ .brand img{width:34px;height:34px}
+ .vis-call{height:34px;padding:0 12px;font-size:13px}
+}
+@media (max-width:960px) and (min-width:600px){.tiles{grid-template-columns:repeat(4,minmax(0,1fr))}.side-in{width:min(680px,100%)}}
+@media (max-width:420px){.tile{aspect-ratio:auto}.opts.two{grid-template-columns:1fr 1fr}.row2{grid-template-columns:1fr 1fr}.tile b{font-size:13.5px}}
+@media (max-width:420px) and (max-height:600px){.vis-copy .proof{display:none}.tile b{font-size:12.5px}.tile i{width:22px;height:22px}}
+@media (max-width:960px){.vis-inner{padding-bottom:16px}}
+@media (max-height:620px){
+ .q-k,.hint{display:none}
+ .q-h{font-size:19px}
+ .vis-copy .eb,.vis-copy .proof{display:none}
+ .app.started .vis-copy{display:none}
+ .vis-copy h1{font-size:21px}
+ .fld input{height:40px}
+ .fld label{font-size:12px}
+ .fields{gap:6px}
+ .go{height:44px}
+ .tile.plain{padding:0 12px}
+ .tile.plain small{display:none}
+ .next div{padding:5px 0;font-size:13.5px}
+ .res .ok{width:40px;height:40px}
+ .res p{font-size:14px}
+}
+.tiles{grid-template-rows:repeat(4,minmax(0,1fr)) auto;grid-auto-rows:auto}
+.tile.plain{min-height:clamp(46px,7dvh,64px)}
+@media (max-width:960px) and (min-width:600px){.tiles{grid-template-rows:repeat(2,minmax(0,1fr)) auto}}
+@media (max-width:400px){.res .go{font-size:14px;gap:6px;white-space:nowrap}}
 </style>
 </head>
 <body>
@@ -295,7 +377,7 @@ function paint(){
   <div class="opts ${s.two?'two':''}">${s.o.map(o=>`<button type="button" class="opt ${cur===o[0]?'sel':''}" data-o="${esc(o[0])}" data-s="${o[1]}"><span class="lab">${o[0]}</span><span class="dot"></span></button>`).join('')}</div>`;
  }
  const stage=$('#stage');const old=stage.firstElementChild;
- const put=()=>{stage.innerHTML=`<div class="step ${st.dir<0?'backin':''}">${h}</div>`;bind(s);window.scrollTo&&innerWidth<=960&&st.i>0&&stage.getBoundingClientRect().top<0&&stage.scrollIntoView({behavior:'smooth',block:'start'})};
+ const put=()=>{stage.innerHTML=`<div class="step ${st.dir<0?'backin':''}">${h}</div>`;bind(s);stage.scrollTop=0};
  if(old){old.classList.add('out');setTimeout(put,180)}else put();
 }
 function esc(x){return String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
